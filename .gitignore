@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-node_modules/*
-=======
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -45,4 +42,3 @@ next-env.d.ts
 
 *storybook.log
 storybook-static
->>>>>>> e9fd340868bd273d9863695a272ecfaa1490e7ed
