@@ -1,40 +1,45 @@
 import Link from "next/link";
-import Image from "next/image";
-import logo from "@public/assets/img/icono.png";
+import { Button, Drawer, Tab, Tabs } from "@mui/material";
+import { useState } from "react";
 export const NavBar = () => {
+  const [value, setValue] = useState("one");
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-indigo-600">
+    <header className="h-[10vh] bg-white shadow-md sticky top-0 z-50">
+      <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center items">
+        <Link href="/" className="text-2xl font-bold text-indigo-600 ">
           OrbitCRM
         </Link>
-        <ul className="flex gap-6 text-gray-700 font-medium">
-          <li>
-            <Link href="#features" className="hover:text-indigo-600">
-              Funcionalidades
-            </Link>
-          </li>
-          <li>
-            <Link href="#pricing" className="hover:text-indigo-600">
-              Precios
-            </Link>
-          </li>
-          <li>
-            <Link href="/auth/login" className="hover:text-indigo-600">
-              Iniciar Sesión
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/auth/register"
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
-            >
+        <div className="hidden sm:block">
+          <Tabs
+            value={value}
+            onChange={(e, v) => setValue(v)}
+            textColor="secondary"
+            indicatorColor="secondary"
+            aria-label="secondary tabs example"
+          >
+            <Tab sx={{ height: "10vh" }} value="one" label="Item One" />
+            <Tab sx={{ height: "10vh" }} value="two" label="Item Two" />
+            <Tab sx={{ height: "10vh" }} value="three" label="Item Three" />
+          </Tabs>
+        </div>
+        <Button onClick={toggleDrawer(true)}>anchored top</Button>
+        <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
+          hola
+        </Drawer>
+        <div className="max-sm:hidden">
+          <Link href="/auth/register">
+            <Button className="" variant="contained">
               Registrarse
-            </Link>
-          </li>
-        </ul>
+            </Button>
+          </Link>
+        </div>
       </nav>
-      
     </header>
   );
 };

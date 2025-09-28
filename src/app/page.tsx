@@ -10,12 +10,11 @@ export default function HomePage() {
     <>
       <NavBar />
       <main className="min-h-screen flex flex-col">
-        {/* Hero */}
-        <section className="flex flex-col items-center justify-center text-center flex-1 px-6 py-16 bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Bienvenido a OrbitCRM
-          </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl">
+        <section className="h-[90vh] flex flex-col items-center justify-center text-center px-6 py-16
+        bg-gradient-to-br from-blue-600 to-indigo-700 text-white 
+        md:flex-1">
+          <h1 className="text-5xl font-bold mb-6">Bienvenido a OrbitCRM</h1>
+          <p className="text-2xl mb-8">
             Gestiona clientes, oportunidades y proyectos en un solo lugar.
             Nuestro CRM te ayuda a crecer de forma organizada y eficiente.
           </p>
