@@ -44,7 +44,7 @@ export const NavBar = ({ enabledDrawer = true, iconHamburger, links }: Props) =>
 				<MyDrawer open={openDrawer} toggleDrawer={setOpenDrawer} />
 				<Icon
 					onClick={() => enabledDrawer && setOpenDrawer(!openDrawer)}
-					className="cursor-pointer"
+					className="cursor-pointer sm:hidden"
 					icon={iconHamburger}
 					width={40}
 					color="#a83c3c"
@@ -53,7 +53,7 @@ export const NavBar = ({ enabledDrawer = true, iconHamburger, links }: Props) =>
 				<div className="max-sm:hidden">
 					<Link href="/auth/register">
 						<Button className="" variant="contained">
-							Comenzar Gratis
+							Registrarse
 						</Button>
 					</Link>
 				</div>
