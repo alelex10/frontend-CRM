@@ -9,8 +9,9 @@ import Link from "next/link";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
 
-const dataNavBar = [
+const linksNavBar = [
 	{
 		label: "Inicio",
 		href: "/",
@@ -48,31 +49,32 @@ const cardsHome = [
 	},
 ];
 
-const MyConteiner = () => {
-	
-}
+const ConteinerHomeGrad = styled(Container)({
+	background: "linear-gradient(to bottom right, rgb(37 99 235), rgb(79 70 229))",
+	color: "white",
+	textAlign: "center",
+	alignContent: "center",
+});
 
 export default function HomePage() {
 	return (
 		<>
 			{/* <NavBar iconHamburger="line-md:close-to-menu-transition" links={dataNavBar} /> */}
-			<main style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-				<Container
+			<Container component={"main"}>
+				<ConteinerHomeGrad
 					sx={{
 						p: "11rem",
-						background: "linear-gradient(to bottom right, rgb(37 99 235), rgb(79 70 229))",
 						padding: "1rem 1.5rem", // px-6
-						color: "white",
 					}}
 				>
-					<Typography variant="h2" component={"h1"}>
+					<Typography variant="h3" component={"h1"}>
 						Bienvenido a OrbitCRM
 					</Typography>
 					<Typography variant="subtitle1">
 						Gestiona clientes, oportunidades y proyectos en un solo lugar. Nuestro CRM te ayuda a crecer de forma
 						organizada y eficiente.
 					</Typography>
-					<Box style={{ display: "flex", gap: "1rem" }}>
+					<Box style={{}}>
 						<Link href="/auth/register">
 							<Button
 								variant="contained"
@@ -89,7 +91,7 @@ export default function HomePage() {
 							</Button>
 						</Link>
 					</Box>
-				</Container>
+				</ConteinerHomeGrad>
 
 				{/* Features */}
 				<Container>
@@ -113,14 +115,11 @@ export default function HomePage() {
 				</Container>
 
 				{/* CTA Final */}
-				<Container>
-					{" "}
-					{/* py-20 bg-indigo-700 text-center text-white */}
-					<h2 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "1.5rem" }} className="md:text-4xl">
+				<ConteinerHomeGrad>
+					<Typography variant="h3" component={"h1"}>
 						Lleva tu negocio al siguiente nivel
-					</h2>
+					</Typography>
 					<p style={{ fontSize: "1.25rem", marginBottom: "2rem" }}>
-						{" "}
 						Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.
 					</p>
 					<Link href="/auth/register">
@@ -128,8 +127,8 @@ export default function HomePage() {
 							Crear Cuenta
 						</Button>
 					</Link>
-				</Container>
-			</main>
+				</ConteinerHomeGrad>
+			</Container>
 		</>
 	);
 }
