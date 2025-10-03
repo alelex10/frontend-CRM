@@ -10,7 +10,7 @@ import {
 	ListItemText,
 } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
-import { NavBar } from "../navbar/NavBar";
+import NavBar from "../navbar/NavBar";
 
 interface Props {
 	open: boolean;
@@ -25,7 +25,7 @@ export const MyDrawer = ({ open, toggleDrawer }: Props) => {
 
 	const list = () => (
 		<Box role="presentation" onClick={() => toggleDrawer(false)} onKeyDown={() => toggleDrawer(false)}>
-			<NavBar enabledDrawer={false} iconHamburger="line-md:menu-to-close-transition" />
+			<NavBar /> 
 			<List>
 				{listData[0].map((text, index) => (
 					<ListItem key={text} disablePadding>

@@ -1,63 +1,31 @@
 import Link from "next/link";
-import { Button, Drawer, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import { MyDrawer } from "../drawer/MyDrawer";
-import { Icon } from "@iconify/react";
+import AppBar from "@mui/material/AppBar";
 
-interface Link {
+
+
+// Define la interfaz para los enlaces si aún no la tienes
+interface NavLink {
 	label: string;
 	href: string;
-	value: string;
+	value?: string | number; // Añadido para Tabs
 }
 
-interface Props {
-	enabledDrawer?: boolean;
-	iconHamburger: string;
-	links?: Link[];
+interface NavBarProps {
+	links?: NavLink[];
+	iconHamburger?: string; // Este prop se maneja ahora con un ícono de Material UI
+	enabledDrawer?: boolean; // Prop para controlar si el drawer está habilitado
 }
 
-export const NavBar = ({ enabledDrawer = true, iconHamburger, links }: Props) => {
+export default function NavBar({ links, iconHamburger, enabledDrawer = true }: NavBarProps) {
+	const [value, setValue] = useState(0);
 	const [openDrawer, setOpenDrawer] = useState(false);
-	const [value, setValue] = useState("one");
+
+
 
 	return (
-		<header className="h-[10vh] bg-white shadow-md sticky top-0 z-50">
-			<nav className="max-w-7xl mx-auto px-6 flex justify-between items-center items h-full">
-				<Link href="/" className="text-2xl font-bold text-indigo-600 ">
-					OrbitCRM
-				</Link>
-				<div className="hidden sm:block">
-					<Tabs
-						value={value}
-						onChange={(e, v) => setValue(v)}
-						textColor="secondary"
-						indicatorColor="secondary"
-						aria-label="secondary tabs example"
-					>
-						{links?.map((link) => (
-							<Tab value={link.value} sx={{ height: "10vh" }} key={link.label} label={link.label} />
-						))}
-					</Tabs>
-				</div>
-
-				{/* ----------- Drawer ------------*/}
-				<MyDrawer open={openDrawer} toggleDrawer={setOpenDrawer} />
-				<Icon
-					onClick={() => enabledDrawer && setOpenDrawer(!openDrawer)}
-					className="cursor-pointer sm:hidden"
-					icon={iconHamburger}
-					width={40}
-					color="#a83c3c"
-				/>
-
-				<div className="max-sm:hidden">
-					<Link href="/auth/register">
-						<Button className="" variant="contained">
-							Registrarse
-						</Button>
-					</Link>
-				</div>
-			</nav>
-		</header>
+		<AppBar position="sticky" color="default" elevation={2} sx={{ height: "10vh", backgroundColor: "white" }}>
+			
+		</AppBar>
 	);
-};
+}

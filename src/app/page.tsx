@@ -1,9 +1,14 @@
 "use client";
 
-import { NavBar } from "@/components/navbar/NavBar";
-import { Card, CardContent, Typography } from "@mui/material";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+
 import Button from "@mui/material/Button";
 import Link from "next/link";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Grid";
 
 const dataNavBar = [
 	{
@@ -28,27 +33,53 @@ const dataNavBar = [
 	},
 ];
 
+const cardsHome = [
+	{
+		title: "📊 Seguimiento de Leads",
+		description: "Captura, organiza y da seguimiento a cada oportunidad de negocio en un solo lugar.",
+	},
+	{
+		title: "👥 Gestión de Clientes",
+		description: "Administra y mantene la información de tus clientes de manera eficiente.",
+	},
+	{
+		title: "📈 Gestión de Proyectos",
+		description: "Administra y mantene la información de tus proyectos de manera eficiente.",
+	},
+];
+
+const MyConteiner = () => {
+	
+}
+
 export default function HomePage() {
 	return (
 		<>
-			<NavBar iconHamburger="line-md:close-to-menu-transition" links={dataNavBar} />
-			<main className="min-h-screen flex flex-col">
-				<section
-					className="h-[90vh] flex flex-col items-center justify-center text-center px-6 py-16
-        bg-gradient-to-br from-blue-600 to-indigo-700 text-white 
-        md:flex-1"
+			{/* <NavBar iconHamburger="line-md:close-to-menu-transition" links={dataNavBar} /> */}
+			<main style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+				<Container
+					sx={{
+						p: "11rem",
+						background: "linear-gradient(to bottom right, rgb(37 99 235), rgb(79 70 229))",
+						padding: "1rem 1.5rem", // px-6
+						color: "white",
+					}}
 				>
-					<h1 className="text-5xl font-bold mb-6">Bienvenido a OrbitCRM</h1>
-					<p
-						className="text-2xl mb-8 
-          sm:w-1/2"
-					>
+					<Typography variant="h2" component={"h1"}>
+						Bienvenido a OrbitCRM
+					</Typography>
+					<Typography variant="subtitle1">
 						Gestiona clientes, oportunidades y proyectos en un solo lugar. Nuestro CRM te ayuda a crecer de forma
 						organizada y eficiente.
-					</p>
-					<div className="flex gap-4">
+					</Typography>
+					<Box style={{ display: "flex", gap: "1rem" }}>
 						<Link href="/auth/register">
-							<Button variant="contained" color="primary" size="large" className="shadow-lg">
+							<Button
+								variant="contained"
+								color="primary"
+								size="large"
+								style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}
+							>
 								Comenzar Gratis
 							</Button>
 						</Link>
@@ -57,56 +88,47 @@ export default function HomePage() {
 								Iniciar Sesión
 							</Button>
 						</Link>
-					</div>
-				</section>
+					</Box>
+				</Container>
 
 				{/* Features */}
-				<section className="py-16 px-6 bg-gray-50">
-					<h2 className="text-black text-3xl md:text-4xl font-bold text-center mb-12">Funcionalidades Clave</h2>
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-						<Card className="shadow-md">
-							<CardContent>
-								<Typography variant="h6" gutterBottom>
-									📊 Seguimiento de Leads
-								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									Captura, organiza y da seguimiento a cada oportunidad de negocio en un solo lugar.
-								</Typography>
-							</CardContent>
-						</Card>
-						<Card className="shadow-md">
-							<CardContent>
-								<Typography variant="h6" gutterBottom>
-									🤝 Gestión de Clientes
-								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									Administra información de tus clientes y mantén todo el historial de interacciones.
-								</Typography>
-							</CardContent>
-						</Card>
-						<Card className="shadow-md">
-							<CardContent>
-								<Typography variant="h6" gutterBottom>
-									🚀 Reportes e Insights
-								</Typography>
-								<Typography variant="body2" color="text.secondary">
-									Obtén métricas clave para tomar decisiones informadas y hacer crecer tu negocio.
-								</Typography>
-							</CardContent>
-						</Card>
-					</div>
-				</section>
+				<Container>
+					<Typography variant="h4">Funcionalidades Clave</Typography>
+					<Grid container spacing={2}>
+						{cardsHome.map((card) => (
+							<Grid size={4} key={card.title}>
+								<Card style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+									<CardContent>
+										<Typography variant="h6" gutterBottom>
+											{card.title}
+										</Typography>
+										<Typography variant="body2" color="text.secondary">
+											{card.description}
+										</Typography>
+									</CardContent>
+								</Card>
+							</Grid>
+						))}
+					</Grid>
+				</Container>
 
 				{/* CTA Final */}
-				<section className="py-20 bg-indigo-700 text-center text-white">
-					<h2 className="text-3xl md:text-4xl font-bold mb-6">Lleva tu negocio al siguiente nivel</h2>
-					<p className="text-lg mb-8">Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.</p>
+				<Container>
+					{" "}
+					{/* py-20 bg-indigo-700 text-center text-white */}
+					<h2 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "1.5rem" }} className="md:text-4xl">
+						Lleva tu negocio al siguiente nivel
+					</h2>
+					<p style={{ fontSize: "1.25rem", marginBottom: "2rem" }}>
+						{" "}
+						Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.
+					</p>
 					<Link href="/auth/register">
-						<Button variant="contained" size="large" color="primary" className="shadow-lg">
+						<Button variant="contained" size="large" color="primary" style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
 							Crear Cuenta
 						</Button>
 					</Link>
-				</section>
+				</Container>
 			</main>
 		</>
 	);
