@@ -9,7 +9,7 @@ import Link from "next/link";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import NavBar from "../components/navbar/NavBar";
 import { themes } from "storybook/internal/theming";
 
@@ -76,22 +76,29 @@ const ConteinerHome = styled(Container)(({ theme }) => ({
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",
-  gap: "3rem",
+  gap: theme.spacing(10),
   justifyContent: "space-between",
   textAlign: "center",
+  "& > *": {
+    padding: 0,
+    width: "100%",
+  },
 })) as typeof Container;
 
 export default function HomePage() {
+  const theme = useTheme();
+  const isLarge = theme.breakpoints.up("md");
+
   return (
     <>
       <NavBar links={linksNavBar} />
-      <ConteinerHome component={"main"} maxWidth={false} sx={{
-        padding: "0",
-      }}>
-        <ConteinerGrad component={"section"} maxWidth={false} sx={{ height: "90vh"}} >
-          <Typography variant="h3" component={"h1"}>
-            Bienvenido a OrbitCRM
-          </Typography>
+      <ConteinerHome component={"main"} maxWidth={false}>
+        <ConteinerGrad
+          component={"section"}
+          maxWidth={false}
+          sx={{ height: "90vh", p: 0 }}
+        >
+          <Typography variant="h2">Bienvenido a OrbitCRM</Typography>
           <Typography
             variant="subtitle1"
             sx={{ width: { xs: "100%", md: "50%" }, margin: "0 auto" }}
@@ -115,7 +122,6 @@ export default function HomePage() {
                 variant="outlined"
                 size="large"
                 sx={{
-                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
                   color: "white",
                   borderColor: "white",
                 }}
@@ -128,8 +134,10 @@ export default function HomePage() {
 
         {/* Features */}
         <Container component={"section"}>
-          <Typography variant="h4">Funcionalidades Clave</Typography>
-          <Grid container spacing={2}>
+          <Typography variant="h4" sx={{ marginBottom: "2rem" }}>
+            Funcionalidades Clave
+          </Typography>
+          <Grid container spacing={{ xs: 10, md: 4 }}>
             {cardsHome.map((card) => (
               <Grid size={{ xs: 12, md: 4 }} key={card.title}>
                 <Card style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
@@ -137,7 +145,7 @@ export default function HomePage() {
                     <Typography variant="h6" gutterBottom>
                       {card.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body1" color="text.secondary">
                       {card.description}
                     </Typography>
                   </CardContent>
@@ -149,10 +157,10 @@ export default function HomePage() {
 
         {/* CTA Final */}
         <ConteinerGrad>
-          <Typography variant="h3" component={"h1"}>
+          <Typography variant="h4">
             Lleva tu negocio al siguiente nivel
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="subtitle1">
             Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.
           </Typography>
           <Link href="/auth/register">
