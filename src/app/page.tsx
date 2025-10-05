@@ -49,24 +49,36 @@ const cardsHome = [
 	},
 ];
 
-const ConteinerHomeGrad = styled(Container)({
+const ConteinerGrad = styled(Container)({
+	display: "flex",
+	flexDirection: "column",
 	background: "linear-gradient(to bottom right, rgb(37 99 235), rgb(79 70 229))",
 	color: "white",
 	textAlign: "center",
 	alignContent: "center",
-});
+	padding: "2rem 3rem",
+	minHeight: "100vh",
+	justifyContent: "center",
+	gap: "2rem",
+}) as typeof Container;
+
+const ConteinerHome = styled(Container)({
+	padding: 0,
+	width: "100%",
+	minHeight: "100vh",
+	display: "flex",
+	flexDirection: "column",
+	gap: "3rem",
+	justifyContent: "space-between",
+	textAlign: "center",
+})as typeof Container;
 
 export default function HomePage() {
 	return (
 		<>
 			{/* <NavBar iconHamburger="line-md:close-to-menu-transition" links={dataNavBar} /> */}
-			<Container component={"main"}>
-				<ConteinerHomeGrad
-					sx={{
-						p: "11rem",
-						padding: "1rem 1.5rem", // px-6
-					}}
-				>
+			<ConteinerHome>
+				<ConteinerGrad>
 					<Typography variant="h3" component={"h1"}>
 						Bienvenido a OrbitCRM
 					</Typography>
@@ -74,7 +86,7 @@ export default function HomePage() {
 						Gestiona clientes, oportunidades y proyectos en un solo lugar. Nuestro CRM te ayuda a crecer de forma
 						organizada y eficiente.
 					</Typography>
-					<Box style={{}}>
+					<Box sx={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
 						<Link href="/auth/register">
 							<Button
 								variant="contained"
@@ -86,19 +98,23 @@ export default function HomePage() {
 							</Button>
 						</Link>
 						<Link href="/auth/login">
-							<Button variant="outlined" color="inherit" size="large">
+							<Button
+								variant="outlined"
+								size="large"
+								sx={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)", color: "white", borderColor: "white" }}
+							>
 								Iniciar Sesión
 							</Button>
 						</Link>
 					</Box>
-				</ConteinerHomeGrad>
+				</ConteinerGrad>
 
 				{/* Features */}
 				<Container>
 					<Typography variant="h4">Funcionalidades Clave</Typography>
 					<Grid container spacing={2}>
 						{cardsHome.map((card) => (
-							<Grid size={4} key={card.title}>
+							<Grid size={{ xs: 12, md: 4 }} key={card.title}>
 								<Card style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
 									<CardContent>
 										<Typography variant="h6" gutterBottom>
@@ -115,20 +131,20 @@ export default function HomePage() {
 				</Container>
 
 				{/* CTA Final */}
-				<ConteinerHomeGrad>
+				<ConteinerGrad>
 					<Typography variant="h3" component={"h1"}>
 						Lleva tu negocio al siguiente nivel
 					</Typography>
-					<p style={{ fontSize: "1.25rem", marginBottom: "2rem" }}>
+					<Typography variant="body1">
 						Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.
-					</p>
+					</Typography>
 					<Link href="/auth/register">
 						<Button variant="contained" size="large" color="primary" style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
 							Crear Cuenta
 						</Button>
 					</Link>
-				</ConteinerHomeGrad>
-			</Container>
+				</ConteinerGrad>
+			</ConteinerHome>
 		</>
 	);
 }
