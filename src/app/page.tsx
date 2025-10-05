@@ -10,6 +10,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
+import NavBar from "../components/navbar/NavBar";
 
 const linksNavBar = [
 	{
@@ -76,7 +77,7 @@ const ConteinerHome = styled(Container)({
 export default function HomePage() {
 	return (
 		<>
-			{/* <NavBar iconHamburger="line-md:close-to-menu-transition" links={dataNavBar} /> */}
+			<NavBar links={linksNavBar} />
 			<ConteinerHome>
 				<ConteinerGrad>
 					<Typography variant="h3" component={"h1"}>
