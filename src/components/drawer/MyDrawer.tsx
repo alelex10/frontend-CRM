@@ -25,7 +25,6 @@ export const MyDrawer = ({ open, toggleDrawer }: Props) => {
 
 	const list = () => (
 		<Box role="presentation" onClick={() => toggleDrawer(false)} onKeyDown={() => toggleDrawer(false)}>
-			<NavBar /> 
 			<List>
 				{listData[0].map((text, index) => (
 					<ListItem key={text} disablePadding>
@@ -52,7 +51,14 @@ export const MyDrawer = ({ open, toggleDrawer }: Props) => {
 	return (
 		<>
 			<Drawer
-				sx={{ zIndex: 100, bottom: "10vh", position: "relative", transform: "none"}}
+				sx={{
+					zIndex: 100,
+					width: "100%",
+					flexShrink: 0,
+					"& .MuiDrawer-paper": {
+						top: "10vh",
+					},
+				}}
 				anchor="top"
 				open={open}
 				onClose={() => toggleDrawer(false)}

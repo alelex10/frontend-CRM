@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Iconify } from "../icons/Icon";
+import { MyDrawer } from "../drawer/MyDrawer";
 
 interface NavLink {
 	label: string;
@@ -20,19 +21,20 @@ interface NavBarProps {
 }
 
 export default function NavBar({ links, enabledDrawer = true }: NavBarProps) {
-	const [value, setValue] = useState(0);
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position="fixed">
+			<AppBar position="fixed" >
 				<Toolbar sx={{ display: "flex", justifyContent: "space-between", height: "10vh" }}>
 					<Typography variant="h6" component="div">
-						OpbitCRM
+						OpbitCRM 
 					</Typography>
+					<MyDrawer open={openDrawer} toggleDrawer={setOpenDrawer} />
 					<IconButton size="large" color="inherit" sx={{ display: { xs: "block", md: "none" } }}>
-						<Iconify icon="line-md:close-to-menu-transition" />
+						<Iconify onClick={() => setOpenDrawer(!openDrawer)} icon="line-md:close-to-menu-transition" />
 					</IconButton>
+
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
 						{links?.map((link) => (
 							<Button key={link.value} sx={{ my: 2, color: "white", display: "block" }}>
@@ -40,7 +42,7 @@ export default function NavBar({ links, enabledDrawer = true }: NavBarProps) {
 							</Button>
 						))}
 					</Box>
-					<Button color="inherit">Registrarse</Button>
+					<Button sx={{  display: { xs: "none", md: "flex"} }} color="inherit">Registrarse</Button>
 				</Toolbar>
 			</AppBar>
 		</Box>
