@@ -25,22 +25,21 @@ export default function NavBar({ links, enabledDrawer = true }: NavBarProps) {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position="static">
-				<Toolbar >
+			<AppBar position="fixed">
+				<Toolbar sx={{ display: "flex", justifyContent: "space-between", height: "10vh" }}>
 					<Typography variant="h6" component="div">
 						OpbitCRM
 					</Typography>
-					<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-						<Iconify icon="line-md:close-to-menu-transition" width="24" height="24" />
+					<IconButton size="large" color="inherit" sx={{ display: { xs: "block", md: "none" } }}>
+						<Iconify icon="line-md:close-to-menu-transition" />
 					</IconButton>
-					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "center" }}>
 						{links?.map((link) => (
 							<Button key={link.value} sx={{ my: 2, color: "white", display: "block" }}>
 								{link.label}
 							</Button>
 						))}
 					</Box>
-
 					<Button color="inherit">Registrarse</Button>
 				</Toolbar>
 			</AppBar>

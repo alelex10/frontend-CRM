@@ -72,18 +72,18 @@ const ConteinerHome = styled(Container)({
 	gap: "3rem",
 	justifyContent: "space-between",
 	textAlign: "center",
-})as typeof Container;
+}) as typeof Container;
 
 export default function HomePage() {
 	return (
 		<>
 			<NavBar links={linksNavBar} />
 			<ConteinerHome>
-				<ConteinerGrad>
+				<ConteinerGrad sx={{ height: "90vh" }}>
 					<Typography variant="h3" component={"h1"}>
 						Bienvenido a OrbitCRM
 					</Typography>
-					<Typography variant="subtitle1">
+					<Typography variant="subtitle1" sx={{width: { xs: "100%", md: "50%" },margin: "0 auto"}} >
 						Gestiona clientes, oportunidades y proyectos en un solo lugar. Nuestro CRM te ayuda a crecer de forma
 						organizada y eficiente.
 					</Typography>
@@ -136,9 +136,7 @@ export default function HomePage() {
 					<Typography variant="h3" component={"h1"}>
 						Lleva tu negocio al siguiente nivel
 					</Typography>
-					<Typography variant="body1">
-						Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.
-					</Typography>
+					<Typography variant="body1">Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.</Typography>
 					<Link href="/auth/register">
 						<Button variant="contained" size="large" color="primary" style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
 							Crear Cuenta
