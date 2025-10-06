@@ -10,7 +10,7 @@ import {
 	ListItemText,
 } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
-import NavBar from "../navbar/NavBar";
+import NavBar from "../navbar/nav-bar";
 
 interface Props {
 	open: boolean;

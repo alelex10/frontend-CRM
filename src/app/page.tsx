@@ -10,7 +10,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import { styled, useTheme } from "@mui/material/styles";
-import NavBar from "../components/navbar/NavBar";
+import NavBar from "../components/navbar/nav-bar";
 import { themes } from "storybook/internal/theming";
 
 const linksNavBar = [
