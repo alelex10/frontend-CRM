@@ -11,6 +11,11 @@ const dirname =
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   test: {
+    // enable vitest global test api
+    // no nesecito importar los modulos vitest
+    globals: true,
+    environment: 'jsdom', 
+    setupFiles: './src/test/setup-tests.ts',
     projects: [
       {
         extends: true,
