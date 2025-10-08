@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { MyDrawer } from "../drawer/mi-drawer";
-import { Iconify } from "../icons/Icon";
+import { Iconify } from "../icons/icon";
 
 interface NavLink {
 	label: string;
