@@ -18,6 +18,7 @@ export default defineConfig({
     // no nesecito importar los modulos vitest
     globals: true,
     environment: "jsdom",
+    setupFiles: ["./src/test/stup-tests.ts"]
     /* projects: [
       {
         extends: true,
