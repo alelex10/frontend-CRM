@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { MyDrawer } from "../drawer/mi-drawer";
-import { Iconify } from "../icons/Icon";
+import { Iconify } from "../icons/icon";
 
 interface NavLink {
 	label: string;
@@ -21,7 +21,7 @@ interface NavBarProps {
 }
 
 export default function NavBar({ links, enabledDrawer = true }: NavBarProps) {
-	const [openDrawer, setOpenDrawer] = useState(false);
+	const [openDrawer, setOpenDrawer] = React.useState(false);
 
 	return (
 		<Box>
@@ -31,7 +31,7 @@ export default function NavBar({ links, enabledDrawer = true }: NavBarProps) {
 						display: "flex",
 						justifyContent: "space-between",
 						height: "10vh",
-					}}	
+					}}
 				>
 					<Typography variant="h6" component="div">
 						OpbitCRM

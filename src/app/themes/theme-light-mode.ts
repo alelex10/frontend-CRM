@@ -32,6 +32,7 @@ const deepPurple = {
 	A700: "#6200ea",
 };
 export const lightTheme = createTheme({
+	cssVariables: { nativeColor: true },
 	palette: {
 		mode: "light",
 		primary: { main: deepPurple["500"], light: deepPurple["50"], dark: deepPurple["800"] },

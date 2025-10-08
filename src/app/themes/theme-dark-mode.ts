@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
 export const darkTheme = createTheme({
+	cssVariables: { nativeColor: true },
 	palette: {
 		mode: "dark",
 		primary: { main: "#60A5FA", light: "#93C5FD", dark: "#1E3A8A" },
@@ -10,10 +11,4 @@ export const darkTheme = createTheme({
 		divider: "#334155",
 	},
 });
-
-
-
-
-
-
 
