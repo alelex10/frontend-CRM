@@ -16,11 +16,9 @@ interface NavLink {
 }
 
 interface NavBarProps {
-	links?: NavLink[];
-	enabledDrawer?: boolean;
-}
+	links?: NavLink[];}
 
-export default function NavBar({ links, enabledDrawer = true }: NavBarProps) {
+export default function NavBar({ links }: NavBarProps) {
 	const [openDrawer, setOpenDrawer] = React.useState(false);
 
 	return (
@@ -61,7 +59,8 @@ export default function NavBar({ links, enabledDrawer = true }: NavBarProps) {
 						))}
 					</Box>
 					<Button sx={{ display: { xs: "none", md: "flex" } }} color="inherit">
-						Registrarse
+						asd
+						<Link href="dashboard">Iniciar Sesión</Link>
 					</Button>
 				</Toolbar>
 			</AppBar>
