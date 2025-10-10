@@ -1,4 +1,5 @@
 import { createTheme, useTheme } from "@mui/material/styles";
+import theme from "./theme-general";
 
 const hue = 290;
 
@@ -31,7 +32,7 @@ const deepPurple = {
 	A400: "#651fff",
 	A700: "#6200ea",
 };
-export const lightTheme = createTheme({
+export const lightTheme = createTheme(theme, {
 	cssVariables: { nativeColor: true },
 	palette: {
 		mode: "light",
@@ -42,7 +43,7 @@ export const lightTheme = createTheme({
 		divider: deepPurple["200"],
 	},
 });
-export const lightThemeOKLCH = createTheme({
+export const lightThemeOKLCH = createTheme(theme, {
 	cssVariables: { nativeColor: true },
 	palette: {
 		mode: "light",
@@ -67,5 +68,3 @@ export const lightThemeOKLCH = createTheme({
 		divider: colors.color7, // Púrpura claro para divisores
 	},
 });
-
-
