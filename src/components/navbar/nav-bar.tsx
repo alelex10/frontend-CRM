@@ -44,7 +44,6 @@ export default function NavBar({ links }: NavBarProps) {
 					>
 						<Iconify icon="line-md:close-to-menu-transition" />
 					</IconButton>
-
 					<Box
 						sx={{
 							flexGrow: 1,
@@ -59,8 +58,7 @@ export default function NavBar({ links }: NavBarProps) {
 						))}
 					</Box>
 					<Button sx={{ display: { xs: "none", md: "flex" } }} color="inherit">
-						asd
-						<Link href="dashboard">Iniciar Sesión</Link>
+						<Link  href="/dashboard">Iniciar Sesión</Link>
 					</Button>
 				</Toolbar>
 			</AppBar>
