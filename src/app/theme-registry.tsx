@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ThemeProvider, CssBaseline, Button } from "@mui/material";
-import { darkTheme } from "./themes/theme-dark-mode";
+import { darkTheme, darkThemeOKLCH } from "./themes/theme-dark-mode";
 import { lightTheme, lightThemeOKLCH } from "./themes/theme-light-mode";
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
@@ -12,12 +12,10 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
 	const toggleDarkMode = () => setDarkMode(!darkMode);
 
 	return (
-		<ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+		<ThemeProvider theme={darkMode ? darkThemeOKLCH : lightThemeOKLCH}>
 			<CssBaseline />
 			{children}
 			<Button onClick={toggleDarkMode}>{darkMode ? "☀️" : "🌙"}</Button>
 		</ThemeProvider>
 	);
 }
-
-

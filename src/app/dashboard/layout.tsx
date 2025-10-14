@@ -6,6 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { AppBar } from "./components/app-bar/app-bar";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import LabelBottomNavigation from "./components/bottom-navigation/bottom-navigation";
+import ThemeRegistry from "../theme-registry";
 
 interface Props {
 	children?: React.ReactNode;
@@ -37,9 +38,11 @@ const DashboardLayout = ({ children }: Props) => {
 	}
 	return (
 		<>
+			{/* <ThemeRegistry> */}
 			<AppBar open={false} />
 			{children}
 			<LabelBottomNavigation />
+			{/* </ThemeRegistry> */}
 		</>
 	);
 };
