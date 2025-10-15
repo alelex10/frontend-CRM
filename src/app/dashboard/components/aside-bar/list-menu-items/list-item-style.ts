@@ -1,3 +1,4 @@
+import { LinkProps } from "@mui/material/Link";
 import ListItemButton, { ListItemButtonProps } from "@mui/material/ListItemButton";
 import ListItemIcon, { ListItemIconProps } from "@mui/material/ListItemIcon";
 import ListItemText, { ListItemTextProps } from "@mui/material/ListItemText";
@@ -7,7 +8,7 @@ interface Open {
 	open?: boolean;
 }
 
-interface ListItemButomAsideProps extends ListItemButtonProps, Open {}
+type ListItemButomAsideProps = ListItemButtonProps & Open & LinkProps;
 interface ListItemIconAsideProps extends ListItemIconProps, Open {}
 interface ListItemTextAsideProps extends ListItemTextProps, Open {}
 
@@ -27,4 +28,3 @@ export const ListItemIconAside = styled(ListItemIcon)<ListItemIconAsideProps>(({
 export const ListItemTextAside = styled(ListItemText)<ListItemTextAsideProps>(({ theme, open }) => ({
 	display: open ? "block" : "none",
 }));
-

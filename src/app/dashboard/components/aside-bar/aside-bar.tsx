@@ -14,6 +14,8 @@ import { ListItemButomAside, ListItemIconAside, ListItemTextAside } from "./list
 import { AppBar, AppBarAnimated } from "../app-bar/app-bar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
+import ListItemButton from "@mui/material/ListItemButton";
 
 export interface ListMenuItem {
 	label: string;
@@ -51,14 +53,16 @@ export default function AsideBar({ children, listMenuItems }: DrawerProps) {
 				<Divider />
 				<List>
 					{listMenuItems?.map((item) => (
+						// <Link href={item.href} key={item.label}>
 						<ListItem key={item.label} disablePadding sx={{ display: "block" }}>
-							<ListItemButomAside open={open}>
+							<ListItemButomAside href={item.href} open={open}>
 								<ListItemIconAside open={open}>
 									{item.icon && <Iconify icon={item.icon} color="inherit" />}
 								</ListItemIconAside>
 								<ListItemTextAside primary={item.label} open={open} />
 							</ListItemButomAside>
 						</ListItem>
+						// </Link>
 					))}
 				</List>
 				<Divider />

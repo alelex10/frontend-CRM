@@ -20,12 +20,12 @@ export const LIST_MENU_ITEMS: ListMenuItem[] = [
 	},
 	{
 		label: "Contactos",
-		href: "dashboard/contatos",
+		href: "/dashboard/contacts",
 		icon: "material-symbols:contacts",
 	},
 	{
 		label: "Compañias",
-		href: "dashboard/companias",
+		href: "/dashboard/compani",
 		icon: "material-symbols:business-center",
 	},
 ];
