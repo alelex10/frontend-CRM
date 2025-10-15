@@ -1,16 +1,5 @@
-import {
-	Box,
-	Button,
-	Divider,
-	Drawer,
-	List,
-	ListItem,
-	ListItemButton,
-	ListItemIcon,
-	ListItemText,
-} from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
-import NavBar from "../navbar/nav-bar";
+import { Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
 	open: boolean;
@@ -68,5 +57,3 @@ export const MyDrawer = ({ open, toggleDrawer }: Props) => {
 		</>
 	);
 };
-
-
