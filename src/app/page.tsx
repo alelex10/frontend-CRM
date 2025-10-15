@@ -7,7 +7,6 @@ import Link from "next/link";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
-import { styled } from "@mui/material/styles";
 import NavBar from "../components/navbar/nav-bar";
 import { ConteinerGrad } from "./components/conteiner-grad";
 import { ConteinerHome } from "./components/conteiner-home";
