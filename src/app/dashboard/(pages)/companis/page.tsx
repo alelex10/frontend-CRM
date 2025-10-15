@@ -1,5 +1,6 @@
 const page = () => {
-	return <div>asdsad</div>;
+	return <div>companis</div>;
 };
 export default page;
+
 

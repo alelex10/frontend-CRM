@@ -17,26 +17,27 @@ interface DrawerProps {
 	listIntems?: ListMenuItem[];
 	open: boolean;
 	setOpen: Dispatch<SetStateAction<boolean>>;
+	variant?: "secondary";
 }
 
-export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open, setOpen }: DrawerProps) => {
+export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open, setOpen, variant }: DrawerProps) => {
 	const handleDrawerClose = () => setOpen(false);
 	const handleDrawerOpen = () => setOpen(true);
 
-	const isSticky = position === "sticky";
+	const isSecondary = variant === "secondary";
+
 	return (
-		<>
+		<Box sx={{ display: "flex" }}>
 			<Drawer
 				variant="permanent"
 				open={open}
 				sx={{
 					"& .MuiDrawer-paper": {
-						minHeight: "100%",
 						position: position,
 					},
 				}}
 			>
-				<DrawerHeader sx={{ minHeight: { sm: isSticky ? "32px" : "64px" } }}>
+				<DrawerHeader sx={{ minHeight: { sm: isSecondary ? "32px" : "64px" } }}>
 					<IconButton sx={{ padding: "0 8px" }} color="inherit" onClick={open ? handleDrawerClose : handleDrawerOpen}>
 						<Iconify icon="material-symbols:menu-open" />
 					</IconButton>
@@ -56,11 +57,10 @@ export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open,
 				</List>
 				<Divider />
 			</Drawer>
-			<Box sx={{ flexGrow: 1, height: "100%", position: "relative", overflow: "auto" }}>
-
+			<Box component="main" sx={{ flexGrow: 1, p: isSecondary ? 3 : 0 }}>
 				{children}
 			</Box>
-		</>
+		</Box>
 	);
 };
 
