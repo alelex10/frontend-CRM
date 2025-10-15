@@ -8,15 +8,17 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { MyDrawer } from "../drawer/mi-drawer";
 import { Iconify } from "../icons/icon";
+import MenuTab from "./menu-tab/menu-tab";
 
-interface NavLink {
+export interface NavLink {
 	label: string;
 	href: string;
 	value?: string | number;
 }
 
 interface NavBarProps {
-	links?: NavLink[];}
+	links?: NavLink[];
+}
 
 export default function NavBar({ links }: NavBarProps) {
 	const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -44,21 +46,9 @@ export default function NavBar({ links }: NavBarProps) {
 					>
 						<Iconify icon="line-md:close-to-menu-transition" />
 					</IconButton>
-					<Box
-						sx={{
-							flexGrow: 1,
-							display: { xs: "none", md: "flex" },
-							justifyContent: "center",
-						}}
-					>
-						{links?.map((link) => (
-							<Button key={link.value} sx={{ my: 2, color: "white", display: "block" }}>
-								{link.label}
-							</Button>
-						))}
-					</Box>
-					<Button sx={{ display: { xs: "none", md: "flex" } }} color="inherit">
-						<Link  href="/dashboard">Iniciar Sesión</Link>
+					<MenuTab links={links} />
+					<Button href="dashboard" sx={{ display: { xs: "none", md: "flex" } }} color="inherit">
+						Iniciar Sesión
 					</Button>
 				</Toolbar>
 			</AppBar>

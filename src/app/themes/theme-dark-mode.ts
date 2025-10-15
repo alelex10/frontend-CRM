@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { styleScrollbar } from "./theme-general";
-import { colorsDark } from "./colors";
+import { colorsDark, createPalete } from "./colors";
+import themeNavegation from "./theme-navegation";
 
 
 export const darkTheme = createTheme({
@@ -17,28 +18,7 @@ export const darkTheme = createTheme({
 
 export const darkThemeOKLCH = createTheme({
 	cssVariables: { nativeColor: true },
-	palette: {
-		mode: "light",
-		primary: {
-			main: colorsDark.color3, // Un púrpura intenso como principal
-			light: colorsDark.color8, // Un púrpura muy claro para variantes "light"
-			dark: colorsDark.color1, // Un púrpura oscuro para variantes "dark"
-		},
-		secondary: {
-			main: colorsDark.color5, // Un púrpura medio para secundario
-			light: colorsDark.color7, // Un púrpura claro para variante "light"
-			dark: colorsDark.color2, // Un púrpura más saturado para variante "dark"
-		},
-		background: {
-			default: colorsDark.color9, // Casi blanco para el fondo principal
-			paper: colorsDark.color8, // Blanco ligeramente teñido para elementos de "papel"
-		},
-		text: {
-			primary: colorsDark.color1, // Púrpura oscuro para texto principal
-			secondary: colorsDark.color4, // Púrpura brillante para texto secundario
-		},
-		divider: colorsDark.color7, // Púrpura claro para divisores
-	},
+	palette: { ...createPalete(colorsDark), mode: "dark" },
 	components: {
 		MuiCssBaseline: {
 			styleOverrides: {
@@ -48,4 +28,4 @@ export const darkThemeOKLCH = createTheme({
 			},
 		},
 	},
-});
+}, themeNavegation);

@@ -1,13 +1,8 @@
-import { Theme } from "@mui/material/styles";
-import { createTheme } from "@mui/material/styles";
-
-const themeDefault = createTheme();
-
 export const styleScrollbar = (colors: any) => ({
 	//? COLOR DE FONDO
 	"&::-webkit-scrollbar, & *::-webkit-scrollbar": {
 		// .backgroundColor: "#2b2b2b",
-		backgroundColor: colors.color10,
+		backgroundColor: colors.color9,
 	},
 	// "&::-webkit-scrollbar-track, & *::-webkit-scrollbar-track": {
 	//   backgroundColor: "#2b2b2b",
