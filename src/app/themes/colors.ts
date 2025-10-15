@@ -7,7 +7,7 @@ export const colorsLight = {
 	color8: `oklch(80% .2 ${hue})`,
 	color7: `oklch(72% .25 ${hue})`,
 	color6: `oklch(67% .31 ${hue})`,
-	color5: `oklch(50% .27 ${hue})`,
+	color5: `oklch(55% .31 ${hue})`,
 	color4: `oklch(35% .25 ${hue})`,
 	color3: `oklch(25% .2 ${hue})`,
 	color2: `oklch(13% .2 ${hue})`,
@@ -19,7 +19,7 @@ export const colorsDark = {
 	color9: `oklch(13% .2 ${hue})`,
 	color8: `oklch(25% .2 ${hue})`,
 	color7: `oklch(35% .25 ${hue})`,
-	color6: `oklch(50% .27 ${hue})`,
+	color6: `#F8FAFC`,
 	color5: `oklch(67% .31 ${hue})`,
 	color4: `oklch(72% .25 ${hue})`,
 	color3: `oklch(80% .2 ${hue})`,
@@ -45,7 +45,6 @@ export const deepPurple = {
 };
 
 export const createPalete = (paleteColor: typeof colorsLight) => ({
-
 	primary: {
 		main: paleteColor.color5, // Un púrpura intenso como principal
 		light: paleteColor.color9, // Un púrpura muy claro para variantes "light"

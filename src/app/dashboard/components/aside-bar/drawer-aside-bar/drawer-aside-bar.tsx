@@ -12,6 +12,7 @@ import { ListMenuItem } from "../aside-bar";
 import Box from "@mui/material/Box";
 
 interface DrawerProps {
+	hidden?: boolean;
 	children?: React.ReactNode;
 	position?: "fixed" | "absolute" | "static" | "sticky";
 	listIntems?: ListMenuItem[];
@@ -20,14 +21,22 @@ interface DrawerProps {
 	variant?: "secondary";
 }
 
-export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open, setOpen, variant }: DrawerProps) => {
+export const DrawerAsideBar = ({
+	hidden = false,
+	children,
+	position = "fixed",
+	listIntems,
+	open,
+	setOpen,
+	variant,
+}: DrawerProps) => {
 	const handleDrawerClose = () => setOpen(false);
 	const handleDrawerOpen = () => setOpen(true);
 
 	const isSecondary = variant === "secondary";
 
 	return (
-		<Box sx={{ display: "flex" }}>
+		<Box sx={{ display: hidden ? "none" : "flex" }}>
 			<Drawer
 				variant="permanent"
 				open={open}
@@ -57,7 +66,7 @@ export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open,
 				</List>
 				<Divider />
 			</Drawer>
-			<Box component="main" sx={{ flexGrow: 1, p: isSecondary ? 3 : 0 }}>
+			<Box component="main" sx={{ flexGrow: 1, px: isSecondary ? 1 : 0 }}>
 				{children}
 			</Box>
 		</Box>

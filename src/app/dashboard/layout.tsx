@@ -41,17 +41,7 @@ const DashboardLayout = ({ children }: Props) => {
 		<>
 			<Container maxWidth={false} disableGutters component="main" sx={{ minHeight: "100vh" }}>
 				{isLarge ? (
-					<AsideBar listMenuItems={LIST_MENU_ITEMS}>
-						<DrawerAsideBar
-							variant="secondary"
-							position="static"
-							listIntems={LIST_MENU_ITEMS}
-							open={open}
-							setOpen={setOpen}
-						>
-							{children}
-						</DrawerAsideBar>
-					</AsideBar>
+					<AsideBar listMenuItems={LIST_MENU_ITEMS}>{children}</AsideBar>
 				) : (
 					<>
 						<AppBar open={false} />

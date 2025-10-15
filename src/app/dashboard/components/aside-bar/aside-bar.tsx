@@ -42,7 +42,7 @@ export default function AsideBar({ children, listMenuItems }: DrawerProps) {
 
 			<AppBar open={open} handleDrawerOpen={handleDrawerOpen} />
 			<DrawerAsideBar listIntems={listMenuItems} open={open} setOpen={setOpen} />
-			<Box>
+			<Box sx={{ flexGrow: 1, p: 1 }}>
 				<DrawerHeader />
 				{children}
 			</Box>

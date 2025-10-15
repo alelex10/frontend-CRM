@@ -1,3 +1,36 @@
+"use client";
+import { useState } from "react";
+import { DrawerAsideBar } from "../../components/aside-bar/drawer-aside-bar/drawer-aside-bar";
+import { ListMenuItem } from "../../components/aside-bar/aside-bar";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
+const LIST_MENU_ITEMS_CONTACTS: ListMenuItem[] = [
+	{
+		label: "Contactos",
+		href: "/dashboard/contacts",
+		// icnono de tabla
+		icon: "material-symbols:grid-on-outline",
+	},
+];
 export default function LayoutCompani({ children }: { children: React.ReactNode }) {
-    return <> {children}</>;
+	const [open, setOpen] = useState(true);
+	const theme = useTheme();
+
+	const isLarge = useMediaQuery(theme.breakpoints.up("md"));
+
+	return (
+		<>
+			<DrawerAsideBar
+				hidden={isLarge && false}
+				variant="secondary"
+				position="static"
+				listIntems={LIST_MENU_ITEMS_CONTACTS}
+				open={open}
+				setOpen={setOpen}
+			>
+				{children}
+			</DrawerAsideBar>
+		</>
+	);
 }
