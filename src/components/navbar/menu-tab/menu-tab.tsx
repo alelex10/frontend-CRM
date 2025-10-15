@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { NavLink } from '../nav-bar';
-import { useTheme } from '@mui/material';
+import { styled, useTheme } from '@mui/material';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -28,6 +28,17 @@ interface TabPanelProps {
 //   );
 // }
 
+const TapCustom = (styled(Tab)(({ theme }) => ({
+    height: "10vh",
+    color: theme.palette.text.secondary,
+    "&.Mui-selected": {
+        color: theme.palette.primary.contrastText,
+        fontWeight: "bold",
+
+    },
+
+}))) as typeof Tab;
+
 function a11yProps(index: number) {
     return {
         id: `simple-tab-${index}`,
@@ -47,11 +58,11 @@ export default function MenuTab({ links }: BasicTabsProps) {
     };
 
     return (
-        <Box >
+        <Box sx={{display: { xs: "none", md: "block" }}}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     {links?.map((item, index) => (
-                        <Tab sx={{ height: '10vh' }} key={item.label} label={item.label} />
+                        <TapCustom key={item.label} label={item.label} value={index} {...a11yProps(index)} />
                     ))}
                 </Tabs>
             </Box>

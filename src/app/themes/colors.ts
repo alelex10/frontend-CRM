@@ -47,7 +47,7 @@ export const deepPurple = {
 export const createPalete = (paleteColor: typeof colorsLight) => ({
 
 	primary: {
-		main: paleteColor.color6, // Un púrpura intenso como principal
+		main: paleteColor.color5, // Un púrpura intenso como principal
 		light: paleteColor.color9, // Un púrpura muy claro para variantes "light"
 		dark: paleteColor.color5, // Un púrpura oscuro para variantes "dark"
 	},

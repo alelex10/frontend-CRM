@@ -47,7 +47,7 @@ export default function NavBar({ links }: NavBarProps) {
 						<Iconify icon="line-md:close-to-menu-transition" />
 					</IconButton>
 					<MenuTab links={links} />
-					<Button href="dashboard" sx={{ display: { xs: "none", md: "flex" } }} color="inherit">
+					<Button variant="outlined" href="dashboard" sx={{ display: { xs: "none", md: "flex" } }} color="inherit">
 						Iniciar Sesión
 					</Button>
 				</Toolbar>
