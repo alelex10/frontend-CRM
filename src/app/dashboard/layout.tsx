@@ -4,9 +4,10 @@ import AsideBar, { ListMenuItem } from "./components/aside-bar/aside-bar";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { AppBar } from "./components/app-bar/app-bar";
-import BottomNavigation from "@mui/material/BottomNavigation";
 import LabelBottomNavigation from "./components/bottom-navigation/bottom-navigation";
-import ThemeRegistry from "../theme-registry";
+
+import { DrawerAsideBar } from "./components/aside-bar/drawer-aside-bar/drawer-aside-bar";
+import Container from "@mui/material/Container";
 
 interface Props {
 	children?: React.ReactNode;
@@ -25,24 +26,39 @@ export const LIST_MENU_ITEMS: ListMenuItem[] = [
 	},
 	{
 		label: "Compañias",
-		href: "/dashboard/compani",
+		href: "/dashboard/companis",
 		icon: "material-symbols:business-center",
 	},
 ];
 
 const DashboardLayout = ({ children }: Props) => {
+	const [open, setOpen] = React.useState(false);
+
 	const theme = useTheme();
-	const isLarge = useMediaQuery(theme.breakpoints.up("lg"));
-	if (isLarge) {
-		return <AsideBar listMenuItems={LIST_MENU_ITEMS}>{children}</AsideBar>;
-	}
+	const isLarge = useMediaQuery(theme.breakpoints.up("md"));
+
 	return (
 		<>
-			{/* <ThemeRegistry> */}
-			<AppBar open={false} />
-			{children}
-			<LabelBottomNavigation />
-			{/* </ThemeRegistry> */}
+			<Container
+				maxWidth={false}
+				disableGutters
+				component="main"
+				sx={{ minHeight: "100vh", overflow: "hidden", position: "relative" }}
+			>
+				{isLarge ? (
+					<AsideBar listMenuItems={LIST_MENU_ITEMS}>
+						<DrawerAsideBar position="static" listIntems={LIST_MENU_ITEMS} open={open} setOpen={setOpen}>
+							{children}
+						</DrawerAsideBar>
+					</AsideBar>
+				) : (
+					<>
+						<AppBar open={false} />
+						{children}
+						<LabelBottomNavigation />
+					</>
+				)}
+			</Container>
 		</>
 	);
 };
