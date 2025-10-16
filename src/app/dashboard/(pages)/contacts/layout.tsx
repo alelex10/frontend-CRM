@@ -4,6 +4,7 @@ import { DrawerAsideBar } from "../../components/aside-bar/drawer-aside-bar/draw
 import { ListMenuItem } from "../../components/aside-bar/aside-bar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import TabScrollNav from "../components/tab-scroll-nav/tab-scroll-nav";
 
 const LIST_MENU_ITEMS_CONTACTS: ListMenuItem[] = [
 	{
@@ -16,13 +17,12 @@ const LIST_MENU_ITEMS_CONTACTS: ListMenuItem[] = [
 export default function LayoutCompani({ children }: { children: React.ReactNode }) {
 	const [open, setOpen] = useState(true);
 	const theme = useTheme();
-
 	const isLarge = useMediaQuery(theme.breakpoints.up("md"));
-
+	console.log("isLarge", isLarge);
 	return (
 		<>
 			<DrawerAsideBar
-				hidden={isLarge && false}
+				hidden={!isLarge}
 				variant="secondary"
 				position="static"
 				listIntems={LIST_MENU_ITEMS_CONTACTS}
@@ -31,6 +31,7 @@ export default function LayoutCompani({ children }: { children: React.ReactNode 
 			>
 				{children}
 			</DrawerAsideBar>
+			<TabScrollNav hidden={isLarge}></TabScrollNav>
 		</>
 	);
 }

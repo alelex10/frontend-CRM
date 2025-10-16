@@ -12,7 +12,7 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
 	const toggleDarkMode = () => setDarkMode(!darkMode);
 
 	return (
-		<ThemeProvider theme={darkMode ? darkThemeOKLCH : lightThemeOKLCH}>
+		<ThemeProvider theme={darkMode ? lightThemeOKLCH : darkThemeOKLCH}>
 			<CssBaseline />
 			{children}
 			<Button onClick={toggleDarkMode}>{darkMode ? "☀️" : "🌙"}</Button>

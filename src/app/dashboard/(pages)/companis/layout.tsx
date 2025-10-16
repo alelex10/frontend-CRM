@@ -9,7 +9,6 @@ const LIST_MENU_ITEMS_COMPANIS: ListMenuItem[] = [
 	{
 		label: "Companis",
 		href: "/dashboard/companis",
-		// icnono de tabla
 		icon: "material-symbols:grid-on-outline",
 	},
 ];
@@ -21,7 +20,7 @@ export default function LayoutCompani({ children }: { children: React.ReactNode 
 	return (
 		<>
 			<DrawerAsideBar
-				hidden={isLarge && false}
+				hidden={!isLarge}
 				variant="secondary"
 				position="static"
 				listIntems={LIST_MENU_ITEMS_COMPANIS}

@@ -3,7 +3,6 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { Iconify } from "../../../../components/icons/icon";
 import { LIST_MENU_ITEMS } from "../../layout";
-import { a } from "vitest/dist/chunks/suite.d.FvehnV49.js";
 
 export default function LabelBottomNavigation() {
 	const [value, setValue] = React.useState("recents");
@@ -26,4 +25,3 @@ export default function LabelBottomNavigation() {
 		</BottomNavigation>
 	);
 }
-

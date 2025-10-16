@@ -6,8 +6,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { AppBar } from "./components/app-bar/app-bar";
 import LabelBottomNavigation from "./components/bottom-navigation/bottom-navigation";
 
-import { DrawerAsideBar } from "./components/aside-bar/drawer-aside-bar/drawer-aside-bar";
 import Container from "@mui/material/Container";
+import { DrawerHeader } from "./components/aside-bar/drawer-header-aside-bar/drawer-header-aside-bar";
+import { ContainerDesktop } from "../../components/container-responsive/container-desktop";
+import { ContainerMovil } from "../../components/container-responsive/container-movil";
 
 interface Props {
 	children?: React.ReactNode;
@@ -32,24 +34,18 @@ export const LIST_MENU_ITEMS: ListMenuItem[] = [
 ];
 
 const DashboardLayout = ({ children }: Props) => {
-	const [open, setOpen] = React.useState(false);
-
-	const theme = useTheme();
-	const isLarge = useMediaQuery(theme.breakpoints.up("md"));
-
 	return (
 		<>
-			<Container maxWidth={false} disableGutters component="main" sx={{ minHeight: "100vh" }}>
-				{isLarge ? (
-					<AsideBar listMenuItems={LIST_MENU_ITEMS}>{children}</AsideBar>
-				) : (
-					<>
-						<AppBar open={false} />
-						{children}
-						<LabelBottomNavigation />
-					</>
-				)}
-			</Container>
+			<ContainerDesktop component="main" sx={{ minHeight: "100vh" }}>
+				<AsideBar listMenuItems={LIST_MENU_ITEMS}>{children}</AsideBar>
+			</ContainerDesktop>
+
+			<ContainerMovil component="main" sx={{ minHeight: "100vh" }}>
+				<AppBar open={false} />
+				<DrawerHeader />
+				{children}
+				<LabelBottomNavigation />
+			</ContainerMovil>
 		</>
 	);
 };

@@ -19,6 +19,7 @@ export const AppBarAnimated = styled(MuiAppBar, {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.leavingScreen,
 	}),
+
 	variants: [
 		{
 			props: ({ open }) => open,
@@ -40,27 +41,34 @@ interface ToolbarProps {
 }
 
 export const AppBar = ({ open, handleDrawerOpen }: ToolbarProps) => {
-  const theme = useTheme();
-  const isLarge = useMediaQuery(theme.breakpoints.up("md"));
+	const theme = useTheme();
+	const isLarge = useMediaQuery(theme.breakpoints.up("md"));
 	return (
-		<AppBarAnimated position="fixed" open={open}>
+		<AppBarAnimated
+			position="fixed"
+			open={open}
+			sx={{
+				[theme.breakpoints.down("md")]: {
+					boxShadow: "none",
+				},
+			}}
+		>
 			<Toolbar>
-				{isLarge && (
-					<IconButton
-						color="inherit"
-						aria-label="open drawer"
-						onClick={handleDrawerOpen}
-						edge="start"
-						sx={[
-							{
-								marginRight: 5,
-								display: open ? "none" : "block",
-							},
-						]}
-					>
-						<Iconify icon="material-symbols:menu-open" rotate={90} />
-					</IconButton>
-				)}
+				<IconButton
+					color="inherit"
+					aria-label="open drawer"
+					onClick={handleDrawerOpen}
+					edge="start"
+					sx={[
+						{
+							marginRight: 5,
+							display: open || !isLarge ? "none" : "block",
+						},
+					]}
+				>
+					<Iconify icon="material-symbols:menu-open" rotate={90} />
+				</IconButton>
+
 				<Typography variant="h6" noWrap component="div">
 					Mini variant drawer
 				</Typography>

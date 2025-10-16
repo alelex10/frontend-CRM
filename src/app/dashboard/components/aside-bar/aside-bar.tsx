@@ -17,6 +17,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import ListItemButton from "@mui/material/ListItemButton";
 import { DrawerAsideBar } from "./drawer-aside-bar/drawer-aside-bar";
+import { useTheme } from "@mui/material/styles";
 
 export interface ListMenuItem {
 	label: string;
@@ -31,13 +32,14 @@ interface DrawerProps {
 
 export default function AsideBar({ children, listMenuItems }: DrawerProps) {
 	const [open, setOpen] = React.useState(false);
+	const theme = useTheme();
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
 
 	return (
-		<Box sx={{ display: "flex" }}>
+		<Box hidden sx={{ display: "flex" }}>
 			<CssBaseline />
 
 			<AppBar open={open} handleDrawerOpen={handleDrawerOpen} />

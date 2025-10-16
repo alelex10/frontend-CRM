@@ -24,7 +24,7 @@ export default function NavBar({ links }: NavBarProps) {
 	const [openDrawer, setOpenDrawer] = React.useState(false);
 
 	return (
-		<Box>
+		<Box component={"nav"}>
 			<AppBar position="fixed">
 				<Toolbar
 					sx={{
