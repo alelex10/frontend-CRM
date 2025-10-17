@@ -5,6 +5,8 @@ import { ListMenuItem } from "../../components/aside-bar/aside-bar";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import TabScrollNav from "../components/tab-scroll-nav/tab-scroll-nav";
+import { ContainerDesktop } from "../../../../components/container-responsive/container-desktop";
+import { ContainerMovil } from "../../../../components/container-responsive/container-movil";
 
 const LIST_MENU_ITEMS_CONTACTS: ListMenuItem[] = [
 	{
@@ -21,17 +23,20 @@ export default function LayoutCompani({ children }: { children: React.ReactNode 
 	console.log("isLarge", isLarge);
 	return (
 		<>
-			<DrawerAsideBar
-				hidden={!isLarge}
-				variant="secondary"
-				position="static"
-				listIntems={LIST_MENU_ITEMS_CONTACTS}
-				open={open}
-				setOpen={setOpen}
-			>
-				{children}
-			</DrawerAsideBar>
-			<TabScrollNav hidden={isLarge}></TabScrollNav>
+			{/* <ContainerDesktop>
+				<DrawerAsideBar
+					variant="secondary"
+					position="static"
+					listIntems={LIST_MENU_ITEMS_CONTACTS}
+					open={open}
+					setOpen={setOpen}
+				>
+					{children}
+				</DrawerAsideBar>
+			</ContainerDesktop>
+			<ContainerMovil>
+				<TabScrollNav></TabScrollNav>
+			</ContainerMovil> */}
 		</>
 	);
 }

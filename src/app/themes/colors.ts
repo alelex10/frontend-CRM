@@ -1,4 +1,4 @@
-const hue = 150;
+const hue = 200;
 
 /* Usar la paleta del video */
 export const colorsLight = {

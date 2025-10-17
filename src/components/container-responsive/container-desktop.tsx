@@ -11,4 +11,3 @@ export const ContainerDesktop = styled(Container)(({ theme }) => ({
 		display: "none",
 	},
 })) as typeof Container;
-

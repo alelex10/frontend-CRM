@@ -11,4 +11,3 @@ export const ContainerMovil = styled(Container)(({ theme }) => ({
 		display: "none",
 	},
 })) as typeof Container;
-

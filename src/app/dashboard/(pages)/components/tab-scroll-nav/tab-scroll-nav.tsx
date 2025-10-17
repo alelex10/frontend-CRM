@@ -8,7 +8,6 @@ import { useTheme } from "@mui/material/styles";
 
 interface TabScrollNavProps {
 	children?: React.ReactNode;
-	hidden?: boolean;
 }
 
 interface TabPanelProps {
@@ -61,7 +60,7 @@ const Data = [
 	},
 ];
 
-export default function TabScrollNav({ children, hidden }: TabScrollNavProps) {
+export default function TabScrollNav({ children }: TabScrollNavProps) {
 	const [value, setValue] = React.useState(0);
 	const theme = useTheme();
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -69,7 +68,7 @@ export default function TabScrollNav({ children, hidden }: TabScrollNavProps) {
 	};
 
 	return (
-		<Box hidden={hidden} sx={{ maxWidth: { xs: "100%", sm: 480 }, bgcolor: "background.paper" }}>
+		<Box sx={{ maxWidth: { xs: "100%", sm: 480 }, bgcolor: "background.paper" }}>
 			<AppBar position="static">
 				<Tabs
 					value={value}
@@ -104,4 +103,3 @@ export default function TabScrollNav({ children, hidden }: TabScrollNavProps) {
 		</Box>
 	);
 }
-

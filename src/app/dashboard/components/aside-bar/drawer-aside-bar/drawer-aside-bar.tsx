@@ -1,3 +1,4 @@
+"use client";
 import { Dispatch, SetStateAction, use, useState } from "react";
 import { Drawer } from "./drawer-styled";
 import { DrawerHeader } from "../drawer-header-aside-bar/drawer-header-aside-bar";
@@ -5,7 +6,6 @@ import IconButton from "@mui/material/IconButton";
 import { Iconify } from "../../../../../components/icons/icon";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import { LIST_MENU_ITEMS } from "../../../layout";
 import ListItem from "@mui/material/ListItem";
 import { ListItemButomAside, ListItemIconAside, ListItemTextAside } from "../list-menu-items/list-item-style";
 import { ListMenuItem } from "../aside-bar";
@@ -13,7 +13,6 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 
 interface DrawerProps {
-	hidden?: boolean;
 	children?: React.ReactNode;
 	position?: "fixed" | "absolute" | "static" | "sticky";
 	listIntems?: ListMenuItem[];
@@ -28,9 +27,9 @@ export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open,
 	const theme = useTheme();
 
 	const isSecondary = variant === "secondary";
-
+	// console.log(listIntems);
 	return (
-		<Box hidden sx={{ [theme.breakpoints.up("md")]: { display: "flex" } }}>
+		<Box hidden sx={{ [theme.breakpoints.up("sm")]: { display: "flex" } }}>
 			<Drawer
 				variant="permanent"
 				open={open}
@@ -72,4 +71,3 @@ export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open,
 		</Box>
 	);
 };
-

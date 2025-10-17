@@ -45,13 +45,13 @@ export const AppBar = ({ open, handleDrawerOpen }: ToolbarProps) => {
 	const { darkMode, toggleTheme } = useThemeStore();
 
 	const theme = useTheme();
-	const isLarge = useMediaQuery(theme.breakpoints.up("md"));
+	const isLarge = useMediaQuery(theme.breakpoints.up("sm"));
 	return (
 		<AppBarAnimated
 			position="fixed"
 			open={open}
 			sx={{
-				[theme.breakpoints.down("md")]: {
+				[theme.breakpoints.down("sm")]: {
 					boxShadow: "none",
 				},
 			}}
