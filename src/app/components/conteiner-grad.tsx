@@ -6,7 +6,7 @@ export const ConteinerGrad = styled(Container)(({ theme }) => ({
 	display: "flex",
 	width: "100%",
 	flexDirection: "column",
-	background: `linear-gradient(to bottom right,${theme.palette.background.default} , ${theme.palette.background.paper})`,
+	background: `linear-gradient(to bottom right,${theme.palette.background.default} , ${theme.palette.primary.main})`,
 	color: theme.palette.text.primary,
 	textAlign: "center",
 	alignContent: "center",
@@ -15,3 +15,4 @@ export const ConteinerGrad = styled(Container)(({ theme }) => ({
 	justifyContent: "center",
 	gap: "2rem",
 })) as typeof Container;
+

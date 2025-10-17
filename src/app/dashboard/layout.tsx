@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import { DrawerHeader } from "./components/aside-bar/drawer-header-aside-bar/drawer-header-aside-bar";
 import { ContainerDesktop } from "../../components/container-responsive/container-desktop";
 import { ContainerMovil } from "../../components/container-responsive/container-movil";
+import ThemeRegistry from "../themes/theme-registry";
 
 interface Props {
 	children?: React.ReactNode;
@@ -35,7 +36,7 @@ export const LIST_MENU_ITEMS: ListMenuItem[] = [
 
 const DashboardLayout = ({ children }: Props) => {
 	return (
-		<>
+		<ThemeRegistry>
 			<ContainerDesktop component="main" sx={{ minHeight: "100vh" }}>
 				<AsideBar listMenuItems={LIST_MENU_ITEMS}>{children}</AsideBar>
 			</ContainerDesktop>
@@ -46,7 +47,7 @@ const DashboardLayout = ({ children }: Props) => {
 				{children}
 				<LabelBottomNavigation />
 			</ContainerMovil>
-		</>
+		</ThemeRegistry>
 	);
 };
 export default DashboardLayout;

@@ -2,7 +2,7 @@
 import { createTheme } from "@mui/material/styles";
 import { styleScrollbar } from "./theme-general";
 import { colorsDark, createPalete } from "./colors";
-import themeNavegation from "./theme-navegation";
+import { themeNavegation } from "./theme-navegation";
 
 export const darkTheme = createTheme({
 	cssVariables: {

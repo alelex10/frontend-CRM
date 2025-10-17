@@ -5,8 +5,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import ThemeRegistry from "./themes/theme-registry";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { ThemeDefault } from "./themes/theme-default";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -33,7 +33,7 @@ export default function RootLayout({
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<InitColorSchemeScript attribute="class" />
 				<AppRouterCacheProvider options={{ enableCssLayer: true }}>
-					<ThemeRegistry>{children} </ThemeRegistry>
+					<ThemeDefault>{children}</ThemeDefault>
 				</AppRouterCacheProvider>
 			</body>
 		</html>

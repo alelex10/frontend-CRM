@@ -1,4 +1,4 @@
-// import { Link as RouterLink , LinkProps as RouterLinkProps } from 'react-router';
+"use client";
 import { LinkProps } from "@mui/material/Link";
 import { createTheme } from "@mui/material/styles";
 import RouterLink from "next/link";
@@ -14,7 +14,7 @@ const LinkBehavior = React.forwardRef<
 	return <RouterLink ref={ref} href={href} {...other} />;
 });
 
-const themeNavegation = createTheme({
+export const themeNavegation = createTheme({
 	components: {
 		MuiLink: {
 			defaultProps: {
@@ -28,5 +28,3 @@ const themeNavegation = createTheme({
 		},
 	},
 });
-
-export default themeNavegation;
