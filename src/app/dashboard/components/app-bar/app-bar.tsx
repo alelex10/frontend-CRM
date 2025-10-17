@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { styled, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useThemeStore } from "../../../themes/themeStore";
 
 interface AppBarProps extends MuiAppBarProps {
 	open?: boolean;
@@ -41,6 +42,8 @@ interface ToolbarProps {
 }
 
 export const AppBar = ({ open, handleDrawerOpen }: ToolbarProps) => {
+	const { darkMode, toggleTheme } = useThemeStore();
+
 	const theme = useTheme();
 	const isLarge = useMediaQuery(theme.breakpoints.up("md"));
 	return (
@@ -72,6 +75,14 @@ export const AppBar = ({ open, handleDrawerOpen }: ToolbarProps) => {
 				<Typography variant="h6" noWrap component="div">
 					Mini variant drawer
 				</Typography>
+				<IconButton
+					onClick={() => toggleTheme()}
+					sx={{
+						marginLeft: "auto",
+					}}
+				>
+					<Iconify icon={darkMode ? "eva:moon-fill" : "eva:sun-fill"} />
+				</IconButton>
 			</Toolbar>
 		</AppBarAnimated>
 	);

@@ -51,5 +51,3 @@ MyDocument.getInitialProps = async (ctx) => {
 	};
 };
 
-
-

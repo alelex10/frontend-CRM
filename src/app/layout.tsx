@@ -5,7 +5,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import ThemeRegistry from "./theme-registry";
+import ThemeRegistry from "./themes/theme-registry";
 import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 
 const geistSans = Geist({
