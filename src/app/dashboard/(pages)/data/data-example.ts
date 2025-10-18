@@ -80,4 +80,3 @@ export const headCells: readonly HeadCell[] = [
 		label: "Protein (g)",
 	},
 ];
-
