@@ -17,12 +17,15 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.8",
+    "@hookform/resolvers": "^5.2.2",
     "@mui/material": "^7.3.2",
     "@mui/material-nextjs": "^7.3.3",
     "@storybook/addon-themes": "^9.1.10",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.65.0",
+    "zod": "^4.1.12",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

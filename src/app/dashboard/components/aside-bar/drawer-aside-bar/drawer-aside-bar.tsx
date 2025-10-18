@@ -29,7 +29,7 @@ export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open,
 	const isSecondary = variant === "secondary";
 	// console.log(listIntems);
 	return (
-		<Box hidden sx={{ [theme.breakpoints.up("sm")]: { display: "flex" } }}>
+		<Box hidden sx={{ display: "flex" }}>
 			<Drawer
 				variant="permanent"
 				open={open}

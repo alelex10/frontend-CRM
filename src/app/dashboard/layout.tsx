@@ -1,12 +1,8 @@
 "use client";
 import React from "react";
 import AsideBar, { ListMenuItem } from "./components/aside-bar/aside-bar";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { AppBar } from "./components/app-bar/app-bar";
 import LabelBottomNavigation from "./components/bottom-navigation/bottom-navigation";
-
-import Container from "@mui/material/Container";
 import { DrawerHeader } from "./components/aside-bar/drawer-header-aside-bar/drawer-header-aside-bar";
 import { ContainerDesktop } from "../../components/container-responsive/container-desktop";
 import { ContainerMovil } from "../../components/container-responsive/container-movil";
@@ -24,13 +20,18 @@ export const LIST_MENU_ITEMS: ListMenuItem[] = [
 	},
 	{
 		label: "Contactos",
-		href: "/dashboard/contacts",
+		href: "/dashboard/contacts/table",
 		icon: "material-symbols:contacts",
 	},
 	{
 		label: "Compañias",
-		href: "/dashboard/companis",
+		href: "/dashboard/companis/table",
 		icon: "material-symbols:business-center",
+	},
+	{
+		label: "Oportunidades",
+		href: "/dashboard/opportunities/pipeline",
+		icon: "material-symbols:handshake",
 	},
 ];
 
