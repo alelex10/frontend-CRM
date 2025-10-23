@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 import NavBar from "../components/navbar/nav-bar";
 import { ConteinerGrad } from "./components/conteiner-grad";
 import { ConteinerHome } from "./components/conteiner-home";
+import { Footer } from "./components/footer";
 
 const linksNavBar = [
 	{
@@ -113,6 +114,9 @@ export default function HomePage() {
 					</Link>
 				</ConteinerGrad>
 			</ConteinerHome>
+			<Footer />
 		</>
 	);
 }
+
+
