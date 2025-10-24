@@ -11,7 +11,6 @@ export const colorsLight = {
 	color4: `oklch(35% .25 ${hue})`,
 	color3: `oklch(25% .2 ${hue})`,
 	color2: `oklch(13% .2 ${hue})`,
-	
 	color1: `oklch(5% .2 ${hue})`,
 };
 
