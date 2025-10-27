@@ -9,49 +9,63 @@ import Button from "@mui/material/Button";
 import { MyDrawer } from "../drawer/mi-drawer";
 import { Iconify } from "../icons/icon";
 import MenuTab from "./menu-tab/menu-tab";
+import { useTokenStore } from "@/store/token-store";
+// import { cookies } from 'cookies'
+
 
 export interface NavLink {
-	label: string;
-	href: string;
-	value?: string | number;
+  label: string;
+  href: string;
+  value?: string | number;
 }
 
 interface NavBarProps {
-	links?: NavLink[];
+  links?: NavLink[];
 }
 
 export default function NavBar({ links }: NavBarProps) {
-	const [openDrawer, setOpenDrawer] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
+  const { token } = useTokenStore();
+  
+  const existsToken = useTokenStore((state) => !!state.token);
+	
+  console.log("token", existsToken)
 
-	return (
-		<Box component={"nav"}>
-			<AppBar position="fixed">
-				<Toolbar
-					sx={{
-						display: "flex",
-						justifyContent: "space-between",
-						height: "10vh",
-					}}
-				>
-					<Typography variant="h6" component="div">
-						OpbitCRM
-					</Typography>
-					{/* drawer */}
-					<MyDrawer open={openDrawer} toggleDrawer={setOpenDrawer} />
-					<IconButton
-						onClick={() => setOpenDrawer(!openDrawer)}
-						size="large"
-						color="inherit"
-						sx={{ display: { xs: "block", md: "none" } }}
-					>
-						<Iconify icon="line-md:close-to-menu-transition" />
-					</IconButton>
-					<MenuTab links={links} />
-					<Button variant="outlined" href="/dashboard" sx={{ display: { xs: "none", md: "flex" } }} color="inherit">
-						Iniciar Sesión
-					</Button>
-				</Toolbar>
-			</AppBar>
-		</Box>
-	);
+  return (
+    <Box component={"nav"}>
+      <AppBar position="fixed">
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            height: "10vh",
+          }}
+        >
+          <Typography variant="h6" component="div">
+            OpbitCRM
+          </Typography>
+          {/* drawer */}
+          <MyDrawer open={openDrawer} toggleDrawer={setOpenDrawer} />
+          <IconButton
+            onClick={() => setOpenDrawer(!openDrawer)}
+            size="large"
+            color="inherit"
+            sx={{ display: { xs: "block", md: "none" } }}
+          >
+            <Iconify icon="line-md:close-to-menu-transition" />
+          </IconButton>
+          <MenuTab links={links} />
+		  
+          <Button
+            variant="outlined"
+            href="/dashboard"
+            sx={{ display: { xs: "none", md: "flex" } }}
+            color="inherit"
+          >
+            Iniciar Sesión
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }

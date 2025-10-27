@@ -1,4 +1,4 @@
-"use client";
+
 import React from "react";
 import AsideBar, { ListMenuItem } from "./components/aside-bar/aside-bar";
 import { AppBar } from "./components/app-bar/app-bar";

@@ -3,7 +3,7 @@
 import { ThemeProvider, CssBaseline, Button } from "@mui/material";
 import { darkTheme, darkThemeOKLCH } from "./theme-dark-mode";
 import { lightTheme, lightThemeOKLCH } from "./theme-light-mode";
-import { useThemeStore } from "./themeStore";
+import { useThemeStore } from "./theme-store";
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
 	const { darkMode } = useThemeStore();
