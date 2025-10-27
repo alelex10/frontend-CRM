@@ -13,7 +13,6 @@ interface loginUserProps {
 }
 
 export async function loginUser({ LoginData }: loginUserProps) {
-  console.log(LoginData);
 
   const response = await myFetch<LoginResponse>(
     API.AUTH.LOGIN,
@@ -28,6 +27,7 @@ export async function loginUser({ LoginData }: loginUserProps) {
   // ✅ Guardar el token en cookie segura
   // ✅ Guardar token en cookie del servidor
   if (response?.data) {
+    
     (await cookies()).set("access_token", response.data?.data.access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -39,5 +39,5 @@ export async function loginUser({ LoginData }: loginUserProps) {
     // ✅ Redirigir al dashboard
     redirect("/dashboard");
   }
-  return response;
+  return response.error;
 }

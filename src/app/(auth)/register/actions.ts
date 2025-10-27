@@ -2,24 +2,25 @@
 
 import { myFetch } from "@/app/common/my-fetch";
 import { API } from "@/consts/api";
-import { LoginData } from "@/schemas/auth.schema";
+import { LoginData, RegisterData } from "@/schemas/auth.schema";
 import { useTokenStore } from "@/store/token-store";
-import { LoginResponse } from "@/types/auth";
+import { LoginResponse, RegisterResponse } from "@/types/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { R } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 
-interface loginUserProps {
-  LoginData: LoginData;
+interface RegisterUserProps {
+  RegisterData: RegisterData;
 }
 
-export async function loginUser({ LoginData }: loginUserProps) {
-  console.log(LoginData);
+export async function RegisterUser({ RegisterData }: RegisterUserProps) {
+  // console.log(RegisterData);
 
-  const response = await myFetch<LoginResponse>(
-    API.AUTH.LOGIN,
+  const response = await myFetch<RegisterResponse>(
+    API.AUTH.REGISTER,
     {
       method: "POST",
-      body: JSON.stringify(LoginData),
+      body: JSON.stringify(RegisterData),
     }
   );
 
@@ -39,5 +40,5 @@ export async function loginUser({ LoginData }: loginUserProps) {
     // ✅ Redirigir al dashboard
     redirect("/dashboard");
   }
-  return response;
+  return response.error;
 }

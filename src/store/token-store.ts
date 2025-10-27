@@ -25,7 +25,7 @@ export const useTokenStore = create<TokenStore>()(
       clearToken: () => set({ token: "", expiresAt: null }),
     }),
     {
-      name: "token-storage",
+      name: "access_token",
       // ⏱ limpiar si expiró al hidratar (al abrir la app)
       onRehydrateStorage: () => (state) => {
         if (!state) return;

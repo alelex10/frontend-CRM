@@ -3,7 +3,7 @@ import { error } from "console";
 
 interface Stats<T> {
   data: undefined | ResponseTemplate<T>;
-  error: undefined | string;
+  error: undefined | ResponseError;
 }
 
 export async function myFetch<T>(
@@ -19,22 +19,24 @@ export async function myFetch<T>(
       },
     });
 
-    const responseJson = await response.json();
-
-    console.log("RESPONSE JSON:", responseJson);
-
-    if (!responseJson.ok) {
+    if (!response.ok) {
       try {
-        stats.error = responseJson.message;
+        stats.error = await response.json() as ResponseError;
         return stats;
       } catch (error) {
         console.log("ERROR DE PETICON:", error);
-        stats.error = "Error Inesperado";
+        stats.error = {
+          message: "Ocurrió un error inesperado",
+          error: "Ocurrió un error inesperado",
+          statusCode: response.status,
+        };
         return stats;
       }
     }
 
-    stats.data = responseJson;
+    const responseJson = await response.json();
+
+    stats.data = responseJson as ResponseTemplate<T>;
     return stats;
   } catch (error: any) {
     console.error(error);
