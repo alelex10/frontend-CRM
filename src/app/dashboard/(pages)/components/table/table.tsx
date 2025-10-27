@@ -87,11 +87,11 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 
 interface Props {
-	rows: Compani[];
+	data: Compani[];
 	headCells: readonly CompaniHeadCell[];
 }
 
-export default function EnhancedTable({ rows, headCells }: Props) {
+export default function EnhancedTable({ data, headCells }: Props) {
 	// const [order, setOrder] = React.useState<Order>("asc");
 	// const [orderBy, setOrderBy] = React.useState<keyof Compani>("name");
 	const [selected, setSelected] = React.useState<number[]>([]);
@@ -107,7 +107,7 @@ export default function EnhancedTable({ rows, headCells }: Props) {
 
 	const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.checked) {
-			const newSelected = rows.map((n) => n.id);
+			const newSelected = data.map((n) => n.id);
 			setSelected(newSelected);
 			return;
 		}
@@ -146,7 +146,7 @@ export default function EnhancedTable({ rows, headCells }: Props) {
 	};
 	// VERIFICADO
 	// Avoid a layout jump when reaching the last page with empty rows.
-	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
 	// const visibleRows = React.useMemo(
 	// 	() => rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
@@ -165,11 +165,11 @@ export default function EnhancedTable({ rows, headCells }: Props) {
 							// orderBy={orderBy}
 							onSelectAllClick={handleSelectAllClick}
 							// onRequestSort={handleRequestSort}
-							rowCount={rows.length}
+							rowCount={data.length}
 							headCells={headCells}
 						/>
 						<TableBody>
-							{rows.map((row, index) => {
+							{data.map((row, index) => {
 								const isItemSelected = selected.includes(row.id);
 								const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -200,7 +200,7 @@ export default function EnhancedTable({ rows, headCells }: Props) {
 				<TablePagination
 					rowsPerPageOptions={[5, 10, 25]}
 					component="div"
-					count={rows.length}
+					count={data.length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onPageChange={handleChangePage}

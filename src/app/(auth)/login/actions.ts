@@ -1,6 +1,6 @@
 "use server";
 
-import { myFetch } from "@/app/common/my-fetch";
+import { myFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { LoginData } from "@/schemas/auth.schema";
 import { useTokenStore } from "@/store/token-store";

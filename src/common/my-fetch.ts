@@ -1,7 +1,7 @@
 import { ResponseError, ResponseTemplate } from "@/types/response";
 import { error } from "console";
 
-interface Stats<T> {
+export interface ResponseMyFetch<T> {
   data: undefined | ResponseTemplate<T>;
   error: undefined | ResponseError;
 }
@@ -9,8 +9,8 @@ interface Stats<T> {
 export async function myFetch<T>(
   url: string,
   options: RequestInit
-): Promise<Stats<T>> {
-  let stats: Stats<T> = { data: undefined, error: undefined };
+): Promise<ResponseMyFetch<T>> {
+  let stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
   try {
     const response = await fetch(url, {
       ...options,
@@ -40,6 +40,11 @@ export async function myFetch<T>(
     return stats;
   } catch (error: any) {
     console.error(error);
+    stats.error = {
+      message: "Ocurrió un error inesperado",
+      error: "Ocurrió un error inesperado",
+      statusCode: 500,
+    };
     return stats;
   }
 }

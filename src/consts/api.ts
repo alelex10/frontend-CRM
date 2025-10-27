@@ -7,4 +7,7 @@ export const API = {
     REGISTER: `${API_BASE_URL}/auth/register`,
     // LOGOUT: `${API_BASE_URL}/auth/logout`,
   },
+  COMPANI: {
+    LIST: `${API_BASE_URL}/company`,
+  },
 };
