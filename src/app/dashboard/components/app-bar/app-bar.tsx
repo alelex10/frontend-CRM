@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { styled, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useThemeStore } from "../../../themes/themeStore";
+import { useThemeStore } from "../../../themes/theme-store";
 
 interface AppBarProps extends MuiAppBarProps {
 	open?: boolean;

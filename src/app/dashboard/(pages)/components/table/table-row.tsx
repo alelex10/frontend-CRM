@@ -1,7 +1,7 @@
 import Checkbox from "@mui/material/Checkbox";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { Compani } from "../../../../../types/compani/compani.types";
+import { Compani } from "../../../../../types/compani.types";
 
 interface Props {
 	row: Compani;

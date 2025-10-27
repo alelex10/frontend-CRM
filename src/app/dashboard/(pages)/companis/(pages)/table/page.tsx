@@ -5,7 +5,6 @@ import { companiHeadCells, companiRows } from "../../../data/data-company";
 const page = () => {
 	return (
 		<div>
-			{/* <EnhancedTable headCells={headCells} rows={rows}></EnhancedTable> */}
 			<EnhancedTable headCells={companiHeadCells} rows={companiRows}></EnhancedTable>
 		</div>
 	);

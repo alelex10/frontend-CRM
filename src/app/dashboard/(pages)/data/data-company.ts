@@ -1,4 +1,4 @@
-import { Compani } from "../../../../types/compani/compani.types";
+import { Compani } from "../../../../types/compani.types";
 
 export function createCompaniData(
 	id: number,

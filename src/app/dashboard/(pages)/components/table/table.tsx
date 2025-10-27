@@ -17,7 +17,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { Iconify } from "../../../../../components/icons/icon";
 import { Data } from "../../data/data-example";
-import { Compani } from "../../../../../types/compani/compani.types";
+import { Compani } from "../../../../../types/compani.types";
 import { CompaniHeadCell } from "../../data/data-company";
 import { EnhancedTableHead } from "./table-head";
 import TableBodyRow from "./table-row";
