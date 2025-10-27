@@ -19,6 +19,7 @@ import { MySnackbar } from "@/components/snackbar/my-snackbar";
 
 export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const [error, setError] = React.useState<string | undefined>();
+  const [isLoading, setIsLoading] = React.useTransition();
   const {
     register,
     handleSubmit,
@@ -35,10 +36,10 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   });
 
   const onsubmit = async (data: RegisterData) => {
-    // console.log(data);
-    const response = await RegisterUser({ RegisterData: data });
-    // console.log(response);
-    setError(response?.message);
+    setIsLoading(async () => {
+      const response = await RegisterUser({ RegisterData: data });
+      setError(response?.message);
+    });
   };
 
   return (
@@ -153,7 +154,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
 
         {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
-        <Button type="submit" fullWidth variant="contained">
+        <Button type="submit" fullWidth variant="contained" disabled={isLoading}>
           Registrar
         </Button>
       </Box>

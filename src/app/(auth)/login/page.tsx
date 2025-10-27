@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -16,9 +16,11 @@ import { loginUser } from "./actions";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import { MySnackbar } from "@/components/snackbar/my-snackbar";
+import { useState, useTransition } from "react";
 
 export default function SignIn(props: { disableCustomTheme?: boolean }) {
-  const [errorMessage, setError] = React.useState<string | undefined>();
+  const [errorMessage, setError] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useTransition();
   const {
     register,
     handleSubmit,
@@ -32,8 +34,11 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   });
 
   const onsubmit = async (data: LoginData) => {
-    const response = await loginUser({ LoginData: data });
-    setError(response?.message);
+    setIsLoading(async () => {
+      const response = await loginUser({ LoginData: data });
+      setError(response?.message);
+    });
+    
   };
 
   return (
@@ -112,7 +117,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         </FormControl>
 
         {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
-        <Button type="submit" fullWidth variant="contained">
+        <Button type="submit" fullWidth variant="contained" disabled={isLoading}>
           Iniciar Sesión
         </Button>
       </Box>

@@ -1,3 +1,4 @@
+"use client";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { drawerWidth } from "../aside-bar/config";
 import { Iconify } from "../../../../components/icons/icon";
