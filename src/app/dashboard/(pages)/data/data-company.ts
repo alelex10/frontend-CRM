@@ -1,4 +1,5 @@
 import { Compani } from "../../../../types/compani.types";
+import { Contact } from "../../../../types/conntac.types";
 
 export function createCompaniData(
 	id: number,
@@ -107,7 +108,12 @@ export interface CompaniHeadCell {
 	label: string;
 	numeric: boolean;
 }
-
+export interface ContactHeadCell {
+	disablePadding: boolean;
+	id: keyof Contact; // Usa keyof Compani para que sea tipado correctamente
+	label: string;
+	numeric: boolean;
+}
 export const companiHeadCells: readonly CompaniHeadCell[] = [
 	{
 		id: "id",
@@ -147,3 +153,47 @@ export const companiHeadCells: readonly CompaniHeadCell[] = [
 	},
 ];
 
+export const contactHeadCell: readonly ContactHeadCell[] = [
+	{
+		id: "id",
+		numeric: true,
+		disablePadding: false,
+		label: "ID",
+	},
+	{
+		id: "name",
+		numeric: false,
+		disablePadding: true,
+		label: "Nombre",
+	},
+	{
+		id: "email",
+		numeric: false,
+		disablePadding: false,
+		label: "Correo Electrónica",
+	},
+	{
+		id: "phone",
+		numeric: false,
+		disablePadding: false,
+		label: "Teléfono",
+	},
+	{
+		id: "companyId",
+		numeric: false,
+		disablePadding: false,
+		label: "Compañía",
+	},
+	{
+		id: "createdAt",
+		numeric: false, // Podríamos considerar 'true' si la fecha se representa numéricamente para ordenación, pero como string/Date es más común 'false'
+		disablePadding: false,
+		label: "Fecha de Creación",
+	},
+	{
+		id: "updatedAt",
+		numeric: false, // Similar a createdAt
+		disablePadding: false,
+		label: "Última Actualización",
+	},
+];

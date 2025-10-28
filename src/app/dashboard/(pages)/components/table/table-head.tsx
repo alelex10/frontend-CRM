@@ -1,5 +1,5 @@
 import TableHead from "@mui/material/TableHead";
-import { CompaniHeadCell } from "../../data/data-company";
+import { CompaniHeadCell, ContactHeadCell } from "../../data/data-company";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
@@ -12,7 +12,7 @@ interface EnhancedTableProps {
 	// order: Order;
 	// orderBy: string;
 	rowCount: number;
-	headCells: readonly CompaniHeadCell[];
+	headCells: readonly ContactHeadCell[];
 }
 
 export function EnhancedTableHead(props: EnhancedTableProps) {
@@ -61,3 +61,4 @@ export function EnhancedTableHead(props: EnhancedTableProps) {
 	);
 }
 
+// export function EnhancedTableHead

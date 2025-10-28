@@ -2,15 +2,16 @@ import Checkbox from "@mui/material/Checkbox";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Compani } from "../../../../../types/compani.types";
+import { Contact } from "../../../../../types/conntac.types";
 
 interface Props {
-	row: Compani;
+	row: Contact;
 	labelId: string;
 	isItemSelected: boolean;
 	handleClick: (event: React.MouseEvent<unknown>, id: number) => void;
 }
 
-export default function TableBodyRow({ row, labelId, isItemSelected, handleClick }: Props) {
+export default function TableBodyRowContact({ row, labelId, isItemSelected, handleClick }: Props) {
 	return (
 		<>
 			<TableRow
@@ -35,14 +36,12 @@ export default function TableBodyRow({ row, labelId, isItemSelected, handleClick
 					{row.id}
 				</TableCell>
 				<TableCell align="right">{row.name}</TableCell>
-				<TableCell align="right">{row.address}</TableCell>
-				<TableCell align="right">{row.industry}</TableCell>
+				<TableCell align="right">{row.email}</TableCell>
+				<TableCell align="right">{row.phone}</TableCell>
+				<TableCell align="right">{row.companyId}</TableCell>
 				<TableCell align="right">{row.createdAt.toLocaleString().slice(0, 9)}</TableCell>
 				<TableCell align="right">{row.updatedAt.toLocaleString().slice(0, 9)}</TableCell>
 			</TableRow>
 		</>
 	);
 }
-
-
-
