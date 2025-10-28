@@ -13,10 +13,11 @@ export async function myFetch<T>(
   let stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
   try {
     const response = await fetch(url, {
-      ...options,
+      
       headers: {
         "Content-Type": "application/json",
       },
+      ...options,
     });
 
     if (!response.ok) {
