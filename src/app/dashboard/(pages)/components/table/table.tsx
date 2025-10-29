@@ -16,51 +16,14 @@ import Switch from "@mui/material/Switch";
 import { Iconify } from "../../../../../components/icons/icon";
 import { Data } from "../../data/data-example";
 import { Compani } from "../../../../../types/compani.types";
-import { CompaniHeadCell } from "../../data/data-company";
+import { HeadCell } from "../../data/data-head";
 import { EnhancedTableHead } from "./table-head";
 import TableBodyRow from "./table-row";
-import { Dispatch, SetStateAction, TransitionStartFunction, useEffect, useState, useTransition } from "react";
-import { companyList } from "../../companis/(pages)/table/actions";
+import { useState } from "react";
+import { Contact } from "../../../../../types/conntac.types";
+import { C } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 
-interface FetchProps {
-	setCompanies: Dispatch<SetStateAction<Compani[]>>;
-	setError: Dispatch<SetStateAction<string | undefined>>;
-	setIsLoading: TransitionStartFunction;
-}
-
-export const fetchData = async ({ setCompanies, setError, setIsLoading }: FetchProps) => {
-	setIsLoading(async () => {
-		const dataList = await companyList({ query: {} });
-		const response = dataList;
-		if (response?.data?.data) {
-			setCompanies(response.data.data.data);
-		}
-		if (response?.error) {
-			setError(response.error.message);
-		}
-	});
-};
-
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-	if (b[orderBy] < a[orderBy]) {
-		return -1;
-	}
-	if (b[orderBy] > a[orderBy]) {
-		return 1;
-	}
-	return 0;
-}
-
-type Order = "asc" | "desc";
-
-// function getComparator<Key extends keyof any>(
-// 	order: Order,
-// 	orderBy: Key
-// ): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
-// 	return order === "desc"
-// 		? (a, b) => descendingComparator(a, b, orderBy)
-// 		: (a, b) => -descendingComparator(a, b, orderBy);
-// }
+export type Order = "asc" | "desc";
 
 interface EnhancedTableToolbarProps {
 	numSelected: number;
@@ -106,38 +69,26 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 
 interface Props {
-	headCells: readonly CompaniHeadCell[];
+	headCells: readonly HeadCell[];
+	data: Compani[] | Contact[];
+	setData: React.Dispatch<React.SetStateAction<Compani[] | Contact[]>>;
 }
 
-export default function EnhancedTable({ headCells }: Props) {
-	const [companies, setCompanies] = useState<Compani[]>([]);
-	const [error, setError] = useState<string>();
-	const [isLoading, setIsLoading] = useTransition();
-
-	useEffect(() => {
-		fetchData({
-			setCompanies,
-			setError,
-			setIsLoading,
-		});
-	}, []);
-
-	// const [order, setOrder] = React.useState<Order>("asc");
-	// const [orderBy, setOrderBy] = React.useState<keyof Compani>("name");
+export default function EnhancedTable({ headCells, data }: Props) {
+	// const [order, setOrder] = useState<Order>("asc");
+	const [orderBy, setOrderBy] = useState<keyof Compani>("id");
 	const [selected, setSelected] = useState<number[]>([]);
 	const [page, setPage] = useState(0);
 	const [dense, setDense] = useState(false);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
-	const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
-		// const isAsc = orderBy === property && order === "asc";
-		// setOrder(isAsc ? "desc" : "asc");
-		// setOrderBy(property);
+	const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Compani) => {
+		
 	};
 
 	const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.checked) {
-			const newSelected = companies.map((n) => n.id);
+			const newSelected = data.map((n) => n.id);
 			setSelected(newSelected);
 			return;
 		}
@@ -153,35 +104,14 @@ export default function EnhancedTable({ headCells }: Props) {
 	};
 	// VERIFICADO
 	const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
-		// cada vez que se aga click en el checkbox se agrega o quita el id
 		setSelected((selected) => (selected.includes(id) ? selected.filter((id) => id !== id) : [...selected, id]));
-
-		// const selectedIndex = selected.indexOf(id);
-		// let newSelected: number[] = [];
-
-		// if (selectedIndex === -1) {
-		// 	newSelected = newSelected.concat(selected, id);
-		// } else if (selectedIndex === 0) {
-		// 	newSelected = newSelected.concat(selected.slice(1));
-		// } else if (selectedIndex === selected.length - 1) {
-		// 	newSelected = newSelected.concat(selected.slice(0, -1));
-		// } else if (selectedIndex > 0) {
-		// 	newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-		// }
-		// setSelected(newSelected);
 	};
 	// VERIFICADO
 	const handleChangeDense = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setDense(event.target.checked);
 	};
-	// VERIFICADO
-	// Avoid a layout jump when reaching the last page with empty rows.
-	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - companies.length) : 0;
 
-	// const visibleRows = React.useMemo(
-	// 	() => rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-	// 	[rows, page, rowsPerPage]
-	// );
+	const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
 	return (
 		<Box sx={{ width: "100%" }}>
@@ -192,14 +122,14 @@ export default function EnhancedTable({ headCells }: Props) {
 						<EnhancedTableHead
 							numSelected={selected.length}
 							// order={order}
-							// orderBy={orderBy}
+							orderBy={orderBy}
 							onSelectAllClick={handleSelectAllClick}
-							// onRequestSort={handleRequestSort}
-							rowCount={companies.length}
+							onRequestSort={handleRequestSort}
+							rowCount={data.length}
 							headCells={headCells}
 						/>
 						<TableBody>
-							{companies.map((row, index) => {
+							{data.map((row, index) => {
 								const isItemSelected = selected.includes(row.id);
 								const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -230,7 +160,7 @@ export default function EnhancedTable({ headCells }: Props) {
 				<TablePagination
 					rowsPerPageOptions={[5, 10, 25]}
 					component="div"
-					count={companies.length}
+					count={data.length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onPageChange={handleChangePage}

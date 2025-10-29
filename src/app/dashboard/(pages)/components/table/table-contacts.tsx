@@ -16,13 +16,13 @@ import Switch from "@mui/material/Switch";
 import { Iconify } from "../../../../../components/icons/icon";
 import { Data } from "../../data/data-example";
 import { Compani } from "../../../../../types/compani.types";
-import { CompaniHeadCell, ContactHeadCell } from "../../data/data-company";
+import { HeadCell, ContactHeadCell } from "../../data/data-head";
 import { EnhancedTableHead } from "./table-head";
 import TableBodyRow from "./table-row";
 import { Dispatch, SetStateAction, TransitionStartFunction, useEffect, useState, useTransition } from "react";
-import { companyList } from "../../companis/(pages)/table/actions";
+import { companyList } from "../../companis/(pages-companies)/table/actions";
 import { Contact } from "../../../../../types/conntac.types";
-import { contactList } from "../../contacts/(pages)/table/actions";
+import { contactList } from "../../contacts/(pages-contacts)/table/actions";
 import TableBodyRowContact from "./table-row-contact";
 
 interface FetchProps {
