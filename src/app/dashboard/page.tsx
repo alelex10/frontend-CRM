@@ -1,29 +1,43 @@
-//import { cookies } from "next/headers";
-//import type { request } from "next/server";
-import type { NextRequest } from "next/server";
-import DashboardClient from "./DashboardClient";
+"use server";
 
-export default async function DashboardPage(request: NextRequest) {
-  // ✅ Leer cookie del request (lado servidor)
-  //const token = cookies().get("token")?.value;
-  /*const token = request.cookies.get("access_token");
+import { cookies } from "next/headers";
+import DashboardClient from "./DashboardClient";
+import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
+import { API } from "@/consts/api";
+import { ResponseTemplate } from "@/types/response";
+import { Dashboard } from "@/types/dashboard.types";
+
+export default async function DashboardPage() {
+  const token = (await cookies()).get("access_token")?.value;
+
+  //console.log("TOKEN MAGICO: ",token);
 
   if (!token) {
     return <p>No estás autenticado</p>;
   }
 
-  // ✅ Pedir datos al backend con ese token
-  const res = await fetch(`${process.env.API_URL}/dashboard`, {
-    headers: { Authorization: `Bearer ${token}` },
-    cache: "no-store",
-  });
+  // MiContraseñaSegura123
+  
+  const response = await myFetch<ResponseTemplate<Dashboard>>(
+    API.DASHBOARD,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  
 
-  if (!res.ok) {
-    return <p>Error al cargar el dashboard</p>;
+  //console.log(response);
+  const data = response.data?.data;
+  //console.log(data);
+
+  if (!data) {
+    return <p>Error: no se pudieron cargar los datos del dashboard.</p>;
   }
 
-  const data = await res.json();*/
-
-  return <DashboardClient /*data={data}*/ />;
+  return <DashboardClient data={data} />;
 }
 

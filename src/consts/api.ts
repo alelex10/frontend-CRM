@@ -13,4 +13,5 @@ export const API = {
   CONTACT: {
     LIST: `${API_BASE_URL}/contacts`,
   },
+  DASHBOARD: `${API_BASE_URL}/dashboard`,
 };

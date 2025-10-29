@@ -8,38 +8,49 @@ import {
   Box,
 } from "@mui/material";
 import { PieChart } from "@mui/x-charts/PieChart";
+import { Dashboard } from "@/types/dashboard.types";
 
-export default function DashboardClient() {
+export default function DashboardClient({ data }: { data: Dashboard }) {
+
+  // 👉 Función para formatear números grandes
+  const formatNumber = (num: number) => {
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+    if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+    return num.toString();
+  };
 
   const stats = [
-    { label: "Ventas totales", value: "5.2M", color: "#7B61FF" },
-    { label: "Tasa de ventas", value: "16.92%", color: "#5B8DEF" },
-    { label: "Tasa de cierre", value: "14.47%", color: "#3DD9EB" },
-    { label: "Días promedio para cerrar", value: "60.7", color: "#31C48D" },
-    { label: "Valor de las oportunidades", value: "77.8M", color: "#4F46E5" },
-    { label: "Deals abiertas", value: "1.6K", color: "#3B82F6" },
-    { label: "Valor ponderado", value: "35.6M", color: "#06B6D4" },
-    { label: "Antigüedad promedio de las ventas", value: "201.67", color: "#10B981" },
+    { label: "Valor de ventas totales", value: formatNumber(data.totalSales), color: "#7B61FF" },
+    { label: "Tasa de ventas", value: `${data.winRate}%`, color: "#5B8DEF" },
+    { label: "Tasa de cierre", value: `${data.closeRate}%`, color: "#3DD9EB" },
+    { label: "Días promedio para cerrar", value: data.avgDaysToClose, color: "#31C48D" },
+    { label: "Valor de las oportunidades", value: formatNumber(data.pipelineValue), color: "#4F46E5" },
+    { label: "Oportunidades abiertas", value: data.openDeals, color: "#3B82F6" },
+    { label: "Valor promedio de venta", value: formatNumber(data.avgDealSize), color: "#06B6D4" },
+    { label: "Edad prom. de oportunidades", value: data.avgOpenDealAge.toFixed(1), color: "#10B981" },
   ];
 
-  const pipelineData = [
-    { id: 0, value: 40, label: "Entrada de Lead", color: "#7B61FF" },
-    { id: 1, value: 20, label: "Contacto Realizado", color: "#5B8DEF" },
-    { id: 2, value: 10, label: "Entrevista", color: "#3DD9EB" },
-    { id: 3, value: 10, label: "Propuesta enviada", color: "#31C48D" },
-    { id: 4, value: 10, label: "Negociación", color: "#06B6D4" },
-    { id: 5, value: 5, label: "Cerrado Perdido", color: "#EF4444" },
-    { id: 6, value: 5, label: "Cerrado Ganado", color: "#10B981" },
-  ];
+  const pipelineData = data.salesPipeline
+  .filter((item) => item.percentage && item.percentage > 0)
+  .map((item, index) => ({
+    id: index,
+    value: item.percentage,
+    label: item.stage.replace(/_/g, " "),
+    color: ["#7B61FF", "#5B8DEF", "#3DD9EB", "#31C48D", "#06B6D4", "#10B981", "#EF4444"][index],
+  }));
 
-  const lossReasonsData = [
-    { id: 0, value: 5, label: "Limitaciones del producto", color: "#6366F1" },
-    { id: 1, value: 20, label: "Restricciones de presupuesto", color: "#F59E0B" },
-    { id: 2, value: 10, label: "Precio demasiado alto", color: "#EF4444" },
-    { id: 3, value: 50, label: "Mejor alternativa", color: "#3B82F6" },
-    { id: 4, value: 10, label: "Falta de urgencia", color: "#10B981" },
-    { id: 5, value: 5, label: "Otros", color: "#b9b010ff" },
-  ];
+const lossReasonsData = data.dealLossReasons
+  .filter((item) => item.percentage && item.percentage > 0)
+  .map((item, index) => ({
+    id: index,
+    value: item.percentage,
+    label: item.reason,
+    color: ["#6366F1", "#F59E0B", "#EF4444", "#3B82F6", "#10B981", "#b9b010ff"][index],
+  }));
+
+
+  const hasPipelineData = pipelineData.some((item) => item.value > 0);
+  const hasLossData = lossReasonsData.some((item) => item.value > 0);
 
   return (
     <Box sx={{ p: 3, flexGrow: 1 }}>
@@ -54,7 +65,7 @@ export default function DashboardClient() {
                     color: "white",
                     textAlign: "center",
                     borderRadius: 2,
-                    height: "100%",
+                    //height: "100%",
                   }}
                 >
                   <CardContent>
@@ -74,62 +85,73 @@ export default function DashboardClient() {
             <Grid size={{ xs: 12, md: 6 }}>
               <Card sx={{ p: 2 }}>
                 <Typography variant="h6" mb={2}>
-                  Proceso de ventas
+                  Proceso de ventas (%)
                 </Typography>
 
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  justifyContent="center"
-                  gap={2}
-                >
-                  <PieChart
-                    series={[
-                      {
-                        data: pipelineData,
-                        innerRadius: 40,
-                        outerRadius: 100,
-                        paddingAngle: 3,
-                        cornerRadius: 5,
-                      },
-                    ]}
-                    hideLegend
-                    width={350}
-                    height={250}
-                  />
-
-                  {/* Leyenda abajo */}
+                {hasPipelineData ? (
                   <Box
-                    sx={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "center",
-                      gap: 1.5,
-                    }}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    gap={2}
                   >
-                    {pipelineData.map((item) => (
-                      <Box
-                        key={item.id}
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 0.8,
-                        }}
-                      >
+                    <PieChart
+                      series={[
+                        {
+                          data: pipelineData,
+                          innerRadius: 40,
+                          outerRadius: 100,
+                          paddingAngle: 3,
+                          cornerRadius: 5,
+                        },
+                      ]}
+                      hideLegend
+                      width={350}
+                      height={250}
+                    />
+
+                    {/* Leyenda */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        gap: 1.5,
+                      }}
+                    >
+                      {pipelineData.map((item) => (
                         <Box
+                          key={item.id}
                           sx={{
-                            width: 12,
-                            height: 12,
-                            borderRadius: "50%",
-                            bgcolor: item.color,
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 0.8,
                           }}
-                        />
-                        <Typography variant="body2">{item.label}</Typography>
-                      </Box>
-                    ))}
+                        >
+                          <Box
+                            sx={{
+                              width: 12,
+                              height: 12,
+                              borderRadius: "50%",
+                              bgcolor: item.color,
+                            }}
+                          />
+                          <Typography variant="body2">{item.label}</Typography>
+                        </Box>
+                      ))}
+                    </Box>
                   </Box>
-                </Box>
+                ) : (
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    align="center"
+                    sx={{ mt: 4 }}
+                  >
+                    No hay oportunidades creadas.
+                  </Typography>
+                )}
               </Card>
             </Grid>
 
@@ -137,62 +159,73 @@ export default function DashboardClient() {
             <Grid size={{ xs: 12, md: 6 }}>
               <Card sx={{ p: 2 }}>
                 <Typography variant="h6" mb={2}>
-                  Razones de pérdidas
+                  Razones de pérdidas (%)
                 </Typography>
 
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  alignItems="center"
-                  justifyContent="center"
-                  gap={2}
-                >
-                  <PieChart
-                    series={[
-                      {
-                        data: lossReasonsData,
-                        innerRadius: 40,
-                        outerRadius: 100,
-                        paddingAngle: 3,
-                        cornerRadius: 5,
-                      },
-                    ]}
-                    hideLegend
-                    width={350}
-                    height={250}
-                  />
-
-                  {/* Leyenda abajo */}
+                {hasLossData ? (
                   <Box
-                    sx={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "center",
-                      gap: 1.5,
-                    }}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    gap={2}
                   >
-                    {lossReasonsData.map((item) => (
-                      <Box
-                        key={item.id}
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: 0.8,
-                        }}
-                      >
+                    <PieChart
+                      series={[
+                        {
+                          data: lossReasonsData,
+                          innerRadius: 40,
+                          outerRadius: 100,
+                          paddingAngle: 3,
+                          cornerRadius: 5,
+                        },
+                      ]}
+                      hideLegend
+                      width={350}
+                      height={250}
+                    />
+
+                    {/* Leyenda */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        gap: 1.5,
+                      }}
+                    >
+                      {lossReasonsData.map((item) => (
                         <Box
+                          key={item.id}
                           sx={{
-                            width: 12,
-                            height: 12,
-                            borderRadius: "50%",
-                            bgcolor: item.color,
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 0.8,
                           }}
-                        />
-                        <Typography variant="body2">{item.label}</Typography>
-                      </Box>
-                    ))}
+                        >
+                          <Box
+                            sx={{
+                              width: 12,
+                              height: 12,
+                              borderRadius: "50%",
+                              bgcolor: item.color,
+                            }}
+                          />
+                          <Typography variant="body2">{item.label}</Typography>
+                        </Box>
+                      ))}
+                    </Box>
                   </Box>
-                </Box>
+                ) : (
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    align="center"
+                    sx={{ mt: 4 }}
+                  >
+                    No hubo oportunidades perdidas.
+                  </Typography>
+                )}
               </Card>
             </Grid>
           </Grid>
