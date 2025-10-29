@@ -3,12 +3,14 @@
 import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { Compani } from "@/types/compani.types";
+import { Contact } from "@/types/conntac.types";
 import { ResponsePaginated } from "@/types/response";
 import { cookies } from "next/headers";
 
-type orderBy = "name" | "createdAt" | "updatedAt" | "id";
+type orderBy = keyof Compani | keyof Contact;
+export type dataTypeList = Compani[] | Contact[];
 
-interface CompanyQuery {
+export interface SortFilter {
   page?: number;
   limit?: number;
   search?: string;
@@ -16,29 +18,38 @@ interface CompanyQuery {
   order?: "asc" | "desc";
 }
 
-interface CompaniProps {
-  query?: CompanyQuery;
+export interface CompaniFetchProps {
+  query?: SortFilter;
+  type?: "companies" | "contacts";
 }
 
-export async function companyList({
+export async function fetchDataList({
   query,
-}: CompaniProps): Promise<ResponseMyFetch<ResponsePaginated<Compani[]>>> {
+  type,
+}: CompaniFetchProps): Promise<
+  ResponseMyFetch<ResponsePaginated<dataTypeList>>
+> {
   // console.log("token", (await cookies()).get("access_token"))
-  const page = `page=${query?.page ?? 1}`;
+  const URL = {
+    companies: API.COMPANI.LIST,
+    contacts: API.CONTACT.LIST,
+  }[type ?? "companies"];
+
+  const page = `page=${(query?.page ?? 1) + 1}`;
   const limit = `limit=${query?.limit ?? 10}`;
   const search = `search=${query?.search ?? ""}`;
-  const orderBy: orderBy= query?.orderBy ?? "name";
-  const order = `order=${ query?.order ?? "asc"}`;
+  const orderBy = `orderBy=${query?.orderBy ?? "id"}`;
+  const order = `order=${query?.order ?? "desc"}`;
 
-  const response = await myFetch<ResponsePaginated<Compani[]>>(
-    API.COMPANI.LIST + `?${page}&${limit}&${search}&${orderBy}&${order}`,
+  const response = await myFetch<ResponsePaginated<dataTypeList>>(
+    URL + `?${page}&${limit}&${search}&${orderBy}&${order}`,
     {
       method: "GET",
       headers: {
         Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
         "Content-Type": "application/json",
       },
-    } 
+    }
   );
 
   console.log(response);

@@ -1,3 +1,4 @@
+
 export interface Compani {
 	id: number;
 	name: string;
@@ -5,6 +6,8 @@ export interface Compani {
 	address?: string;
 	createdAt: Date;
 	updatedAt: Date;
+	deletedAt?: Date;
+	userId: number;
 }
 export interface CreateCompani extends Pick<Compani, "name" | "industry" | "address"> {}
 

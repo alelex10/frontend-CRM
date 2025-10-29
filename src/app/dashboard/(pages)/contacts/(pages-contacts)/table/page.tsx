@@ -1,10 +1,10 @@
-import EnhancedTableContacts from "../../../components/table/table-contacts";
+import EnhancedTable from "../../../components/table/table";
 import { contactHeadCell } from "../../../data/data-head";
 
 const page = () => {
 	return (
 		<div>
-			<EnhancedTableContacts headCells={contactHeadCell} />
+			<EnhancedTable headCells={contactHeadCell} nameTable="contacts"  />
 		</div>
 	);
 };
