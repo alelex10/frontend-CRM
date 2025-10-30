@@ -74,7 +74,7 @@ export const AppBar = ({ open, handleDrawerOpen }: ToolbarProps) => {
 				</IconButton>
 
 				<Typography variant="h6" noWrap component="div">
-					Mini variant drawer
+					ORBIT-CRM
 				</Typography>
 				<IconButton
 					onClick={() => toggleTheme()}

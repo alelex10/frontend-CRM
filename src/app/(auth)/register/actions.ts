@@ -10,35 +10,35 @@ import { redirect } from "next/navigation";
 import { R } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 
 interface RegisterUserProps {
-  RegisterData: RegisterData;
+	RegisterData: RegisterData;
 }
 
 export async function RegisterUser({ RegisterData }: RegisterUserProps) {
-  // console.log(RegisterData);
+	// console.log(RegisterData);
 
-  const response = await myFetch<RegisterResponse>(
-    API.AUTH.REGISTER,
-    {
-      method: "POST",
-      body: JSON.stringify(RegisterData),
-    }
-  );
+	const response = await myFetch<RegisterResponse>(API.AUTH.REGISTER, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(RegisterData),
+	});
 
-  console.log(response);
+	console.log(response);
 
-  // ✅ Guardar el token en cookie segura
-  // ✅ Guardar token en cookie del servidor
-  if (response?.data) {
-    (await cookies()).set("access_token", response.data?.data.access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/",
-      maxAge: 60 * 15, // 15 minutos
-    });
+	// ✅ Guardar el token en cookie segura
+	// ✅ Guardar token en cookie del servidor
+	if (response?.data) {
+		(await cookies()).set("access_token", response.data?.data.access_token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "strict",
+			path: "/",
+			maxAge: 60 * 15, // 15 minutos
+		});
 
-    // ✅ Redirigir al dashboard
-    redirect("/dashboard");
-  }
-  return response.error;
+		// ✅ Redirigir al dashboard
+		redirect("/dashboard");
+	}
+	return response.error;
 }
