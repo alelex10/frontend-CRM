@@ -11,12 +11,14 @@ export async function myFetch<T>(
   options: RequestInit
 ): Promise<ResponseMyFetch<T>> {
   let stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
+  console.log(url)
   try {
     const response = await fetch(url, {
-      ...options,
+      
       headers: {
         "Content-Type": "application/json",
       },
+      ...options,
     });
 
     if (!response.ok) {
@@ -39,7 +41,7 @@ export async function myFetch<T>(
     stats.data = responseJson as ResponseTemplate<T>;
     return stats;
   } catch (error: any) {
-    console.error(error);
+    // console.error(error);
     stats.error = {
       message: "Ocurrió un error inesperado",
       error: "Ocurrió un error inesperado",

@@ -10,4 +10,7 @@ export const API = {
   COMPANI: {
     LIST: `${API_BASE_URL}/company`,
   },
+  CONTACT: {
+    LIST: `${API_BASE_URL}/contacts`,
+  },
 };

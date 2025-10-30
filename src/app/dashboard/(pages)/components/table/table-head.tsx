@@ -1,25 +1,28 @@
 import TableHead from "@mui/material/TableHead";
-import { CompaniHeadCell } from "../../data/data-company";
+import { HeadCell } from "../../data/data-head";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
+import { Compani } from "../../../../../types/compani.types";
+import { Contact } from "../../../../../types/conntac.types";
+import { Order } from "./table";
 
 interface EnhancedTableProps {
 	numSelected: number;
-	// onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Compani) => void;
+	onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Compani | keyof Contact) => void;
 	onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	// order: Order;
-	// orderBy: string;
+	order: Order;
+	orderBy: string;
 	rowCount: number;
-	headCells: readonly CompaniHeadCell[];
+	headCells: readonly HeadCell[];
 }
 
 export function EnhancedTableHead(props: EnhancedTableProps) {
-	const { onSelectAllClick, numSelected, rowCount } = props;
-	// const createSortHandler = (property: keyof Compani) => (event: React.MouseEvent<unknown>) => {
-	// 	onRequestSort(event, property);
-	// };
+	const { onSelectAllClick, numSelected, rowCount, headCells, orderBy, order, onRequestSort } = props;
+	const createSortHandler = (property: keyof Compani | keyof Contact) => (event: React.MouseEvent<unknown>) => {
+		onRequestSort(event, property);
+	};
 
 	return (
 		<TableHead>
@@ -35,17 +38,19 @@ export function EnhancedTableHead(props: EnhancedTableProps) {
 						}}
 					/>
 				</TableCell>
-				{props.headCells.map((headCell) => (
+				{headCells.map((headCell) => (
 					<TableCell
 						key={headCell.id}
 						align={"right"}
 						padding={headCell.disablePadding ? "none" : "normal"}
-						// sortDirection={orderBy === headCell.id ? order : false}
+						sortDirection={"desc"}
+					// sortDirection={orderBy === headCell.id ? order : false}
 					>
 						<TableSortLabel
-						// active={orderBy === headCell.id}
-						// direction={orderBy === headCell.id ? order : "asc"}
-						// onClick={createSortHandler(headCell.id)}
+							// active={orderBy === headCell.id}
+							direction={orderBy === headCell.id ? order : "asc"}
+							// direction="desc" // FLECHITA DE ORDEN
+							onClick={createSortHandler(headCell.id)}
 						>
 							{headCell.label}
 							{/* {orderBy === headCell.id ? (
@@ -61,3 +66,4 @@ export function EnhancedTableHead(props: EnhancedTableProps) {
 	);
 }
 
+// export function EnhancedTableHead

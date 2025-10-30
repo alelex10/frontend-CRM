@@ -6,6 +6,16 @@ export interface ResponseTemplate<T> {
   path: string;
 }
 
+
+            
+export interface ResponsePaginated<T> {
+    data: T;
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+}
+
 export interface ResponseError {
   message: string;
   error: string;

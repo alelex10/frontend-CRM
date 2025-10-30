@@ -2,15 +2,17 @@ import Checkbox from "@mui/material/Checkbox";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Compani } from "../../../../../types/compani.types";
+import { Contact } from "@/types/conntac.types";
 
 interface Props {
-	row: Compani;
+	row: Compani | Contact;
 	labelId: string;
 	isItemSelected: boolean;
 	handleClick: (event: React.MouseEvent<unknown>, id: number) => void;
 }
 
 export default function TableBodyRow({ row, labelId, isItemSelected, handleClick }: Props) {
+	const keysRow = Object.keys(row) as (keyof Compani | keyof Contact)[];
 	return (
 		<>
 			<TableRow
@@ -26,21 +28,30 @@ export default function TableBodyRow({ row, labelId, isItemSelected, handleClick
 					<Checkbox
 						color="primary"
 						checked={isItemSelected}
-						// inputProps={{
-						// 	"aria-labelledby": labelId,
-						// }}
 					/>
 				</TableCell>
 				<TableCell component="th" id={labelId} scope="row" padding="none" align="right">
 					{row.id}
 				</TableCell>
 				<TableCell align="right">{row.name}</TableCell>
-				<TableCell align="right">{row.address}</TableCell>
-				<TableCell align="right">{row.industry}</TableCell>
+				{
+					keysRow.map((key) => {
+						if (key === "id" ||
+							key === "name" || 
+							key === "createdAt" || 
+							key === "updatedAt" || 
+							key === "deletedAt" || 
+							key === "userId") {
+							return null;
+						}
+						return (
+							<TableCell key={key} align="right">{row[key] }</TableCell>
+						);
+					})
+				}
 				<TableCell align="right">{row.createdAt.toLocaleString().slice(0, 9)}</TableCell>
 				<TableCell align="right">{row.updatedAt.toLocaleString().slice(0, 9)}</TableCell>
 			</TableRow>
 		</>
 	);
 }
-
