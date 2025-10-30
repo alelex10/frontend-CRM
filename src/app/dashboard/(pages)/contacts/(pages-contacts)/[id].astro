@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ContactNotes from "../../components/ContactNotes.jsx";
+
+const { id } = Astro.params;
+
+// Traer datos del contacto
+const res = await fetch(////////anexar a bdd
+const contacto = await res.json();
+---
+
+<Layout title={`Contacto: ${contacto.nombre}`}>
+  <section class="contacto">
+    <h1>{contacto.nombre}</h1>
+    <p><strong>Email:</strong> {contacto.email}</p>
+    <p><strong>Empresa:</strong> {contacto.empresa}</p>
+
+    <hr />
+
+    <ContactNotes client:load contactoId={id} />
+  </section>
+</Layout>
