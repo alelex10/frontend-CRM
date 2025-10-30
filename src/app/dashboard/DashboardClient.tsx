@@ -20,33 +20,33 @@ export default function DashboardClient({ data }: { data: Dashboard }) {
   };
 
   const stats = [
-    { label: "Valor de ventas totales", value: formatNumber(data.totalSales), color: "#7B61FF" },
-    { label: "Tasa de ventas", value: `${data.winRate}%`, color: "#5B8DEF" },
-    { label: "Tasa de cierre", value: `${data.closeRate}%`, color: "#3DD9EB" },
-    { label: "Días promedio para cerrar", value: data.avgDaysToClose, color: "#31C48D" },
-    { label: "Valor de las oportunidades", value: formatNumber(data.pipelineValue), color: "#4F46E5" },
-    { label: "Oportunidades abiertas", value: data.openDeals, color: "#3B82F6" },
-    { label: "Valor promedio de venta", value: formatNumber(data.avgDealSize), color: "#06B6D4" },
-    { label: "Edad prom. de oportunidades", value: data.avgOpenDealAge.toFixed(1), color: "#10B981" },
+    { label: "Ventas Totales", value: formatNumber(data.totalSales), color: "#7B61FF" },
+    { label: "Tasa de Ventas", value: `${data.winRate}%`, color: "#5B8DEF" },
+    { label: "Tasa de Cierres", value: `${data.closeRate}%`, color: "#3DD9EB" },
+    { label: "Días Prom. para cerrar", value: data.avgDaysToClose, color: "#31C48D" },
+    { label: "Valor Oportunidades", value: formatNumber(data.pipelineValue), color: "#4F46E5" },
+    { label: "Oport. Abiertas", value: data.openDeals, color: "#3B82F6" },
+    { label: "Valor Prom. de Venta", value: formatNumber(data.avgDealSize), color: "#06B6D4" },
+    { label: "Edad Prom. Oport.", value: data.avgOpenDealAge.toFixed(1), color: "#10B981" },
   ];
 
-  const pipelineData = data.salesPipeline
+  const pipelineData = Array.isArray(data.salesPipeline) ? data.salesPipeline
   .filter((item) => item.percentage && item.percentage > 0)
   .map((item, index) => ({
     id: index,
     value: item.percentage,
     label: item.stage.replace(/_/g, " "),
     color: ["#7B61FF", "#5B8DEF", "#3DD9EB", "#31C48D", "#06B6D4", "#10B981", "#EF4444"][index],
-  }));
+  })): [];
 
-const lossReasonsData = data.dealLossReasons
+  const lossReasonsData = Array.isArray(data.dealLossReasons) ? data.dealLossReasons
   .filter((item) => item.percentage && item.percentage > 0)
   .map((item, index) => ({
     id: index,
     value: item.percentage,
     label: item.reason,
     color: ["#6366F1", "#F59E0B", "#EF4444", "#3B82F6", "#10B981", "#b9b010ff"][index],
-  }));
+  })): [];
 
 
   const hasPipelineData = pipelineData.some((item) => item.value > 0);
@@ -55,7 +55,7 @@ const lossReasonsData = data.dealLossReasons
   return (
     <Box sx={{ p: 3, flexGrow: 1 }}>
       <Grid container spacing={2}>
-        <Grid container size={{ md: 9 }}>
+        <Grid container size={{ xs: 12, lg: 9 }}>
           <Grid container size={{ md: 12 }}>
             {stats.map((stat, index) => (
               <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
@@ -80,9 +80,9 @@ const lossReasonsData = data.dealLossReasons
           </Grid>
 
           {/* Gráficos */}
-          <Grid container size={{ md: 12 }}>
+          <Grid container size={{ xs: 12 }}>
             {/* Sales Pipeline */}
-            <Grid size={{ xs: 12, md: 6 }}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Card sx={{ p: 2 }}>
                 <Typography variant="h6" mb={2}>
                   Proceso de ventas (%)
@@ -149,17 +149,17 @@ const lossReasonsData = data.dealLossReasons
                     align="center"
                     sx={{ mt: 4 }}
                   >
-                    No hay oportunidades creadas.
+                    No hay oportunidades.
                   </Typography>
                 )}
               </Card>
             </Grid>
 
             {/* Deal Loss Reasons */}
-            <Grid size={{ xs: 12, md: 6 }}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <Card sx={{ p: 2 }}>
                 <Typography variant="h6" mb={2}>
-                  Razones de pérdidas (%)
+                  Razon de pérdidas (%)
                 </Typography>
 
                 {hasLossData ? (
@@ -223,7 +223,7 @@ const lossReasonsData = data.dealLossReasons
                     align="center"
                     sx={{ mt: 4 }}
                   >
-                    No hubo oportunidades perdidas.
+                    No hubo perdidas.
                   </Typography>
                 )}
               </Card>
@@ -232,7 +232,7 @@ const lossReasonsData = data.dealLossReasons
         </Grid>
 
         {/* Panel de IA */}
-        <Grid container size={{ xs: 12, md: 3 }}>
+        <Grid container size={{ xs: 12, lg: 3 }}>
           <Card sx={{ p: 3, height: "100%", width: "100%" }}>
             <Typography variant="h6" mb={2}>
               Análisis y sugerencias de IA

@@ -10,13 +10,9 @@ import { Dashboard } from "@/types/dashboard.types";
 export default async function DashboardPage() {
   const token = (await cookies()).get("access_token")?.value;
 
-  //console.log("TOKEN MAGICO: ",token);
-
   if (!token) {
     return <p>No estás autenticado</p>;
   }
-
-  // MiContraseñaSegura123
   
   const response = await myFetch<ResponseTemplate<Dashboard>>(
     API.DASHBOARD,
@@ -29,10 +25,7 @@ export default async function DashboardPage() {
     }
   );
   
-
-  //console.log(response);
   const data = response.data?.data;
-  //console.log(data);
 
   if (!data) {
     return <p>Error: no se pudieron cargar los datos del dashboard.</p>;
@@ -40,4 +33,3 @@ export default async function DashboardPage() {
 
   return <DashboardClient data={data} />;
 }
-
