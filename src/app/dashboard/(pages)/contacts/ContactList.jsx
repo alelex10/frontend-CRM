@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import {
   Table,
@@ -22,18 +23,22 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 
 const ContactsList = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
-  const [selectedContact, setSelectedContact] = useState(null);
+  const [selectedContact, setSelectedContact] = useState<any | null>(null);
   const navigate = useNavigate();
 
-  // 1️⃣ Cargar la lista de contactos desde la API
+  
+  //  Cargar contactos desde el backend
+  
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await fetch("https://");/////////////// vincular la bdd
+       
+        const response = await fetch("https://tu-");/////// anexar bdd
         if (!response.ok) throw new Error("Error al obtener los contactos");
+
         const data = await response.json();
         setContacts(data);
       } catch (error) {
@@ -45,29 +50,35 @@ const ContactsList = () => {
     fetchContacts();
   }, []);
 
-  // Abrir el diálogo de confirmación
-  const handleOpenDialog = (contact) => {
+
+  //  Diálogo de confirmación
+ 
+  const handleOpenDialog = (contact: any) => {
     setSelectedContact(contact);
     setOpenDialog(true);
   };
 
-  // Cerrar el diálogo
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setSelectedContact(null);
   };
 
-  // Confirmar eliminación
+  
+  //  Eliminar contacto
+
   const handleDelete = async () => {
     if (!selectedContact) return;
     try {
+    
       const response = await fetch(
-        `https://${selectedContact.id}`, /////////////// vincular la bdd
+        `https`,/// anexar bdd
         {
           method: "DELETE",
         }
       );
+
       if (!response.ok) throw new Error("Error al eliminar el contacto");
+
       // Actualizar lista local
       setContacts((prev) =>
         prev.filter((contact) => contact.id !== selectedContact.id)
@@ -79,12 +90,16 @@ const ContactsList = () => {
     }
   };
 
-  // Redirigir a la pantalla de edición
-  const handleEdit = (id) => {
+  
+  //  Editar contacto
+  
+  const handleEdit = (id: string) => {
     navigate(`/contacts/edit/${id}`);
   };
 
-  // 6Renderizado
+ 
+  //  Renderizado
+  
   if (loading) return <CircularProgress sx={{ mt: 5 }} />;
 
   return (
@@ -103,6 +118,7 @@ const ContactsList = () => {
                 <TableCell>Nombre</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell>Teléfono</TableCell>
+                <TableCell>Empresa</TableCell> {/* Nueva columna */}
                 <TableCell align="right">Acciones</TableCell>
               </TableRow>
             </TableHead>
@@ -112,6 +128,8 @@ const ContactsList = () => {
                   <TableCell>{contact.nombre}</TableCell>
                   <TableCell>{contact.email}</TableCell>
                   <TableCell>{contact.telefono}</TableCell>
+                  <TableCell>{contact.empresa?.name || "—"}</TableCell>{" "}
+                  {/* Mostrar empresa */}
                   <TableCell align="right">
                     <IconButton
                       color="primary"
@@ -133,7 +151,9 @@ const ContactsList = () => {
         </TableContainer>
       )}
 
-      {/* Diálogo de confirmación */}
+    
+      {/*  Diálogo de confirmación */}
+
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Eliminar contacto</DialogTitle>
         <DialogContent>
