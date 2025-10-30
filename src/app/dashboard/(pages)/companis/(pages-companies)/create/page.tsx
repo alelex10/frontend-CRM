@@ -7,8 +7,13 @@ import Typography from "@mui/material/Typography";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaCreateCompani, formTypeCreateCompani } from "../../../../../../schemas/company.schema";
+import { createCompany } from "./actions";
+import { C } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
+import { CreateCompani } from "@/types/compani.types";
+import { useTransition } from "react";
 
 function FormCompany() {
+	const [loading, setLoading] = useTransition()
 	const {
 		register,
 		handleSubmit,
@@ -21,33 +26,51 @@ function FormCompany() {
 			address: "",
 		},
 	});
-	// const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-	// 	e.preventDefault();
-	// 	handleSubmit(()=>{});
-	// 	console.log("ENVIANDO");
-	// };
-	const onAction = (data: FormData) => {
-		handleSubmit(() => {});
-		console.log(data);
-	};
 
+	const onSubmit = (data: CreateCompani) => {
+		setLoading(async () => {
+			const response = await createCompany({ createData: data });
+			console.log(response);
+		});
+	};
 	return (
 		<Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: "auto" }}>
 			<Typography variant="h4" component="h1" gutterBottom>
-				Contáctanos
+				Crear Empresa
 			</Typography>
 
-			<Box component="form" action={onAction} sx={{ mt: 2 }}>
+			<Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 2 }}>
 				<TextField
 					fullWidth
+					// sx={{ "& .MuiInputBase-root": { py: "calc(16px - 0.65em)", height: "1em" } }}
 					label="Nombre"
 					error={!!errors.name?.message}
 					helperText={errors.name?.message}
 					margin="normal"
 					{...register("name")}
 				/>
-
-				<Button type="submit" fullWidth variant="contained" size="large" sx={{ mt: 3, mb: 2 }}>
+				<TextField
+					fullWidth
+					label="Industria"
+					error={!!errors.industry?.message}
+					helperText={errors.industry?.message}
+					margin="normal"
+					{...register("industry")}
+				/>
+				<TextField
+					fullWidth
+					label="Dirección"
+					error={!!errors.address?.message}
+					helperText={errors.address?.message}
+					margin="normal"
+					{...register("address")}
+				/>
+				<Button disabled={loading}
+					type="submit"
+					fullWidth
+					variant="contained"
+					size="large"
+					sx={{ mt: 3, mb: 2 }}>
 					Enviar Mensaje
 				</Button>
 			</Box>

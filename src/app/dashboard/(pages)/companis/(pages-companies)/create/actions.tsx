@@ -2,36 +2,29 @@
 
 import { myFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
-import { LoginData } from "@/schemas/auth.schema";
-import { useTokenStore } from "@/store/token-store";
 import { LoginResponse } from "@/types/auth";
+import { CreateCompani } from "@/types/compani.types";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-interface loginUserProps {
-  LoginData: LoginData;
+interface createCompanyProps {
+  createData: CreateCompani
 }
 
-export async function loginUser({ LoginData }: loginUserProps) {
-
+export async function createCompany({ createData }: createCompanyProps) {
+  // console.log(createData)
   const response = await myFetch<LoginResponse>(
-    API.AUTH.LOGIN,
+    API.COMPANI.CREATE,
     {
       method: "POST",
-      body: JSON.stringify(LoginData),
+      headers: {
+        Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(createData),
     }
   );
 
   console.log(response);
 
-  // ✅ Guardar el token en cookie segura
-  // ✅ Guardar token en cookie del servidor
-  if (response?.data) {
-    
-    
-
-    // ✅ Redirigir al dashboard
-    redirect("/dashboard");
-  }
-  return response.error;
+  return response;
 }

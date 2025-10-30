@@ -3,7 +3,6 @@
 import { myFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { LoginData } from "@/schemas/auth.schema";
-import { useTokenStore } from "@/store/token-store";
 import { LoginResponse } from "@/types/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

@@ -1,5 +1,5 @@
 import { ResponseError, ResponseTemplate } from "@/types/response";
-import { error } from "console";
+import { C } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
 
 export interface ResponseMyFetch<T> {
   data: undefined | ResponseTemplate<T>;
@@ -12,12 +12,9 @@ export async function myFetch<T>(
 ): Promise<ResponseMyFetch<T>> {
   let stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
   console.log(url)
+  console.log(options.body)
   try {
     const response = await fetch(url, {
-      
-      headers: {
-        "Content-Type": "application/json",
-      },
       ...options,
     });
 
@@ -26,7 +23,7 @@ export async function myFetch<T>(
         stats.error = await response.json() as ResponseError;
         return stats;
       } catch (error) {
-        console.log("ERROR DE PETICON:", error);
+        console.log("ERROR DE PETICION:", error);
         stats.error = {
           message: "Ocurrió un error inesperado",
           error: "Ocurrió un error inesperado",

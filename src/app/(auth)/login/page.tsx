@@ -38,7 +38,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       const response = await loginUser({ LoginData: data });
       setError(response?.message);
     });
-    
+
   };
 
   return (
@@ -95,7 +95,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             variant="outlined"
             // name="email"
             {...register("email")}
-            // color={emailError ? "error" : "primary"}
+          // color={emailError ? "error" : "primary"}
           />
         </FormControl>
         <FormControl>
