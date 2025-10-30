@@ -55,8 +55,4 @@ export async function fetchDataList({
   console.log(response);
 
   return response;
-  // if (response?.data) {
-  //   return response.data;
-  // }
-  // return response.error;
 }

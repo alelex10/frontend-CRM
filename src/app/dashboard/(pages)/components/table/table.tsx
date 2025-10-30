@@ -111,6 +111,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 					page, order, orderBy, limit: rowsPerPage,
 				}, type: nameTable
 			});
+			console.log(dataList)
 			if (dataList?.data?.data) {
 				setData(dataList.data.data.data);
 				setTotalPages(dataList.data.data.totalPages);
