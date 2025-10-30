@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterUser } from "./actions";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
-import { MySnackbar } from "@/components/snackbar/my-snackbar";
+import { MySnackbar } from "@/components/snackbar/my-snackbar-style";
 
 export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const [error, setError] = React.useState<string | undefined>();

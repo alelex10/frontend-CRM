@@ -1,9 +1,10 @@
 "use server";
 
-import { myFetch } from "@/common/my-fetch";
+import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { LoginResponse } from "@/types/auth";
 import { CreateCompani } from "@/types/compani.types";
+import { ResponseError, ResponseTemplate } from "@/types/response";
 import { cookies } from "next/headers";
 
 interface createCompanyProps {
@@ -12,7 +13,7 @@ interface createCompanyProps {
 
 export async function createCompany({ createData }: createCompanyProps) {
   // console.log(createData)
-  const response = await myFetch<LoginResponse>(
+  const response = await myFetch<CreateCompani>(
     API.COMPANI.CREATE,
     {
       method: "POST",

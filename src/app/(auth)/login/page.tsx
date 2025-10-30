@@ -15,11 +15,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "./actions";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
-import { MySnackbar } from "@/components/snackbar/my-snackbar";
+import { MySnackbar } from "@/components/snackbar/my-snackbar-style";
 import { useState, useTransition } from "react";
+import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";
 
 export default function SignIn(props: { disableCustomTheme?: boolean }) {
-  const [errorMessage, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<{ message: string, type: "success" | "error" } | undefined>();
   const [isLoading, setIsLoading] = useTransition();
   const {
     register,
@@ -36,7 +37,9 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
   const onsubmit = async (data: LoginData) => {
     setIsLoading(async () => {
       const response = await loginUser({ LoginData: data });
-      setError(response?.message);
+      if(response?.error) setSuccess({ message: response?.error.message, type: "error" });
+      
+      if(response?.data) setSuccess({ message: response?.data.message, type: "success" });
     });
 
   };
@@ -54,30 +57,11 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
           gap: 2,
         }}
       >
-        {errorMessage && (
-          <MySnackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            open={!!errorMessage}
-            onClose={() => setError(undefined)}
-            sx={{ width: "100%" }}
-            message={
-              <Alert
-                action={
-                  <IconButton
-                    size="small"
-                    aria-label="close"
-                    color="inherit"
-                    onClick={() => setError(undefined)}
-                  >
-                    <Iconify icon="eva:close-fill" />
-                  </IconButton>
-                }
-                severity="error"
-              >
-                {errorMessage}
-              </Alert>
-            }
-            autoHideDuration={6000}
+        {success && (
+          <MySnackbarAlert
+            errorMessage={success.message}
+            setError={setSuccess}
+            variant={success.type}
           />
         )}
         <FormControl>

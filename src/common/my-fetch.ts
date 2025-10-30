@@ -10,9 +10,10 @@ export async function myFetch<T>(
   url: string,
   options: RequestInit
 ): Promise<ResponseMyFetch<T>> {
+
   let stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
   console.log(url)
-  console.log(options.body)
+  // console.log(options.body)
   try {
     const response = await fetch(url, {
       ...options,

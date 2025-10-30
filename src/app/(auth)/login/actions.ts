@@ -1,11 +1,12 @@
 "use server";
 
-import { myFetch } from "@/common/my-fetch";
+import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { LoginData } from "@/schemas/auth.schema";
 import { LoginResponse } from "@/types/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { R } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 
 interface loginUserProps {
   LoginData: LoginData;
@@ -16,6 +17,9 @@ export async function loginUser({ LoginData }: loginUserProps) {
   const response = await myFetch<LoginResponse>(
     API.AUTH.LOGIN,
     {
+      headers: {
+        "Content-Type": "application/json",
+      },
       method: "POST",
       body: JSON.stringify(LoginData),
     }
@@ -27,7 +31,7 @@ export async function loginUser({ LoginData }: loginUserProps) {
   // ✅ Guardar token en cookie del servidor
   if (response?.data) {
     
-    (await cookies()).set("access_token", response.data?.data.access_token, {
+    (await cookies()).set("access_token", response.data?.data.access_token , {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
@@ -38,5 +42,5 @@ export async function loginUser({ LoginData }: loginUserProps) {
     // ✅ Redirigir al dashboard
     redirect("/dashboard");
   }
-  return response.error;
+  return response;
 }
