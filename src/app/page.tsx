@@ -54,15 +54,16 @@ const cardsHome = [
 ];
 
 export default function HomePage() {
+  
   return (
     <>
       <NavBar links={linksNavBar} />
       <ConteinerHome component={"main"} maxWidth={"xl"} >
-        <ConteinerGrad 
+        <ConteinerGrad
           component={"section"}
           maxWidth={false}
           sx={{ height: "90vh", p: 0 }}
-		  gradientDirection="to top"
+          gradientDirection="to top"
         >
           <Typography variant="h2">Bienvenido a OrbitCRM</Typography>
           <Typography
@@ -126,11 +127,11 @@ export default function HomePage() {
             Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.
           </Typography>
           <Button
-		    size="large"			
-		    sx={{
-				width: "fit-content",
-				margin: "0 auto",
-			}}
+            size="large"
+            sx={{
+              width: "fit-content",
+              margin: "0 auto",
+            }}
             variant="contained"
             color="primary"
             href="/register"

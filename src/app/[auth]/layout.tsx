@@ -1,17 +1,17 @@
-"use client";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ConteinerGrad } from "../components/conteiner-grad";
 import { Card, SignInContainer } from "./components/auth-style";
 import Typography from "@mui/material/Typography";
-import { usePathname } from "next/navigation";
+import LoginPage from "./login/login-page";
+import RegisterPage from "./register/register-page";
 
-export default function LayoutAuth({
-  children,
-}: {
+interface Props {
   children: React.ReactNode;
-  route: string;
-}) {
-  const route = usePathname();
+  params: Promise<{ auth: string }>;
+}
+
+export default async function LayoutAuth({ children, params, }: Props) {
+  const { auth } = await params;
   
   return (
     <ConteinerGrad
@@ -28,9 +28,9 @@ export default function LayoutAuth({
             variant="h4"
             sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
           >
-            {route === "/login" ? "Iniciar Sesión" : "Registro"}
+            { auth == "login" ? "Iniciar Sesión" : "Registrarse" }
           </Typography>
-          {children}
+            { auth == "login" ? <LoginPage /> : <RegisterPage/> }
         </Card>
       </SignInContainer>
     </ConteinerGrad>

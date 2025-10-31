@@ -19,9 +19,10 @@ import { MySnackbar } from "@/components/snackbar/my-snackbar-style";
 import { useState, useTransition } from "react";
 import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";
 
-export default function SignIn(props: { disableCustomTheme?: boolean }) {
+export default function LoginPage(props: { disableCustomTheme?: boolean }) {
   const [success, setSuccess] = useState<{ message: string, type: "success" | "error" } | undefined>();
   const [isLoading, setIsLoading] = useTransition();
+  
   const {
     register,
     handleSubmit,

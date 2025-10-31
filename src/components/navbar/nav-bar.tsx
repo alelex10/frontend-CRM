@@ -28,8 +28,6 @@ export default function NavBar({ links }: NavBarProps) {
   const { token } = useTokenStore();
   
   const existsToken = useTokenStore((state) => !!state.token);
-	
-  console.log("token", existsToken)
 
   return (
     <Box component={"nav"}>

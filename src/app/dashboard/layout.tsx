@@ -36,7 +36,7 @@ export const LIST_MENU_ITEMS: ListMenuItem[] = [
 ];
 
 const DashboardLayout = ({ children }: Props) => {
-	return (
+	return (<>
 		<ThemeRegistry>
 			<ContainerDesktop component="main" sx={{ minHeight: "100vh" }}>
 				<AsideBar listMenuItems={LIST_MENU_ITEMS}>{children}</AsideBar>
@@ -49,6 +49,6 @@ const DashboardLayout = ({ children }: Props) => {
 				<LabelBottomNavigation />
 			</ContainerMovil>
 		</ThemeRegistry>
-	);
+	</>);
 };
 export default DashboardLayout;

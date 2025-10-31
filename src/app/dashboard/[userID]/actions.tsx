@@ -7,12 +7,12 @@ import { cookies } from "next/headers";
 
 interface createCompanyProps {
 	createData: CreateCompani;
-	id: number;
+	id: string;
 }
 
 export async function updateCompany({ createData, id }: createCompanyProps) {
 	// console.log(createData)
-	const response = await myFetch<UpdateCompani>(API.COMPANI.CREATE + `/${id}`, {
+	const response = await myFetch<UpdateCompani>(API.COMPANI.CREATE + `/${+id}`, {
 		method: "PATCH",
 		headers: {
 			Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
@@ -26,8 +26,8 @@ export async function updateCompany({ createData, id }: createCompanyProps) {
 	return response;
 }
 
-export async function getCompany({ id }: { id: number }) {
-  const response = await myFetch<Compani>(API.COMPANI.GET_ID + `/${id}`, {
+export async function getCompany({ id }: { id: string }) {
+  const response = await myFetch<Compani>(API.COMPANI.GET_ID + `/${+id}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,

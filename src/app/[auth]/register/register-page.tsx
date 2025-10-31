@@ -17,9 +17,11 @@ import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import { MySnackbar } from "@/components/snackbar/my-snackbar-style";
 
-export default function SignIn(props: { disableCustomTheme?: boolean }) {
+export default function RegisterPage(props: { disableCustomTheme?: boolean }) {
   const [error, setError] = React.useState<string | undefined>();
   const [isLoading, setIsLoading] = React.useTransition();
+
+  console.log("cantidad de renders")
   const {
     register,
     handleSubmit,
