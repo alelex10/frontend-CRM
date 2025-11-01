@@ -1,6 +1,6 @@
 "use server";
 import { getCompany } from "./actions";
-import { FormCreateCompani } from "./components/form-create-company";
+import { FormCreateCompani } from "./components/form-update-company";
 
 interface Props {
 	params: Promise<{ userID: string }>;
