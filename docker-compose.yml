@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   frontend:
+    image: alelex10/frontend-crm:latest
     build:
       context: .
       dockerfile: frontend.dockerfile
@@ -12,3 +13,5 @@ services:
       - .:/app
     environment:
       - NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}
+    env_file:
+      - .env
