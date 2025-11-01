@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: alelex10/frontend-crm:latest
+    image: alelex10/frontend-crm
     build:
       context: .
       dockerfile: frontend.dockerfile
