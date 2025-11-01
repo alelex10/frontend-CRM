@@ -1,35 +1,35 @@
-"use server";
+// "use server";
 
-import { cookies } from "next/headers";
-import DashboardClient from "./DashboardClient";
-import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
-import { API } from "@/consts/api";
-import { ResponseTemplate } from "@/types/response";
-import { Dashboard } from "@/types/dashboard.types";
+// import { cookies } from "next/headers";
+// import DashboardClient from "./DashboardClient";
+// import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
+// import { API } from "@/consts/api";
+// import { ResponseTemplate } from "@/types/response";
+// import { Dashboard } from "@/types/dashboard.types";
 
-export default async function DashboardPage() {
-  const token = (await cookies()).get("access_token")?.value;
+// export default async function DashboardPage() {
+//   const token = (await cookies()).get("access_token")?.value;
 
-  if (!token) {
-    return <p>No estás autenticado</p>;
-  }
+//   if (!token) {
+//     return <p>No estás autenticado</p>;
+//   }
   
-  const response = await myFetch<ResponseTemplate<Dashboard>>(
-    API.DASHBOARD,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+//   const response = await myFetch<ResponseTemplate<Dashboard>>(
+//     API.DASHBOARD,
+//     {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
+//         "Content-Type": "application/json",
+//       },
+//     }
+//   );
   
-  const data = response.data?.data;
+//   const data = response.data?.data;
 
-  if (!data) {
-    return <p>Error: no se pudieron cargar los datos del dashboard.</p>;
-  }
+//   if (!data) {
+//     return <p>Error: no se pudieron cargar los datos del dashboard.</p>;
+//   }
 
-  return <DashboardClient data={data} />;
-}
+//   return <DashboardClient data={data} />;
+// }
