@@ -1,12 +1,11 @@
 "use server";
 
-import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
+import { myFetch} from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { LoginData } from "@/schemas/auth.schema";
 import { LoginResponse } from "@/types/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { R } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 
 interface loginUserProps {
   LoginData: LoginData;

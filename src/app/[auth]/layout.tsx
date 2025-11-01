@@ -6,11 +6,10 @@ import LoginPage from "./login/login-page";
 import RegisterPage from "./register/register-page";
 
 interface Props {
-  children: React.ReactNode;
   params: Promise<{ auth: string }>;
 }
 
-export default async function LayoutAuth({ children, params, }: Props) {
+export default async function LayoutAuth({ params, }: Props) {
   const { auth } = await params;
   
   return (

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 import { AppBar } from "./app-bar";
-import React, { useState } from "react";
+import React from "react";
 
 const meta = {
 	component: AppBar,

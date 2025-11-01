@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaCreateCompani, formTypeCreateCompani } from "../../../../../../schemas/company.schema";
 import { createCompany } from "./actions";
-import { C } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 import { CreateCompani } from "@/types/compani.types";
 import { useState, useTransition } from "react";
 import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";

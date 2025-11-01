@@ -1,10 +1,8 @@
 "use server";
 
-import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
+import { myFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
-import { LoginResponse } from "@/types/auth";
 import { CreateCompani } from "@/types/compani.types";
-import { ResponseError, ResponseTemplate } from "@/types/response";
 import { cookies } from "next/headers";
 
 interface createCompanyProps {

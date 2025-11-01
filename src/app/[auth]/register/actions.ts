@@ -2,12 +2,10 @@
 
 import { myFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
-import { LoginData, RegisterData } from "@/schemas/auth.schema";
-import { useTokenStore } from "@/store/token-store";
-import { LoginResponse, RegisterResponse } from "@/types/auth";
+import { RegisterData } from "@/schemas/auth.schema";
+import { RegisterResponse } from "@/types/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { R } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
 
 interface RegisterUserProps {
 	RegisterData: RegisterData;

@@ -18,9 +18,9 @@ import { Compani } from "../../../../../types/compani.types";
 import { HeadCell } from "../../data/data-head";
 import { EnhancedTableHead } from "./table-head";
 import TableBodyRow from "./table-row";
-import { use, useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Contact } from "../../../../../types/conntac.types";
-import { fetchDataList, dataTypeList, CompaniFetchProps } from "../../companis/(pages-companies)/table/actions";
+import { fetchDataList, dataTypeList } from "../../companis/(pages-companies)/table/actions";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export type Order = "asc" | "desc";
@@ -117,7 +117,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 				setTotalPages(dataList.data.data.totalPages);
 			}
 		})
-	}, [page, order, orderBy, rowsPerPage])
+	}, [page, order, orderBy, rowsPerPage, nameTable])
 
 
 	const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {

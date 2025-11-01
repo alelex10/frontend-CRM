@@ -1,5 +1,5 @@
 "use server";
-
+import { getCompany } from "./actions";
 import { FormCreateCompani } from "./components/form-create-company";
 
 interface Props {
@@ -7,13 +7,14 @@ interface Props {
 }
 
 async function FormCompany({ params }: Props) {
-	const { userID: update } = await params;
-	return (
-		<>
-			<FormCreateCompani userId={update} />
-		</>
-	);
+	const { userID } = await params;
+	const compani = (await getCompany({ id: userID })).data?.data;
+
+	console.log(compani)
+	
+	if (compani) {
+		return <FormCreateCompani compani={compani} />;
+	}
 }
 
 export default FormCompany;
-
