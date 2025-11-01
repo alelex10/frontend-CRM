@@ -19,7 +19,7 @@ import { HeadCell } from "../../data/data-head";
 import { EnhancedTableHead } from "./table-head";
 import TableBodyRow from "./table-row";
 import { useEffect, useState, useTransition } from "react";
-import { Contact } from "../../../../../types/conntac.types";
+import { Contact } from "../../../../../types/contact.types";
 import { fetchDataList, dataTypeList } from "../../companis/(pages-companies)/table/actions";
 import CircularProgress from "@mui/material/CircularProgress";
 

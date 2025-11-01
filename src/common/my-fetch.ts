@@ -37,11 +37,12 @@ export async function myFetch<T>(
 
     stats.data = responseJson as ResponseTemplate<T>;
     return stats;
-  } catch (error: any) {
+  } catch (error) {
     // console.error(error);
+    console.log(error)
     stats.error = {
       message: "Ocurrió un error inesperado",
-      error: error.message,
+      error: "Ocurrió un error inesperado", // TODO: cambiar esto por un mensaje de error
       statusCode: 500,
     };
     return stats;

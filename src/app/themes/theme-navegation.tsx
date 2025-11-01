@@ -5,6 +5,7 @@ import RouterLink from "next/link";
 import { LinkProps as RouterLinkProps } from "next/link";
 import { forwardRef } from "react";
 
+// eslint-disable-next-line react/display-name
 const LinkBehavior = forwardRef<
   HTMLAnchorElement,
   Omit<RouterLinkProps, "href"> & { href: RouterLinkProps["href"] }

@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import Checkbox from "@mui/material/Checkbox";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { Compani } from "../../../../../types/compani.types";
-import { Contact } from "../../../../../types/conntac.types";
+import { Contact } from "../../../../../types/contact.types";
 import { Order } from "./table";
 
 interface EnhancedTableProps {

@@ -4,13 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { NavLink } from "../nav-bar";
-import { styled, useTheme } from "@mui/material";
-
-interface TabPanelProps {
-	children?: React.ReactNode;
-	index: number;
-	value: number;
-}
+import { styled } from "@mui/material";
 
 const TapCustom = styled(Tab)(({ theme }) => ({
 	height: "10vh",
@@ -33,7 +27,6 @@ interface BasicTabsProps {
 }
 export default function MenuTab({ links }: BasicTabsProps) {
 	const [value, setValue] = React.useState(0);
-	const theme = useTheme();
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
