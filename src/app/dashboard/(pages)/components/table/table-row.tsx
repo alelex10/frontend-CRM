@@ -2,7 +2,7 @@ import Checkbox from "@mui/material/Checkbox";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Compani } from "../../../../../types/compani.types";
-import { Contact } from "@/types/conntac.types";
+import { Contact } from "@/types/contact.types";
 
 interface Props {
 	row: Compani | Contact;
@@ -12,7 +12,8 @@ interface Props {
 }
 
 export default function TableBodyRow({ row, labelId, isItemSelected, handleClick }: Props) {
-	const keysRow = Object.keys(row) as (keyof Compani | keyof Contact)[];
+	const keysRow = Object.keys(row) as Array<keyof typeof row>;
+
 	return (
 		<>
 			<TableRow
@@ -44,8 +45,9 @@ export default function TableBodyRow({ row, labelId, isItemSelected, handleClick
 							key === "userId") {
 							return null;
 						}
+						
 						return (
-							<TableCell key={key} align="right">{row[key] }</TableCell>
+							<TableCell key={key} align="right">{row[key]}</TableCell>
 						);
 					})
 				}

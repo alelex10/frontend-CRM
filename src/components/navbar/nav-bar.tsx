@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import { MyDrawer } from "../drawer/mi-drawer";
 import { Iconify } from "../icons/icon";
 import MenuTab from "./menu-tab/menu-tab";
-import { useTokenStore } from "@/store/token-store";
 // import { cookies } from 'cookies'
 
 
@@ -25,9 +24,7 @@ interface NavBarProps {
 
 export default function NavBar({ links }: NavBarProps) {
   const [openDrawer, setOpenDrawer] = React.useState(false);
-  const { token } = useTokenStore();
   
-  const existsToken = useTokenStore((state) => !!state.token);
 
   return (
     <Box component={"nav"}>

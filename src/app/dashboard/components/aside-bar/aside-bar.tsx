@@ -25,7 +25,6 @@ export default function AsideBar({ children, listMenuItems }: DrawerProps) {
 		setOpen(true);
 	};
 
-	console.log("----------------------ASIDE BAR-------------------")
 
 	return (
 		<Box hidden sx={{ display: "flex" }}>

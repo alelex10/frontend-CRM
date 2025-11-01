@@ -8,13 +8,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaCreateCompani, formTypeCreateCompani } from "../../../../../../schemas/company.schema";
 import { createCompany } from "./actions";
-import { CreateCompani } from "@/types/compani.types";
 import { useState, useTransition } from "react";
 import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";
 
 function FormCompany() {
 	const [loading, setLoading] = useTransition()
 	const [success, setSuccess] = useState<{ message: string, type: "success" | "error" } | undefined>();
+	console.log("create companie")
 	const {
 		register,
 		handleSubmit,
@@ -28,7 +28,7 @@ function FormCompany() {
 		},
 	});
 
-	const onSubmit = (data: CreateCompani) => {
+	const onSubmit = (data: formTypeCreateCompani) => {
 		setLoading(async () => {
 			const response = await createCompany({ createData: data });
 			if(response?.error) setSuccess({ message: response?.error.message, type: "error" });
