@@ -1,5 +1,5 @@
 "use client";
-import { createTheme, useTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { styleScrollbar } from "./theme-general";
 import { colorsLight, createPalete, deepPurple } from "./colors";
 import { themeNavegation } from "./theme-navegation";

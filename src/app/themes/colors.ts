@@ -1,6 +1,19 @@
 const hue = 220;
 
 /* Usar la paleta del video */
+export interface Colors {
+	color10: string;
+	color9: string;
+	color8: string;
+	color7: string;
+	color6: string;
+	color5: string;
+	color4: string;
+	color3: string;
+	color2: string;
+	color1: string;
+}
+
 export const colorsLight = {
 	color10: `oklch(99% .05 ${hue})`,
 	color9: `oklch(90% .1 ${hue})`,

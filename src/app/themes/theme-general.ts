@@ -1,4 +1,6 @@
-export const styleScrollbar = (colors: any) => ({
+import { Colors } from "./colors";
+
+export const styleScrollbar = (colors: Colors) => ({
 	//? COLOR DE FONDO
 	"&::-webkit-scrollbar, & *::-webkit-scrollbar": {
 		// .backgroundColor: "#2b2b2b",

@@ -1,5 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, use, useState } from "react";
+import { Dispatch, SetStateAction} from "react";
 import { Drawer } from "./drawer-styled";
 import { DrawerHeader } from "../drawer-header-aside-bar/drawer-header-aside-bar";
 import IconButton from "@mui/material/IconButton";
@@ -10,7 +10,6 @@ import ListItem from "@mui/material/ListItem";
 import { ListItemButomAside, ListItemIconAside, ListItemTextAside } from "../list-menu-items/list-item-style";
 import { ListMenuItem } from "../aside-bar";
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
 
 interface DrawerProps {
 	children?: React.ReactNode;
@@ -24,7 +23,6 @@ interface DrawerProps {
 export const DrawerAsideBar = ({ children, position = "fixed", listIntems, open, setOpen, variant }: DrawerProps) => {
 	const handleDrawerClose = () => setOpen(false);
 	const handleDrawerOpen = () => setOpen(true);
-	const theme = useTheme();
 
 	const isSecondary = variant === "secondary";
 	// console.log(listIntems);

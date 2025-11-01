@@ -2,10 +2,9 @@
 
 import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
-import { Compani } from "@/types/compani.types";
 import { ResponsePaginated } from "@/types/response";
 import { cookies } from "next/headers";
-import { Contact } from "../../../../../../types/conntac.types";
+import { Contact } from "../../../../../../types/contact.types";
 
 type orderBy = "name" | "createdAt" | "updatedAt" | "id";
 

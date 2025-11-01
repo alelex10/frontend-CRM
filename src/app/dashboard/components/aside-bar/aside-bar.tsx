@@ -4,7 +4,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import { DrawerHeader } from "./drawer-header-aside-bar/drawer-header-aside-bar";
-import { AppBar, AppBarAnimated } from "../app-bar/app-bar";
+import { AppBar} from "../app-bar/app-bar";
 import { DrawerAsideBar } from "./drawer-aside-bar/drawer-aside-bar";
 
 export interface ListMenuItem {
@@ -24,6 +24,7 @@ export default function AsideBar({ children, listMenuItems }: DrawerProps) {
 	const handleDrawerOpen = () => {
 		setOpen(true);
 	};
+
 
 	return (
 		<Box hidden sx={{ display: "flex" }}>

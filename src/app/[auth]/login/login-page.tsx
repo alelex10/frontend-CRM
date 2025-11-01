@@ -13,13 +13,10 @@ import { useForm } from "react-hook-form";
 import { LoginData, loginSchema } from "@/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "./actions";
-import Alert from "@mui/material/Alert";
-import IconButton from "@mui/material/IconButton";
-import { MySnackbar } from "@/components/snackbar/my-snackbar-style";
 import { useState, useTransition } from "react";
 import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";
 
-export default function LoginPage(props: { disableCustomTheme?: boolean }) {
+export default function LoginPage() {
   const [success, setSuccess] = useState<{ message: string, type: "success" | "error" } | undefined>();
   const [isLoading, setIsLoading] = useTransition();
   

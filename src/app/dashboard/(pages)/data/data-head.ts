@@ -1,5 +1,5 @@
 import { Compani } from "../../../../types/compani.types";
-import { Contact } from "../../../../types/conntac.types";
+import { Contact } from "../../../../types/contact.types";
 
 export interface HeadCell {
 	disablePadding: boolean;
