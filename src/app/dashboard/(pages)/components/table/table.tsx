@@ -138,6 +138,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 	};
 	// VERIFICADO
 	const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+
 		setSelected((selected) =>
 			selected.includes(id)
 				? selected.filter((id) => id !== id)
@@ -188,6 +189,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 									const labelId = `enhanced-table-checkbox-${index}`;
 									return (
 										<TableBodyRow
+											
 											key={row.id}
 											row={row}
 											labelId={labelId}
@@ -196,15 +198,6 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 										/>
 									);
 								})}
-								{/* {emptyRows > 0 && (
-									<TableRow
-										style={{
-											height: (dense ? 33 : 53) * emptyRows,
-										}}
-									>
-										<TableCell colSpan={6} />
-									</TableRow>
-								)} */}
 							</TableBody>
 						)}
 					</Table>

@@ -6,6 +6,7 @@ import { RegisterData } from "@/schemas/auth.schema";
 import { RegisterResponse } from "@/types/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { storeToken } from "../coockie-store";
 
 interface RegisterUserProps {
 	RegisterData: RegisterData;
@@ -28,13 +29,7 @@ export async function RegisterUser({ RegisterData }: RegisterUserProps) {
 	// ✅ Guardar token en cookie del servidor
 	if (response?.data) {
 
-		(await cookies()).set({
-			name: "access_token",
-			value: response.data.data.access_token,
-			httpOnly: true,      // más seguro, no accesible desde JS
-			path: "/",           // disponible en todo el sitio
-			sameSite: "lax",     // permite redirecciones sin perder cookie
-		})
+		await storeToken(response.data.data.access_token);
 
 		// ✅ Redirigir al dashboard
 		redirect("/dashboard");
