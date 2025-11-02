@@ -39,7 +39,7 @@ export async function loginUser({ LoginData }: loginUserProps) {
     });
 
     // ✅ Redirigir al dashboard
-    redirect("/dashboard");
+    redirect("/dashboard/companis/table");
   }
   return response;
 }

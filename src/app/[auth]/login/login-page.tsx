@@ -15,12 +15,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from "./actions";
 import { useState, useTransition } from "react";
 import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";
-import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   const [success, setSuccess] = useState<{ message: string, type: "success" | "error" } | undefined>();
   const [isLoading, setIsLoading] = useTransition();
-
+  
   const {
     register,
     handleSubmit,
@@ -35,18 +34,11 @@ export default function LoginPage() {
 
   const onsubmit = async (data: LoginData) => {
     setIsLoading(async () => {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (response.ok === false) setSuccess({ message: "Login incorrecto", type: "error" });
-      if (response.ok === true) {
-        setSuccess({ message: "Login correcto", type: "success" });
-        redirect("/dashboard");
-      }
+      const response = await loginUser({ LoginData: data });
+      if(response?.error) setSuccess({ message: response?.error.message, type: "error" });
+      
+      if(response?.data) setSuccess({ message: response?.data.message, type: "success" });
     });
-
 
   };
 
@@ -55,7 +47,6 @@ export default function LoginPage() {
       <Box
         component="form"
         onSubmit={handleSubmit((data) => onsubmit(data))}
-        noValidate
         sx={{
           display: "flex",
           flexDirection: "column",
