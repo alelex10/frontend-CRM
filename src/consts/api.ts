@@ -20,4 +20,10 @@ export const API = {
 		LIST: `${API_BASE_URL}/contacts`,
 	},
 	DASHBOARD: `${API_BASE_URL}/dashboard`,
+	DEAL: {
+		LIST: `${API_BASE_URL}/deals`,
+		CREATE: `${API_BASE_URL}/deals`,
+		UPDATE: `${API_BASE_URL}/deals`,
+		DELETE: `${API_BASE_URL}/deals`,
+	},
 };

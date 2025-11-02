@@ -1,12 +1,31 @@
-"use client";
+import { API } from "@/consts/api";
+import { myFetch } from "@/common/my-fetch";
+import PipelineClient from "./PipelineClient";
+import { cookies } from "next/headers";
+import { ResponseTemplate } from "@/types/response";
+import { Deal } from "@/types/opportunity.types";
 
-import PipelineBoard from "./PipelineBoard";
+export default async function PipelinePage() {
+  const token = (await cookies()).get("access_token")?.value;
+  if (!token) {
+    return <p>No estás autenticado</p>;
+  }
 
-export default function PipelinePage() {
-  return (
-    <div style={{ padding: "1rem" }}>
-      <h1 style={{ marginBottom: "1rem" }}>Oportunidades</h1>
-      <PipelineBoard />
-    </div>
+  const response = await myFetch<ResponseTemplate<Deal>>(
+    API.DEAL.LIST,
+    { method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
   );
+
+  const deals = response.data?.data;
+
+  if (!deals) {
+    return <p>Error: no se pudieron cargar los datos del dashboard.</p>;
+  }
+
+  return <PipelineClient initialDeals={deals} />;
 }
