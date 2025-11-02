@@ -15,7 +15,7 @@ export const MyDrawer = ({ open, toggleDrawer }: Props) => {
 	const list = () => (
 		<Box role="presentation" onClick={() => toggleDrawer(false)} onKeyDown={() => toggleDrawer(false)}>
 			<List>
-				{listData[0].map((text, index) => (
+				{listData[0].map((text) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton>
 							{/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
@@ -26,7 +26,7 @@ export const MyDrawer = ({ open, toggleDrawer }: Props) => {
 			</List>
 			<Divider />
 			<List>
-				{listData[1].map((text, index) => (
+				{listData[1].map((text) => (
 					<ListItem key={text} disablePadding>
 						<ListItemButton>
 							{/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}

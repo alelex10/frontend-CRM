@@ -4,20 +4,20 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaCreateCompani, formTypeCreateCompani } from "../../../../../../schemas/company.schema";
 import { createCompany } from "./actions";
-import { C } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
-import { CreateCompani } from "@/types/compani.types";
 import { useState, useTransition } from "react";
 import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";
+import { C } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
 
 function FormCompany() {
 	const [loading, setLoading] = useTransition()
 	const [success, setSuccess] = useState<{ message: string, type: "success" | "error" } | undefined>();
+	console.log("create companie")
 	const {
-		register,
+		control,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<formTypeCreateCompani>({
@@ -29,12 +29,12 @@ function FormCompany() {
 		},
 	});
 
-	const onSubmit = (data: CreateCompani) => {
+	const onSubmit = (data: formTypeCreateCompani) => {
 		setLoading(async () => {
 			const response = await createCompany({ createData: data });
-			if(response?.error) setSuccess({ message: response?.error.message, type: "error" });
-			
-			if(response?.data) setSuccess({ message: response?.data.message, type: "success" });
+			if (response?.error) setSuccess({ message: response?.error.message, type: "error" });
+
+			if (response?.data) setSuccess({ message: response?.data.message, type: "success" });
 		});
 	};
 	return (
@@ -52,30 +52,47 @@ function FormCompany() {
 			</Typography>
 
 			<Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 2 }}>
-				<TextField
-					fullWidth
-					// sx={{ "& .MuiInputBase-root": { py: "calc(16px - 0.65em)", height: "1em" } }}
-					label="Nombre"
-					error={!!errors.name?.message}
-					helperText={errors.name?.message}
-					margin="normal"
-					{...register("name")}
+				<Controller
+					name="name"
+					control={control}
+					render={({ field, fieldState }) => (
+						<TextField
+							{...field}
+							label="Nombre"
+							error={!!fieldState.error}
+							helperText={fieldState.error?.message}
+							fullWidth
+							margin="normal"
+						/>
+					)}
 				/>
-				<TextField
-					fullWidth
-					label="Industria"
-					error={!!errors.industry?.message}
-					helperText={errors.industry?.message}
-					margin="normal"
-					{...register("industry")}
+				<Controller
+					name="industry"
+					control={control}
+					render={({ field, fieldState }) => (
+						<TextField
+							{...field}
+							label="Industria"
+							error={!!fieldState.error}
+							helperText={fieldState.error?.message}
+							fullWidth
+							margin="normal"
+						/>
+					)}
 				/>
-				<TextField
-					fullWidth
-					label="Dirección"
-					error={!!errors.address?.message}
-					helperText={errors.address?.message}
-					margin="normal"
-					{...register("address")}
+				<Controller
+					name="address"
+					control={control}
+					render={({ field, fieldState }) => (
+						<TextField
+							{...field}
+							label="Dirección"
+							error={!!fieldState.error}
+							helperText={fieldState.error?.message}
+							fullWidth
+							margin="normal"
+						/>
+					)}
 				/>
 				<Button disabled={loading}
 					type="submit"

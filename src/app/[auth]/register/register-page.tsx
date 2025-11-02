@@ -17,7 +17,7 @@ import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import { MySnackbar } from "@/components/snackbar/my-snackbar-style";
 
-export default function RegisterPage(props: { disableCustomTheme?: boolean }) {
+export default function RegisterPage() {
   const [error, setError] = React.useState<string | undefined>();
   const [isLoading, setIsLoading] = React.useTransition();
 
@@ -26,7 +26,7 @@ export default function RegisterPage(props: { disableCustomTheme?: boolean }) {
     register,
     handleSubmit,
     formState: { errors },
-    control,
+
   } = useForm<RegisterData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {

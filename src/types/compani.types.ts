@@ -9,7 +9,6 @@ export interface Compani {
 	deletedAt?: Date;
 	userId: number;
 }
-export interface CreateCompani extends Pick<Compani, "name" | "industry" | "address"> {}
 
-export interface UpdateCompani extends Partial<CreateCompani> {}
-
+export type CreateCompani = Pick<Compani, "name" | "industry" | "address">;
+export type UpdateCompani = Partial<CreateCompani>;

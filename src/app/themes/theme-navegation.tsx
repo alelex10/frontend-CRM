@@ -3,10 +3,10 @@ import { LinkProps } from "@mui/material/Link";
 import { createTheme } from "@mui/material/styles";
 import RouterLink from "next/link";
 import { LinkProps as RouterLinkProps } from "next/link";
-import React from "react";
-import { th } from "zod/v4/locales";
+import { forwardRef } from "react";
 
-const LinkBehavior = React.forwardRef<
+// eslint-disable-next-line react/display-name
+const LinkBehavior = forwardRef<
   HTMLAnchorElement,
   Omit<RouterLinkProps, "href"> & { href: RouterLinkProps["href"] }
 >((props, ref) => {
@@ -15,7 +15,6 @@ const LinkBehavior = React.forwardRef<
   return <RouterLink ref={ref} href={href} {...other} />;
 });
 
-const theme = createTheme({});
 
 export const themeNavegation = createTheme({
   components: {

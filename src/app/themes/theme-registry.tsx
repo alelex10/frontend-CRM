@@ -1,8 +1,8 @@
 "use client";
 
-import { ThemeProvider, CssBaseline, Button } from "@mui/material";
-import { darkTheme, darkThemeOKLCH } from "./theme-dark-mode";
-import { lightTheme, lightThemeOKLCH } from "./theme-light-mode";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { darkThemeOKLCH } from "./theme-dark-mode";
+import { lightThemeOKLCH } from "./theme-light-mode";
 import { useThemeStore } from "./theme-store";
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {

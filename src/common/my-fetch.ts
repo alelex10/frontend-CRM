@@ -1,5 +1,4 @@
 import { ResponseError, ResponseTemplate } from "@/types/response";
-import { C } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
 
 export interface ResponseMyFetch<T> {
   data: undefined | ResponseTemplate<T>;
@@ -11,7 +10,7 @@ export async function myFetch<T>(
   options: RequestInit
 ): Promise<ResponseMyFetch<T>> {
 
-  let stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
+  const stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
   console.log(url)
   // console.log(options.body)
   try {
@@ -38,11 +37,12 @@ export async function myFetch<T>(
 
     stats.data = responseJson as ResponseTemplate<T>;
     return stats;
-  } catch (error: any) {
+  } catch (error) {
     // console.error(error);
+    console.log(error)
     stats.error = {
       message: "Ocurrió un error inesperado",
-      error: "Ocurrió un error inesperado",
+      error: "Ocurrió un error inesperado", // TODO: cambiar esto por un mensaje de error
       statusCode: 500,
     };
     return stats;

@@ -18,9 +18,9 @@ import { Compani } from "../../../../../types/compani.types";
 import { HeadCell } from "../../data/data-head";
 import { EnhancedTableHead } from "./table-head";
 import TableBodyRow from "./table-row";
-import { use, useEffect, useState, useTransition } from "react";
-import { Contact } from "../../../../../types/conntac.types";
-import { fetchDataList, dataTypeList, CompaniFetchProps } from "../../companis/(pages-companies)/table/actions";
+import { useEffect, useState, useTransition } from "react";
+import { Contact } from "../../../../../types/contact.types";
+import { fetchDataList, dataTypeList } from "../../companis/(pages-companies)/table/actions";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export type Order = "asc" | "desc";
@@ -117,7 +117,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 				setTotalPages(dataList.data.data.totalPages);
 			}
 		})
-	}, [page, order, orderBy, rowsPerPage])
+	}, [page, order, orderBy, rowsPerPage, nameTable])
 
 
 	const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,6 +138,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 	};
 	// VERIFICADO
 	const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+
 		setSelected((selected) =>
 			selected.includes(id)
 				? selected.filter((id) => id !== id)
@@ -188,6 +189,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 									const labelId = `enhanced-table-checkbox-${index}`;
 									return (
 										<TableBodyRow
+											
 											key={row.id}
 											row={row}
 											labelId={labelId}
@@ -196,15 +198,6 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 										/>
 									);
 								})}
-								{/* {emptyRows > 0 && (
-									<TableRow
-										style={{
-											height: (dense ? 33 : 53) * emptyRows,
-										}}
-									>
-										<TableCell colSpan={6} />
-									</TableRow>
-								)} */}
 							</TableBody>
 						)}
 					</Table>

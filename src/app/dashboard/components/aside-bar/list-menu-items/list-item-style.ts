@@ -12,7 +12,7 @@ type ListItemButomAsideProps = ListItemButtonProps & Open & LinkProps;
 interface ListItemIconAsideProps extends ListItemIconProps, Open {}
 interface ListItemTextAsideProps extends ListItemTextProps, Open {}
 
-export const ListItemButomAside = styled(ListItemButton)<ListItemButomAsideProps>(({ theme, open }) => ({
+export const ListItemButomAside = styled(ListItemButton)<ListItemButomAsideProps>(({ open }) => ({
 	minHeight: 48,
 	px: 2.5,
 	justifyContent: open ? "initial" : "center",
@@ -25,6 +25,6 @@ export const ListItemIconAside = styled(ListItemIcon)<ListItemIconAsideProps>(({
 	marginRight: open ? theme.spacing(3) : 0,
 }));
 
-export const ListItemTextAside = styled(ListItemText)<ListItemTextAsideProps>(({ theme, open }) => ({
+export const ListItemTextAside = styled(ListItemText)<ListItemTextAsideProps>(({  open }) => ({
 	display: open ? "block" : "none",
 }));

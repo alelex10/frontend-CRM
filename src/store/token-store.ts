@@ -13,7 +13,7 @@ const TOKEN_DURATION = 60 * 15;
 
 export const useTokenStore = create<TokenStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       token: "",
       expiresAt: null,
 

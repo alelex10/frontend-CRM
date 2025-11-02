@@ -1,6 +1,5 @@
-export interface CreateCompani extends Pick<Contact, "id" | "name" | "email" | "phone" | "companyId"> {}
-
-export interface UpdateCompani extends Partial<CreateCompani> {}
+export type CreateCompani = Pick<Contact, "id" | "name" | "email" | "phone" | "companyId">;
+export type UpdateCompani = Partial<CreateCompani>;
 
 export interface Contact {
 	id: number;
@@ -13,5 +12,3 @@ export interface Contact {
 	companyId: number;
 	userId: number;
 }
-
-

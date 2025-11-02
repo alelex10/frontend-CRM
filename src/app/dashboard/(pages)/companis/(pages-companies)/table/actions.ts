@@ -3,7 +3,7 @@
 import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { Compani } from "@/types/compani.types";
-import { Contact } from "@/types/conntac.types";
+import { Contact } from "@/types/contact.types";
 import { ResponsePaginated } from "@/types/response";
 import { cookies } from "next/headers";
 
@@ -29,7 +29,7 @@ export async function fetchDataList({
 }: CompaniFetchProps): Promise<
   ResponseMyFetch<ResponsePaginated<dataTypeList>>
 > {
-  // console.log("token", (await cookies()).get("access_token"))
+  console.log("token", (await cookies()).get("access_token"))
   const URL = {
     companies: API.COMPANI.LIST,
     contacts: API.CONTACT.LIST,

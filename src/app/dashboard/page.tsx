@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 import DashboardClient from "./DashboardClient";
-import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
+import { myFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { ResponseTemplate } from "@/types/response";
 import { Dashboard } from "@/types/dashboard.types";
@@ -14,7 +14,7 @@ export default async function DashboardPage() {
     return <p>No estás autenticado</p>;
   }
   
-  const response = await myFetch<ResponseTemplate<Dashboard>>(
+  const response = await myFetch<Dashboard>(
     API.DASHBOARD,
     {
       method: "GET",

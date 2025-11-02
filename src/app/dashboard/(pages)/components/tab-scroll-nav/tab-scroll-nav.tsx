@@ -6,10 +6,6 @@ import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 
-interface TabScrollNavProps {
-	children?: React.ReactNode;
-}
-
 interface TabPanelProps {
 	children?: React.ReactNode;
 	dir?: string;
@@ -60,7 +56,7 @@ const Data = [
 	},
 ];
 
-export default function TabScrollNav({ children }: TabScrollNavProps) {
+export default function TabScrollNav() {
 	const [value, setValue] = React.useState(0);
 	const theme = useTheme();
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -80,7 +76,7 @@ export default function TabScrollNav({ children }: TabScrollNavProps) {
 						color: theme.palette.primary.contrastText,
 					}}
 				>
-					{Data.map((item, index) => (
+					{Data.map((item) => (
 						<Tab
 							sx={{
 								backgroundColor: theme.palette.primary.main,

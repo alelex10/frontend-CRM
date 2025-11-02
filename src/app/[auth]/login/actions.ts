@@ -1,46 +1,34 @@
 "use server";
 
-import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
-import { LoginData } from "@/schemas/auth.schema";
 import { LoginResponse } from "@/types/auth";
+import { ResponseTemplate } from "@/types/response";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { R } from "vitest/dist/chunks/environment.d.cL3nLXbE.js";
+import { storeToken } from "../coockie-store";
 
-interface loginUserProps {
-  LoginData: LoginData;
+
+interface PrevState {
+  error: string | undefined
 }
 
-export async function loginUser({ LoginData }: loginUserProps) {
+export async function loginAction(prevState: PrevState, formData: FormData): Promise<{ error: string | undefined }> {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
-  const response = await myFetch<LoginResponse>(
-    API.AUTH.LOGIN,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(LoginData),
-    }
-  );
+  const res = await fetch(API.AUTH.LOGIN, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
 
-  console.log(response);
-
-  // ✅ Guardar el token en cookie segura
-  // ✅ Guardar token en cookie del servidor
-  if (response?.data) {
-    
-    (await cookies()).set("access_token", response.data?.data.access_token , {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/",
-      maxAge: 60 * 15, // 15 minutos
-    });
-
-    // ✅ Redirigir al dashboard
-    redirect("/dashboard");
+  if (!res.ok) {
+    return { error: "Credenciales inválidas" }; // 👈 devolvemos un error, no hacemos throw
   }
-  return response;
+
+  const data: ResponseTemplate<LoginResponse> = await res.json();
+
+  await storeToken(data.data.access_token);
+
+  redirect("/dashboard");
 }
