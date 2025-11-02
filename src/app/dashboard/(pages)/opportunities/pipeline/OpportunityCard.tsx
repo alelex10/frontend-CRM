@@ -1,9 +1,16 @@
 "use client";
 
 import { Card, CardContent, Typography } from "@mui/material";
+import { Deal } from "@/types/opportunity.types";
 
-export default function OpportunityCard({ data, onDragStart, onClick }: any) {
+interface OpportunityCardProps {
+  data: Deal;
+  onDragStart: (e: React.DragEvent<HTMLDivElement>, id: number) => void;
+  onClick: () => void;
+}
 
+
+export default function OpportunityCard({ data, onDragStart, onClick }: OpportunityCardProps) {
   return (
     <Card
       draggable

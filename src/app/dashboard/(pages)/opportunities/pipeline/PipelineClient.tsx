@@ -19,9 +19,9 @@ export default function PipelineClient({ initialDeals }: { initialDeals: Deal[] 
   const updateStage = (dealId: number, stage: string, lossReasonId?: number, lossReasonNote?: string) => {
     startTransition(async () => {
       const res = await updateDealStage(dealId, stage, lossReasonId, lossReasonNote);
-      if (res?.data?.data) {
+      if (res) {
         setDeals(prev =>
-          prev.map(d => (d.id === dealId ? { ...d, ...res.data.data } : d))
+          prev.map(d => (d.id === dealId ? { ...d, ...res } : d))
         );
       } else {
         console.error("Error: no se pudo actualizar el stage del deal");
@@ -55,9 +55,6 @@ export default function PipelineClient({ initialDeals }: { initialDeals: Deal[] 
 
   return (
     <>
-      {/*<Typography variant="h5" sx={{ m: 2 }}>
-        Pipeline
-      </Typography>*/}
       <Box
         sx={{
           display: "flex",

@@ -2,7 +2,6 @@ import { API } from "@/consts/api";
 import { myFetch } from "@/common/my-fetch";
 import PipelineClient from "./PipelineClient";
 import { cookies } from "next/headers";
-import { ResponseTemplate } from "@/types/response";
 import { Deal } from "@/types/opportunity.types";
 
 export default async function PipelinePage() {
@@ -11,7 +10,7 @@ export default async function PipelinePage() {
     return <p>No estás autenticado</p>;
   }
 
-  const response = await myFetch<ResponseTemplate<Deal>>(
+  const response = await myFetch<Deal[]>(
     API.DEAL.LIST,
     { method: "GET",
       headers: {
@@ -20,6 +19,8 @@ export default async function PipelinePage() {
       },
     }
   );
+
+  console.log(response);
 
   const deals = response.data?.data;
 

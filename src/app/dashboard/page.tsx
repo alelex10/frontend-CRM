@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 import DashboardClient from "./DashboardClient";
 import { myFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
-import { ResponseTemplate } from "@/types/response";
 import { Dashboard } from "@/types/dashboard.types";
 
 export default async function DashboardPage() {

@@ -1,13 +1,20 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
+import { useState, useEffect, useTransition, ChangeEvent, FormEvent } from "react";
 import { TextField, Button, MenuItem, Box, CircularProgress, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { STAGES } from "@/consts/opportunity";
 import { searchContacts } from "../actions/searchContacts";
 import { submitOpportunity } from "../actions/submitDeals";
+import { Contact } from "@/types/contact.types";
+import { Deal } from "@/types/opportunity.types";
 
-export default function OpportunityForm({ initial = {}, mode = "create" }: any) {
+interface OpportunityFormProps {
+  initial?: Partial<Deal>;
+  mode?: "create" | "edit";
+}
+
+export default function OpportunityForm({ initial = {}, mode = "create" }: OpportunityFormProps) {
   const router = useRouter();
   const [form, setForm] = useState({
     title: initial.title || "",
@@ -16,7 +23,7 @@ export default function OpportunityForm({ initial = {}, mode = "create" }: any) 
     contactId: initial.contactId || "",
   });
 
-  const [contacts, setContacts] = useState<any[]>([]);
+  const [contacts, setContacts] = useState<Contact[]>([]);
   const [loadingContacts, setLoadingContacts] = useState(false);
   const [query, setQuery] = useState("");
   const [isPending, startTransition] = useTransition();
@@ -43,12 +50,12 @@ export default function OpportunityForm({ initial = {}, mode = "create" }: any) 
     return () => clearTimeout(timer);
   }, [query, form.contactId]);
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleContactQueryChange = (e: any) => {
+  const handleContactQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
 
@@ -57,7 +64,7 @@ export default function OpportunityForm({ initial = {}, mode = "create" }: any) 
     }
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = {
       title: form.title || undefined,

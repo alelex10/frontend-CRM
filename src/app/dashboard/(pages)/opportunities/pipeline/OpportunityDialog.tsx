@@ -2,12 +2,18 @@
 
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { Deal } from "@/types/opportunity.types";
 
-export default function OpportunityDialog({ deal, onClose, onDelete }: any) {
+interface OpportunityDialogProps {
+  deal: Deal;
+  onClose: () => void;
+  onDelete: (id: number) => Promise<void>;
+}
+
+export default function OpportunityDialog({ deal, onClose, onDelete }: OpportunityDialogProps) {
   const router = useRouter();
 
   const handleEdit = () => {
-    //router.push(`./dashboard/opportunities/${deal.id}/edit`);
     router.push(`./${deal.id}/edit`);
   };
 

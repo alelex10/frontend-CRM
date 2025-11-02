@@ -3,24 +3,23 @@
 import { myFetch } from '@/common/my-fetch';
 import { API } from '@/consts/api';
 import { cookies } from 'next/headers';
-import { ResponseTemplate } from '@/types/response';
-import { Deal } from '@/types/opportunity.types';
+import { Deal, UpdateDealPayload } from '@/types/opportunity.types';
 
 export async function updateDealStage(
   dealId: number,
   stage: string,
   lossReasonId?: number,
   lossReasonNote?: string
-): Promise<ResponseTemplate<Deal> | null> {
+): Promise<Deal | null> {
   try {
     const token = (await cookies()).get('access_token')?.value;
     if (!token) throw new Error('No token found');
 
-    const payload: any = { stage };
+    const payload: UpdateDealPayload = { stage };
     if (lossReasonId) payload.lossReasonId = lossReasonId;
     if (lossReasonNote) payload.lossReasonNote = lossReasonNote;
 
-    const response = await myFetch<ResponseTemplate<Deal>>(
+    const response = await myFetch<Deal>(
       `${API.DEAL.UPDATE}/${dealId}`,
       {
         method: 'PUT',
@@ -32,7 +31,8 @@ export async function updateDealStage(
       }
     );
 
-    return response;
+    console.log("UPDATED DEAL", response.data?.data);
+    return response.data?.data || null;
   } catch (err) {
     console.error('Error updating deal stage:', err);
     return null;

@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { API } from "@/consts/api";
-import { ResponseTemplate } from "@/types/response";
 import OpportunityForm from "../../create/OpportunityForm";
 import { Deal } from "@/types/opportunity.types";
 import { myFetch } from "@/common/my-fetch";
@@ -14,7 +13,7 @@ export default async function EditOpportunityPage({ params }: { params: Promise<
   if (!token) return <p>No estás autenticado</p>;
 
   //try {
-    const res = await myFetch<ResponseTemplate<Deal>>(`${API.DEAL.LIST}/${dealId}`, {
+    const res = await myFetch<Deal>(`${API.DEAL.LIST}/${dealId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

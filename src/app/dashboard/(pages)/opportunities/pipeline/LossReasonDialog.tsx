@@ -2,17 +2,15 @@
 
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, MenuItem } from "@mui/material";
 import { useState } from "react";
+import { LOSS_REASONS } from "@/consts/opportunity";
 
-const LOSS_REASONS = [
-  { id: 1, label: "Limitaciones del producto" },
-  { id: 2, label: "Restricciones de presupuesto" },
-  { id: 3, label: "Precio demasiado alto" },
-  { id: 4, label: "Mejor alternativo" },
-  { id: 5, label: "Falta de urgencia" },
-  { id: 6, label: "Otro" },
-];
+interface LossReasonDialogProps {
+  open: boolean;
+  onClose: () => void;
+  onConfirm: (reasonId: number, note: string) => void;
+}
 
-export default function LossReasonDialog({ open, onClose, onConfirm }: any) {
+export default function LossReasonDialog({ open, onClose, onConfirm }: LossReasonDialogProps) {
   const [reasonId, setReasonId] = useState("");
   const [note, setNote] = useState("");
 

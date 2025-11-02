@@ -1,17 +1,8 @@
-/*export interface Contact {
-  id: number;
-  name: string;
-  email?: string;
-  phone?: string;
-  company?: string;
-  position?: string;
-}*/
-
-import { Contact } from "./conntac.types";
+import { Contact } from "./contact.types";
 
 export interface LossReason {
   id: number;
-  label: string;
+  name: string;
 }
 
 export interface Deal {
@@ -27,3 +18,9 @@ export interface Deal {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface UpdateDealPayload {
+  stage: string;
+  lossReasonId?: number;
+  lossReasonNote?: string;
+};
