@@ -29,7 +29,7 @@ export async function fetchDataList({
 }: CompaniFetchProps): Promise<
   ResponseMyFetch<ResponsePaginated<dataTypeList>>
 > {
-  // console.log("token", (await cookies()).get("access_token"))
+  console.log("token", (await cookies()).get("access_token"))
   const URL = {
     companies: API.COMPANI.LIST,
     contacts: API.CONTACT.LIST,

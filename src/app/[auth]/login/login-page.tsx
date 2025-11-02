@@ -61,7 +61,7 @@ export default function LoginPage() {
           gap: 2,
         }}
       >
-        {state.error && (
+        {error && (
           <MySnackbarAlert
             errorMessage={error}
             setError={setError}
