@@ -1,12 +1,13 @@
-"use client";
+"use server"
 
+import { cookies } from "next/headers";
 import OpportunityForm from "./OpportunityForm";
 
-export default function CreateOpportunityPage() {
-  return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Crear Oportunidad</h1>
-      <OpportunityForm />
-    </div>
-  );
+export default async function CreateOpportunityPage() {
+  const token = (await cookies()).get("access_token")?.value;
+  if (!token) {
+    return <p>No estás autenticado</p>;
+  }
+
+  return <OpportunityForm mode="create" />;
 }
