@@ -1,6 +1,6 @@
 "use server";
 import { getCompany } from "./actions";
-import { FormCreateCompani } from "./components/form-update-company";
+import { FormUpdateCompani } from "./components/form-update-company";
 
 interface Props {
 	params: Promise<{ userID: string }>;
@@ -13,7 +13,7 @@ async function FormCompany({ params }: Props) {
 	console.log(compani)
 	
 	if (compani) {
-		return <FormCreateCompani compani={compani} />;
+		return <FormUpdateCompani compani={compani} />;
 	}
 }
 

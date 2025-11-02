@@ -9,6 +9,6 @@ export interface Compani {
 	deletedAt?: Date;
 	userId: number;
 }
-  
-export type CreateCompani = Pick<Compani, "id" | "name" | "industry" | "address">;
+
+export type CreateCompani = Pick<Compani, "name" | "industry" | "address">;
 export type UpdateCompani = Partial<CreateCompani>;

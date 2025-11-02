@@ -19,7 +19,7 @@ interface Props {
     compani: Compani;
 }
 
-export const FormCreateCompani = ({ compani }: Props) => {
+export const FormUpdateCompani = ({ compani }: Props) => {
     // const [status, serStatus] = useState<{ message: string, type: "success" | "error" } | undefined>();
     const [loading, setLoading] = useTransition()
 

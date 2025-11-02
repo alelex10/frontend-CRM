@@ -27,13 +27,14 @@ export async function RegisterUser({ RegisterData }: RegisterUserProps) {
 	// ✅ Guardar el token en cookie segura
 	// ✅ Guardar token en cookie del servidor
 	if (response?.data) {
-		(await cookies()).set("access_token", response.data?.data.access_token, {
-			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			sameSite: "strict",
-			path: "/",
-			maxAge: 60 * 15, // 15 minutos
-		});
+
+		(await cookies()).set({
+			name: "access_token",
+			value: response.data.data.access_token,
+			httpOnly: true,      // más seguro, no accesible desde JS
+			path: "/",           // disponible en todo el sitio
+			sameSite: "lax",     // permite redirecciones sin perder cookie
+		})
 
 		// ✅ Redirigir al dashboard
 		redirect("/dashboard");
