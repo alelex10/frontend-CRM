@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const FormCreateCompani = ({ compani }: Props) => {
-    const [status, serStatus] = useState<{ message: string, type: "success" | "error" } | undefined>();
+    // const [status, serStatus] = useState<{ message: string, type: "success" | "error" } | undefined>();
     const [loading, setLoading] = useTransition()
 
     const {
@@ -40,13 +40,13 @@ export const FormCreateCompani = ({ compani }: Props) => {
     return (
         <>
             <Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: "auto" }}>
-                {status && (
+                {/* {status && (
                     <MySnackbarAlert
                         errorMessage={status.message}
                         setError={serStatus}
                         variant={status.type}
                     />
-                )}
+                )} */}
                 <Typography variant="h4" component="h1" gutterBottom>
                     Crear Empresa
                 </Typography>

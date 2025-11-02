@@ -12,17 +12,26 @@ import { Iconify } from "@/components/icons/icon";
 import { useForm } from "react-hook-form";
 import { LoginData, loginSchema } from "@/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginUser } from "./actions";
-import { useState, useTransition } from "react";
+import { loginAction } from "./actions";
+import { useActionState, useEffect, useState, useTransition } from "react";
 import { MySnackbarAlert } from "@/components/snackbar/my-snackbar";
 
 export default function LoginPage() {
-  const [success, setSuccess] = useState<{ message: string, type: "success" | "error" } | undefined>();
-  const [isLoading, setIsLoading] = useTransition();
-  
+  const [isPending, startTransition] = useTransition();
+  const [state, formAction] = useActionState(loginAction, { error: undefined });
+  const [error, setError] = useState<string | undefined>(state.error);
+
+
+  const handleSubmit = (formData: FormData) => {
+    startTransition(async () => {
+      setError(undefined);
+      formAction(formData); // Llama al Server Action
+    });
+  };
+
+
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
@@ -32,21 +41,19 @@ export default function LoginPage() {
     },
   });
 
-  const onsubmit = async (data: LoginData) => {
-    setIsLoading(async () => {
-      const response = await loginUser({ LoginData: data });
-      if(response?.error) setSuccess({ message: response?.error.message, type: "error" });
-      
-      if(response?.data) setSuccess({ message: response?.data.message, type: "success" });
-    });
+  console.log("state.error", state.error)
+  console.log("error", error)
 
-  };
-
+  useEffect(() => {
+    if (state.error) setError(state.error)
+  }, [state.error])
   return (
     <>
+
       <Box
         component="form"
-        onSubmit={handleSubmit((data) => onsubmit(data))}
+        action={handleSubmit}
+        // onSubmit={handleSubmit((data) => onsubmit(data))}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -54,11 +61,11 @@ export default function LoginPage() {
           gap: 2,
         }}
       >
-        {success && (
+        {state.error && (
           <MySnackbarAlert
-            errorMessage={success.message}
-            setError={setSuccess}
-            variant={success.type}
+            errorMessage={error}
+            setError={setError}
+            variant="error"
           />
         )}
         <FormControl>
@@ -98,7 +105,7 @@ export default function LoginPage() {
         </FormControl>
 
         {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
-        <Button type="submit" fullWidth variant="contained" disabled={isLoading}>
+        <Button type="submit" fullWidth variant="contained" disabled={isPending}>
           Iniciar Sesión
         </Button>
       </Box>
@@ -119,6 +126,7 @@ export default function LoginPage() {
           </Link>
         </Typography>
       </Box>
+
     </>
   );
 }

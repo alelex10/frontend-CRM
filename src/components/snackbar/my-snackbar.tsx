@@ -7,10 +7,10 @@ import { Iconify } from '../icons/icon'
 interface MySnackbarAlertProps {
     errorMessage: string | undefined,
 
-    setError: Dispatch<SetStateAction<{
-        message: string;
-        type: "success" | "error";
-    } | undefined>>
+    setError: Dispatch<SetStateAction<string | undefined>> | Dispatch<SetStateAction<{
+    message: string;
+    type: "success" | "error";
+} | undefined>>,
     variant?: 'error' | 'success' | 'warning' | 'info'
 }
 

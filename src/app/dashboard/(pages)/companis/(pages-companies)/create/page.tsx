@@ -18,7 +18,6 @@ function FormCompany() {
 	console.log("create companie")
 	const {
 		control,
-		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<formTypeCreateCompani>({
