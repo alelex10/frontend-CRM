@@ -1,8 +1,10 @@
 "use server";
-import { Suspense } from "react";
+import Container from "@mui/material/Container";
 import { getCompany } from "./actions";
 import { FormUpdateCompani } from "./components/form-update-company";
-import CircularProgress from "@mui/material/CircularProgress";
+import ListTransfer from "./components/list-trasnfer";
+import Divider from "@mui/material/Divider";
+import Chip from "@mui/material/Chip";
 
 interface Props {
 	params: Promise<{ userID: string }>;
@@ -16,9 +18,14 @@ async function FormCompany({ params }: Props) {
 
 	if (compani) {
 		return <>
-			<Suspense fallback={<CircularProgress />}>
+			<Container sx={{ width: "fit-content" }}>
 				<FormUpdateCompani compani={compani} />
-			</Suspense>
+				<Divider >
+					<Chip label="Contactos" size="medium" />
+				</Divider>
+				<ListTransfer />
+			</Container>
+
 		</>;
 	}
 }

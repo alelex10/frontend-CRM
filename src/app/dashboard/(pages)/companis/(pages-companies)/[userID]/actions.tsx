@@ -1,17 +1,20 @@
 "use server";
 
-import { myFetch } from "@/common/my-fetch";
+import { myFetch, ResponseMyFetch } from "@/common/my-fetch";
 import { API } from "@/consts/api";
 import { Compani, CreateCompani, UpdateCompani } from "@/types/compani.types";
 import { cookies } from "next/headers";
 
-interface updateCompanyProps {
-	formData: FormData;
+export interface updateCompanyProps {
+	updateData: UpdateCompani;
 	id: string;
-
 }
 
-export async function updateCompany( id: string, createData: FormData): Promise<Compani | undefined> {
+export async function updateCompany(previousState: ResponseMyFetch<Compani> | undefined, {
+	updateData,
+	id,
+}: updateCompanyProps): Promise<ResponseMyFetch<Compani> | undefined> {
+
 
 	const response = await myFetch<Compani>(API.COMPANI.UPDATE + `/${+id}`, {
 		method: "PATCH",
@@ -19,14 +22,12 @@ export async function updateCompany( id: string, createData: FormData): Promise<
 			Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(createData),
+		body: JSON.stringify(updateData),
 	});
 
 	console.log(response);
 
-	if (response.data) {
-		return response.data.data;
-	}
+	return response;
 }
 
 export async function getCompany({ id }: { id: string }) {
@@ -37,6 +38,6 @@ export async function getCompany({ id }: { id: string }) {
 			"Content-Type": "application/json",
 		},
 	});
-
+	
 	return response;
 }

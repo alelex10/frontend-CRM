@@ -42,7 +42,7 @@ function FormCompany() {
 		<Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: "auto" }}>
 			{success && (
 				<MySnackbarAlert
-					errorMessage={success.message}
+					message={success.message}
 					setError={setSuccess}
 					variant={success.type}
 				/>
