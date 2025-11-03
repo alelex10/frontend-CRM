@@ -5,6 +5,7 @@ import { LoginResponse } from "@/types/auth";
 import { ResponseTemplate } from "@/types/response";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { storeToken } from "../coockie-store";
 
 
 interface PrevState {
@@ -27,15 +28,7 @@ export async function loginAction(prevState: PrevState, formData: FormData): Pro
 
   const data: ResponseTemplate<LoginResponse> = await res.json();
 
-
-  (await cookies()).set({
-    name: "access_token",
-    value: data.data.access_token,
-    httpOnly: true,      // más seguro, no accesible desde JS
-    path: "/",           // disponible en todo el sitio
-    sameSite: "lax",     // permite redirecciones sin perder cookie
-  })
-
+  await storeToken(data.data.access_token);
 
   redirect("/dashboard");
 }

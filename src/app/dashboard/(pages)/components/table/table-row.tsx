@@ -3,6 +3,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { Compani } from "../../../../../types/compani.types";
 import { Contact } from "@/types/contact.types";
+import { Link } from "@mui/material";
 
 interface Props {
 	row: Compani | Contact;
@@ -20,13 +21,14 @@ export default function TableBodyRow({ row, labelId, isItemSelected, handleClick
 				hover
 				role="checkbox"
 				aria-checked={isItemSelected}
-				tabIndex={-1}
+				tabIndex={10}
 				key={row.id}
 				selected={isItemSelected}
-				sx={{ cursor: "pointer" }}
+
 			>
-				<TableCell padding="checkbox" onClick={(event) => handleClick(event, row.id)}>
+				<TableCell sx={{ zIndex: 1000 }} padding="checkbox" onClick={(event) => handleClick(event, row.id)}>
 					<Checkbox
+						sx={{ zIndex: 1000 }}
 						color="primary"
 						checked={isItemSelected}
 					/>
@@ -34,18 +36,22 @@ export default function TableBodyRow({ row, labelId, isItemSelected, handleClick
 				<TableCell component="th" id={labelId} scope="row" padding="none" align="right">
 					{row.id}
 				</TableCell>
-				<TableCell align="right">{row.name}</TableCell>
+				<TableCell align="right" >
+					<Link href={`/dashboard/companis/${row.id}`} underline="always"  color="inherit" variant="caption" sx={{ "&:hover": { color: "primary.main" } }}>
+						{row.name}
+					</Link>
+				</TableCell>
 				{
 					keysRow.map((key) => {
 						if (key === "id" ||
-							key === "name" || 
-							key === "createdAt" || 
-							key === "updatedAt" || 
-							key === "deletedAt" || 
+							key === "name" ||
+							key === "createdAt" ||
+							key === "updatedAt" ||
+							key === "deletedAt" ||
 							key === "userId") {
 							return null;
 						}
-						
+
 						return (
 							<TableCell key={key} align="right">{row[key]}</TableCell>
 						);
