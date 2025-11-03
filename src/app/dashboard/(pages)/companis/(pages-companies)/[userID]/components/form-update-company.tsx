@@ -11,9 +11,11 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useState, useTransition } from "react";
+// import { useState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
-import Loading from "../../loading";
+import { updateCompany } from "../actions";
+import { useActionState } from "react";
+// import Loading from "../../loading";
 
 interface Props {
     compani: Compani;
@@ -21,10 +23,11 @@ interface Props {
 
 export const FormUpdateCompani = ({ compani }: Props) => {
     // const [status, serStatus] = useState<{ message: string, type: "success" | "error" } | undefined>();
-    const [loading, setLoading] = useTransition()
+    const updateCompanyConfig = updateCompany.bind(null, compani?.id.toString());
+    const [state, formAction] = useActionState(updateCompany, { compani });
 
     const {
-
+        handleSubmit,
         control,
         formState: { errors },
     } = useForm<formTypeCreateCompani>({
@@ -36,7 +39,12 @@ export const FormUpdateCompani = ({ compani }: Props) => {
         },
     });
 
-    if (loading) return <Loading />;
+    const onSubmit = handleSubmit(async (data) => {
+        console.log(data)
+        await updateCompanyConfig(data)
+    })
+
+
     return (
         <>
             <Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: "auto" }}>
@@ -51,7 +59,7 @@ export const FormUpdateCompani = ({ compani }: Props) => {
                     Crear Empresa
                 </Typography>
 
-                <Box component="form" sx={{ mt: 2 }}>
+                <Box component="form" onSubmit={onSubmit} sx={{ mt: 2 }}>
                     <Controller
                         name="name"
                         control={control}
@@ -103,7 +111,7 @@ export const FormUpdateCompani = ({ compani }: Props) => {
                         size="large"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Crear Empresa
+                        Editar Empresa
                     </Button>
                 </Box>
             </Paper>

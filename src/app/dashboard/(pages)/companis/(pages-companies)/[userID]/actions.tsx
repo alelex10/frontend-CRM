@@ -8,11 +8,12 @@ import { cookies } from "next/headers";
 interface updateCompanyProps {
 	createData: CreateCompani;
 	id: string;
+
 }
 
-export async function updateCompany({ createData, id }: updateCompanyProps) {
-	
-	const response = await myFetch<UpdateCompani>(API.COMPANI.CREATE + `/${+id}`, {
+export async function updateCompany(initialState: Compani, id: string, createData: CreateCompani): Promise<Compani | undefined> {
+
+	const response = await myFetch<Compani>(API.COMPANI.UPDATE + `/${+id}`, {
 		method: "PATCH",
 		headers: {
 			Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
@@ -23,17 +24,19 @@ export async function updateCompany({ createData, id }: updateCompanyProps) {
 
 	console.log(response);
 
-	return response;
+	if (response.data) {
+		return response.data.data;
+	}
 }
 
 export async function getCompany({ id }: { id: string }) {
-  const response = await myFetch<Compani>(API.COMPANI.GET_ID + `/${+id}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
-      "Content-Type": "application/json",
-    },
-  });
+	const response = await myFetch<Compani>(API.COMPANI.GET_ID + `/${+id}`, {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${(await cookies()).get("access_token")?.value}`,
+			"Content-Type": "application/json",
+		},
+	});
 
-  return response;
+	return response;
 }
