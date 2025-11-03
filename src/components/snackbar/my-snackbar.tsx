@@ -8,7 +8,7 @@ import { ResponseError } from '@/types/response'
 
 interface MySnackbarAlertProps {
     message: string | undefined,
-    state: Compani | undefined | ResponseError,
+    state?: Compani | undefined | ResponseError,
     setError?: Dispatch<SetStateAction<string | undefined>> | Dispatch<SetStateAction<{
         message: string;
         type: "success" | "error";
@@ -16,13 +16,12 @@ interface MySnackbarAlertProps {
     variant?: 'error' | 'success' | 'warning' | 'info'
 }
 
-export const MySnackbarAlert = ({ message, setError, variant,state }: MySnackbarAlertProps) => {
-    let stateMessage = message
-    const [error, setErrorState] = React.useState<string | undefined>(stateMessage)
+export const MySnackbarAlert = ({ message, setError, variant, state }: MySnackbarAlertProps) => {
+    const [error, setErrorState] = React.useState<string | undefined>(message)
 
     React.useEffect(() => {
-        if (stateMessage) {
-            setErrorState(stateMessage)
+        if (message) {
+            setErrorState(message)
         }
     }, [state])
 

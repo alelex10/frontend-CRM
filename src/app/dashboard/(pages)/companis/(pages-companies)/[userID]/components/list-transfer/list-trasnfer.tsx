@@ -10,6 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import { customList } from './custom-list';
 
 function not(a: readonly number[], b: readonly number[]) {
   return a.filter((value) => !b.includes(value));
@@ -67,64 +68,7 @@ export default function ListTransfer() {
     setChecked(not(checked, rightChecked));
   };
 
-  const customList = (title: React.ReactNode, items: readonly number[]) => (
-    <Card>
-      <CardHeader
-        sx={{ px: 2, py: 1 }}
-        avatar={
-          <Checkbox
-            onClick={handleToggleAll(items)}
-            checked={numberOfChecked(items) === items.length && items.length !== 0}
-            indeterminate={
-              numberOfChecked(items) !== items.length && numberOfChecked(items) !== 0
-            }
-            disabled={items.length === 0}
-            inputProps={{
-              'aria-label': 'all items selected',
-            }}
-          />
-        }
-        title={title}
-        subheader={`${numberOfChecked(items)}/${items.length} selected`}
-      />
-      <Divider />
-      <List
-        sx={{
-          width: 200,
-          height: 230,
-          bgcolor: 'background.paper',
-          overflow: 'auto',
-        }}
-        dense
-        component="div"
-        role="list"
-      >
-        {items.map((value: number) => {
-          const labelId = `transfer-list-all-item-${value}-label`;
 
-          return (
-            <ListItemButton
-              key={value}
-              role="listitem"
-              onClick={handleToggle(value)}
-            >
-              <ListItemIcon>
-                <Checkbox
-                  checked={checked.includes(value)}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{
-                    'aria-labelledby': labelId,
-                  }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
-            </ListItemButton>
-          );
-        })}
-      </List>
-    </Card>
-  );
 
   return (
     <Grid
@@ -132,7 +76,12 @@ export default function ListTransfer() {
       spacing={2}
       sx={{ justifyContent: 'center', alignItems: 'center' }}
     >
-      <Grid>{customList('Choices', left)}</Grid>
+      <Grid>{customList({
+        title: 'Asignados',
+        items: left,
+        numberOfChecked,
+        handleToggle
+      })}</Grid>
       <Grid>
         <Grid container direction="column" sx={{ alignItems: 'center' }}>
           <Button
@@ -157,7 +106,12 @@ export default function ListTransfer() {
           </Button>
         </Grid>
       </Grid>
-      <Grid>{customList('Chosen', right)}</Grid>
+      <Grid>{customList({
+        title: 'Sin asignar',
+        items: right,
+        numberOfChecked,
+        handleToggle
+      })}</Grid>
     </Grid>
   );
 }

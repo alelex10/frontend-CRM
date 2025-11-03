@@ -1,8 +1,8 @@
 "use server";
 import Container from "@mui/material/Container";
 import { getCompany } from "./actions";
-import { FormUpdateCompani } from "./components/form-update-company";
-import ListTransfer from "./components/list-trasnfer";
+import { FormUpdateCompani } from "./components/form-update/form-update-company";
+import ListTransfer from "./components/list-transfer/list-trasnfer";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 

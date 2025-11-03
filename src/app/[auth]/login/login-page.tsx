@@ -63,6 +63,7 @@ export default function LoginPage() {
       >
         {error && (
           <MySnackbarAlert
+          
             message={error}
             setError={setError}
             variant="error"

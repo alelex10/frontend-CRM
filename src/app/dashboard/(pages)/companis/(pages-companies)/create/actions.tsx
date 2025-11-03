@@ -23,8 +23,5 @@ export async function createCompany({ createData }: createCompanyProps) {
       body: JSON.stringify(createData),
     }
   );
-
-  console.log(response);
-
   return response;
 }

@@ -11,12 +11,10 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-// import { useState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { updateCompany, updateCompanyProps } from "../actions";
+import { updateCompany, updateCompanyProps } from "../../actions";
 import { useActionState, useTransition } from "react";
 import { ResponseMyFetch } from "@/common/my-fetch";
-// import Loading from "../../loading";
 
 interface Props {
     compani: Compani;
@@ -65,13 +63,7 @@ export const FormUpdateCompani = ({ compani }: Props) => {
             ></MySnackbarAlert>)}
 
             <Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: "auto" }}>
-                {/* {status && (
-                    <MySnackbarAlert
-                        errorMessage={status.message}
-                        setError={serStatus}
-                        variant={status.type}
-                    />
-                )} */}
+
                 <Typography variant="h4" component="h1" gutterBottom>
                     Crear Empresa
                 </Typography>
