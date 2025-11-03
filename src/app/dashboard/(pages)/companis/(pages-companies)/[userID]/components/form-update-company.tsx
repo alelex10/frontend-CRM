@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import { Controller, useForm } from "react-hook-form";
 import { updateCompany } from "../actions";
 import { useActionState } from "react";
+import { F } from "vitest/dist/chunks/config.d.D2ROskhv.js";
 // import Loading from "../../loading";
 
 interface Props {
@@ -24,7 +25,7 @@ interface Props {
 export const FormUpdateCompani = ({ compani }: Props) => {
     // const [status, serStatus] = useState<{ message: string, type: "success" | "error" } | undefined>();
     const updateCompanyConfig = updateCompany.bind(null, compani?.id.toString());
-    const [state, formAction] = useActionState(updateCompany, { compani });
+    // const [state, formAction] = useActionState(updateCompany, { compani });
 
     const {
         handleSubmit,
@@ -39,10 +40,9 @@ export const FormUpdateCompani = ({ compani }: Props) => {
         },
     });
 
-    const onSubmit = handleSubmit(async (data) => {
-        console.log(data)
-        await updateCompanyConfig(data)
-    })
+    const onAction = async (data: FormData) => {
+        updateCompanyConfig(data);
+    };
 
 
     return (
@@ -59,7 +59,7 @@ export const FormUpdateCompani = ({ compani }: Props) => {
                     Crear Empresa
                 </Typography>
 
-                <Box component="form" onSubmit={onSubmit} sx={{ mt: 2 }}>
+                <Box component="form" action={onAction} sx={{ mt: 2 }}>
                     <Controller
                         name="name"
                         control={control}

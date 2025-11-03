@@ -6,12 +6,12 @@ import { Compani, CreateCompani, UpdateCompani } from "@/types/compani.types";
 import { cookies } from "next/headers";
 
 interface updateCompanyProps {
-	createData: CreateCompani;
+	formData: FormData;
 	id: string;
 
 }
 
-export async function updateCompany(initialState: Compani, id: string, createData: CreateCompani): Promise<Compani | undefined> {
+export async function updateCompany( id: string, createData: FormData): Promise<Compani | undefined> {
 
 	const response = await myFetch<Compani>(API.COMPANI.UPDATE + `/${+id}`, {
 		method: "PATCH",
