@@ -6,8 +6,6 @@ export async function middleware(request: NextRequest) {
   const cookiesStore = await cookies();
   const token = cookiesStore.get("access_token");
   const hasToken = cookiesStore.has("access_token");
-  console.log("access_token", token)
-  console.log("hasToken", hasToken)
 
   const { pathname } = request.nextUrl;
 
