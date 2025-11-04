@@ -29,9 +29,9 @@ export const Footer = () => {
 						<Typography variant="h6" color="text.primary" gutterBottom>
 							OrbitCRM
 						</Typography>
-						<Typography variant="body2" color="text.secondary">
+						{/*<Typography variant="body2" color="text.secondary">
 							© {new Date().getFullYear()} OrbitCRM. Todos los derechos reservados.
-						</Typography>
+						</Typography>*/}
 					</Box>
 
 					<Box
@@ -42,7 +42,10 @@ export const Footer = () => {
 							justifyContent: { xs: "center", md: "flex-end" },
 						}}
 					>
-						<Link href="/privacy-policy" passHref>
+						<Typography variant="body2" color="text.secondary">
+							© {new Date().getFullYear()} OrbitCRM. Todos los derechos reservados.
+						</Typography>
+						{/*<Link href="/privacy-policy" passHref>
 							<Typography variant="body2" color="text.secondary" sx={{ cursor: "pointer" }}>
 								Política de Privacidad
 							</Typography>
@@ -56,7 +59,7 @@ export const Footer = () => {
 							<Typography variant="body2" color="text.secondary" sx={{ cursor: "pointer" }}>
 								Contacto
 							</Typography>
-						</Link>
+						</Link>*/}
 					</Box>
 				</Box>
 			</Container>

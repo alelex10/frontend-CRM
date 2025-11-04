@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
+import Link from "next/link";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,26 +12,8 @@ import { ConteinerHome } from "./components/conteiner-home";
 import { Footer } from "./components/footer";
 
 const linksNavBar = [
-  {
-    label: "Inicio",
-    href: "/",
-    value: "one",
-  },
-  {
-    label: "Clientes",
-    href: "/clients",
-    value: "two",
-  },
-  {
-    label: "Oportunidades",
-    href: "/opportunities",
-    value: "three",
-  },
-  {
-    label: "Proyectos",
-    href: "/projects",
-    value: "four",
-  },
+  { label: "Inicio", href: "/" },
+  { label: "Sobre Nosotros", href: "/about-us" },
 ];
 
 const cardsHome = [
@@ -46,9 +28,9 @@ const cardsHome = [
       "Administra y mantene la información de tus clientes de manera eficiente.",
   },
   {
-    title: "📈 Gestión de Proyectos",
+    title: "📈 Gestión de Oportunidades",
     description:
-      "Administra y mantene la información de tus proyectos de manera eficiente.",
+      "Controla el progreso de cada oportunidad y maximiza tus cierres de negocio.",
   },
 ];
 
@@ -74,23 +56,24 @@ export default function HomePage() {
           </Typography>
           <Box sx={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
             <Button
+              component={Link}
+              href="/register"
               variant="contained"
               color="primary"
               size="large"
               style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}
-              href="/register"
             >
               Comenzar Gratis
             </Button>
 
-            <Button
+            {/*<Button
               href="/login"
               variant="outlined"
               size="large"
               color="primary"
             >
               Iniciar Sesión
-            </Button>
+            </Button>*/}
           </Box>
         </ConteinerGrad>
 
@@ -126,14 +109,12 @@ export default function HomePage() {
             Regístrate hoy y empieza a gestionar tus clientes con OrbitCRM.
           </Typography>
           <Button
+            component={Link}
+            href="/register"
             size="large"
-            sx={{
-              width: "fit-content",
-              margin: "0 auto",
-            }}
             variant="contained"
             color="primary"
-            href="/register"
+            sx={{ width: "fit-content", margin: "0 auto" }}
             style={{ boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}
           >
             Crear Cuenta

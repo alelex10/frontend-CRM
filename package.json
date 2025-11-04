@@ -18,6 +18,7 @@
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.8",
     "@hookform/resolvers": "^5.2.2",
+    "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.2",
     "@mui/material-nextjs": "^7.3.3",
     "@mui/x-charts": "^8.15.0",
@@ -29,12 +30,12 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@storybook/addon-themes": "9.1.10",
     "@chromatic-com/storybook": "4.1.1",
     "@eslint/eslintrc": "^3",
     "@iconify/react": "^4.1.1",
     "@storybook/addon-a11y": "9.1.10",
     "@storybook/addon-docs": "9.1.10",
+    "@storybook/addon-themes": "9.1.10",
     "@storybook/addon-vitest": "9.1.10",
     "@storybook/nextjs-vite": "9.1.10",
     "@tailwindcss/postcss": "4",

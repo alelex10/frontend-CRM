@@ -37,7 +37,7 @@ export default function NavBar({ links }: NavBarProps) {
           }}
         >
           <Typography variant="h6" component="div">
-            OpbitCRM
+            OrbitCRM
           </Typography>
           {/* drawer */}
           <MyDrawer open={openDrawer} toggleDrawer={setOpenDrawer} />
