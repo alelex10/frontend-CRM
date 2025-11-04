@@ -93,6 +93,7 @@ jobs:
 
             docker run -d \
               -e NEXT_PUBLIC_BASE_URL='${{ secrets.NEXT_PUBLIC_BASE_URL }}' \
+              -e GOOGLE_GENERATIVE_AI_API_KEY='${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}' \
               --name $CONTAINER_NAME -p $CONTAINER_PORT:3000 --restart unless-stopped $IMAGE
 
   cleanup-old-images:
