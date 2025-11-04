@@ -18,6 +18,7 @@ export const API = {
     LIST: `${API_BASE_URL}/contacts`,
     UPDATE_MANY_CONTACTS: `${API_BASE_URL}/contacts/many`,
     WITHOUT_COMPANY: `${API_BASE_URL}/contacts/company-null`,
+    CREATE: `${API_BASE_URL}/contacts`,
   },
   DASHBOARD: `${API_BASE_URL}/dashboard`,
   DEAL: {

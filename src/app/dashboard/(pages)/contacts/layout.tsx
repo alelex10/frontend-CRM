@@ -12,6 +12,12 @@ const LIST_MENU_ITEMS_CONTACTS: ListMenuItem[] = [
 		href: "/dashboard/contacts/table",
 		icon: "material-symbols:grid-on-outline",
 	},
+	{
+		label: "Crear",
+		href: "/dashboard/contacts/create",
+		icon: "material-symbols:add",
+	},
+	
 ];
 export default function LayoutCompani({ children }: { children: React.ReactNode }) {
 	const [open, setOpen] = useState(true);
@@ -28,9 +34,9 @@ export default function LayoutCompani({ children }: { children: React.ReactNode 
 					{children}
 				</DrawerAsideBar>
 			</ContainerDesktop>
-			<ContainerMovil>
+			{/* <ContainerMovil>
 				<TabScrollNav></TabScrollNav>
-			</ContainerMovil>
+			</ContainerMovil> */}
 		</>
 	);
 }
