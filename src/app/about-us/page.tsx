@@ -36,7 +36,13 @@ const teamMembers = [
     role: "Desarrollador Backend/Frontend",
     username: "fwmc-dev",
     avatar: "/assets/team/paul.jpg",
-  }
+  },
+  {
+    name: "Agustin Lujan",
+    role: "Desarrollador Frontend",
+    username: "AgusLujan-AL",
+    avatar: "/assets/team/agus.jpg",
+  },
 ];
 
 export default function AboutUsPage() {
