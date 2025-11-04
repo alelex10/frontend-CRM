@@ -12,6 +12,7 @@
     "vitest": "vitest"
   },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.28",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
@@ -22,6 +23,7 @@
     "@mui/material": "^7.3.2",
     "@mui/material-nextjs": "^7.3.3",
     "@mui/x-charts": "^8.15.0",
+    "ai": "^5.0.87",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",

@@ -9,10 +9,32 @@ import {
 } from "@mui/material";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { Dashboard } from "@/types/dashboard.types";
+import { useEffect, useState } from "react";
 
-export default function DashboardClient({ data }: { data: Dashboard }) {
+interface DashboardClientProps {
+  data: Dashboard;
+  aiAnalysis?: string;
+}
 
-  // 👉 Función para formatear números grandes
+export default function DashboardClient({ data, aiAnalysis }: DashboardClientProps) {
+  const [displayedText, setDisplayedText] = useState("");
+
+  // Efecto de escritura (typing effect)
+  useEffect(() => {
+    if (!aiAnalysis) return;
+    setDisplayedText(""); // Reiniciar el texto
+    let i = 0;
+
+    const interval = setInterval(() => {
+      setDisplayedText(aiAnalysis.slice(0, i + 1));
+      i++;
+      if (i >= aiAnalysis.length) clearInterval(interval);
+    }, 25); // velocidad de escritura (ms por caracter)
+
+    return () => clearInterval(interval);
+  }, [aiAnalysis]);
+
+  // Función para formatear números grandes
   const formatNumber = (num: number) => {
     if (num >= 1_000_000) return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
     if (num >= 1_000) return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
@@ -21,9 +43,9 @@ export default function DashboardClient({ data }: { data: Dashboard }) {
 
   const stats = [
     { label: "Ventas Totales", value: formatNumber(data.totalSales), color: "#7B61FF" },
-    { label: "Tasa de Ventas", value: `${data.winRate}%`, color: "#5B8DEF" },
-    { label: "Tasa de Cierres", value: `${data.closeRate}%`, color: "#3DD9EB" },
-    { label: "Días Prom. para cerrar", value: data.avgDaysToClose, color: "#31C48D" },
+    { label: "Tasa de Ventas", value: `${data.winRate.toFixed(2)}%`, color: "#5B8DEF" },
+    { label: "Tasa de Cierres", value: `${data.closeRate.toFixed(2)}%`, color: "#3DD9EB" },
+    { label: "Días Prom. para cerrar", value: data.avgDaysToClose.toFixed(1), color: "#31C48D" },
     { label: "Valor Oportunidades", value: formatNumber(data.pipelineValue), color: "#4F46E5" },
     { label: "Oport. Abiertas", value: data.openDeals, color: "#3B82F6" },
     { label: "Valor Prom. de Venta", value: formatNumber(data.avgDealSize), color: "#06B6D4" },
@@ -237,13 +259,40 @@ export default function DashboardClient({ data }: { data: Dashboard }) {
             <Typography variant="h6" mb={2}>
               Análisis y sugerencias de IA
             </Typography>
-            <Typography variant="body1" mb={1}>
-              Aquí, la IA analizará los datos de tu dashboard y te ofrecerá sugerencias
-              personalizadas para mejorar tus tasas de cierre de oportunidades.
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              (Por ahora, esta sección es un lugar reservado.)
-            </Typography>
+            {!aiAnalysis ? (
+              <>
+                <Typography variant="body1" mb={1}>
+                  Aquí, la IA analizará los datos de tu dashboard y te ofrecerá sugerencias
+                  personalizadas para mejorar tus tasas de cierre de oportunidades.
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  (Hubo un error al analizar tus datos.)
+                </Typography>
+              </>
+            ) : (
+              <Typography
+                variant="body1"
+                sx={{
+                  whiteSpace: "pre-wrap",
+                  fontFamily: "monospace",
+                  borderLeft: "3px solid #7B61FF",
+                  pl: 1.5,
+                  animation: "fadeIn 0.3s ease-in-out",
+                  maxHeight: 530,
+                  overflowY: "auto",
+                  pr: 1,
+                  "&::-webkit-scrollbar": {
+                    width: 6,
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#b3b3b3",
+                    borderRadius: 3,
+                  },
+                }}
+              >
+                {displayedText}
+              </Typography>
+            )}
           </Card>
         </Grid>
       </Grid>

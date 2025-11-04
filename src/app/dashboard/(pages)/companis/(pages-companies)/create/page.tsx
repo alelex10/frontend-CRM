@@ -100,7 +100,7 @@ function FormCompany() {
 					variant="contained"
 					size="large"
 					sx={{ mt: 3, mb: 2 }}>
-					Enviar Mensaje
+					Crear
 				</Button>
 			</Box>
 		</Paper>
