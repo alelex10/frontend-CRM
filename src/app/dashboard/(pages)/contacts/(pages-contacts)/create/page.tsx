@@ -47,11 +47,6 @@ function FormContact() {
 	});
 
 
-
-	const handleChange = (event: any) => {
-		setCompany(event.target.value);
-	};
-
 	useEffect(() => {
 		getCompaniesList(setCompanies);
 	}, []);
