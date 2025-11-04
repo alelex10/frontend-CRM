@@ -10,9 +10,15 @@ interface Props {
 	labelId: string;
 	isItemSelected: boolean;
 	handleClick: (event: React.MouseEvent<unknown>, id: number) => void;
+	nameTable: "companies" | "contacts";
 }
 
-export default function TableBodyRow({ row, labelId, isItemSelected, handleClick }: Props) {
+const tableRoutes: Record<Props["nameTable"], string> = {
+  contacts: "contacts",
+  companies: "companis", // la ruta real en la URL
+};
+
+export default function TableBodyRow({ row, labelId, isItemSelected, handleClick, nameTable }: Props) {
 	const keysRow = Object.keys(row) as Array<keyof typeof row>;
 
 	return (
@@ -37,7 +43,7 @@ export default function TableBodyRow({ row, labelId, isItemSelected, handleClick
 					{row.id}
 				</TableCell>
 				<TableCell align="right" >
-					<Link href={`/dashboard/companis/${row.id}`} underline="always"  color="inherit" variant="caption" sx={{ "&:hover": { color: "primary.main" } }}>
+					<Link href={`/dashboard/${tableRoutes[nameTable]}/${row.id}`} underline="always"  color="inherit" variant="caption" sx={{ "&:hover": { color: "primary.main" } }}>
 						{row.name}
 					</Link>
 				</TableCell>

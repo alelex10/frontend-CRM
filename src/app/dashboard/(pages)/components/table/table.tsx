@@ -195,6 +195,7 @@ export default function EnhancedTable({ headCells, nameTable }: Props) {
 											labelId={labelId}
 											isItemSelected={isItemSelected}
 											handleClick={handleClick}
+											nameTable={nameTable}
 										/>
 									);
 								})}

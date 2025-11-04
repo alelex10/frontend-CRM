@@ -96,7 +96,6 @@ export default function LoginPage() {
             type="password"
             id="password"
             autoComplete="current-password"
-            autoFocus
             required
             fullWidth
             variant="outlined"

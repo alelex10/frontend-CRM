@@ -27,4 +27,9 @@ export const API = {
     DELETE: `${API_BASE_URL}/deals`,
     
   },
+  NOTE: {
+    CREATE: `${API_BASE_URL}/contacts`,
+    UPDATE: `${API_BASE_URL}/notes`,
+    DELETE: `${API_BASE_URL}/notes`,
+  },
 };
