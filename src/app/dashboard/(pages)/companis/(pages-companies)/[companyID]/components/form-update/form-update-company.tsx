@@ -11,20 +11,23 @@ import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useState, useTransition } from "react";
 import { Controller, useForm } from "react-hook-form";
-import Loading from "../../loading";
+import { updateCompany, updateCompanyProps } from "../../actions";
+import { useActionState, useTransition } from "react";
+import { ResponseMyFetch } from "@/common/my-fetch";
 
 interface Props {
     compani: Compani;
 }
-
 export const FormUpdateCompani = ({ compani }: Props) => {
-    // const [status, serStatus] = useState<{ message: string, type: "success" | "error" } | undefined>();
     const [loading, setLoading] = useTransition()
-
+    const [state, formAction] =
+        useActionState<
+            ResponseMyFetch<Compani> |
+            undefined, updateCompanyProps
+        >(updateCompany, undefined)
     const {
-
+        handleSubmit,
         control,
         formState: { errors },
     } = useForm<formTypeCreateCompani>({
@@ -36,22 +39,35 @@ export const FormUpdateCompani = ({ compani }: Props) => {
         },
     });
 
-    if (loading) return <Loading />;
+    const onSubmit = handleSubmit(async (data) => {
+        console.log(data);
+        setLoading(async () => {
+            formAction({ updateData: data, id: compani?.id.toString() });
+        });
+
+    });
     return (
         <>
+            {state?.data && (<MySnackbarAlert
+                message={state?.data.message}
+                // setError={error}
+                variant={"success"}
+                state={state.data.data}
+            ></MySnackbarAlert>)}
+            {state?.error && (<MySnackbarAlert
+                message={state?.error.message}
+                // setError={error}
+                variant={"error"}
+                state={state.error}
+            ></MySnackbarAlert>)}
+
             <Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: "auto" }}>
-                {/* {status && (
-                    <MySnackbarAlert
-                        errorMessage={status.message}
-                        setError={serStatus}
-                        variant={status.type}
-                    />
-                )} */}
+
                 <Typography variant="h4" component="h1" gutterBottom>
-                    Crear Empresa
+                    Editar Empresa {compani?.name}
                 </Typography>
 
-                <Box component="form" sx={{ mt: 2 }}>
+                <Box component="form" onSubmit={onSubmit} sx={{ mt: 2 }}>
                     <Controller
                         name="name"
                         control={control}
@@ -96,14 +112,14 @@ export const FormUpdateCompani = ({ compani }: Props) => {
                         )}
                     />
                     <Button
-                        // disabled={loading}
+                        disabled={loading}
                         type="submit"
                         fullWidth
                         variant="contained"
                         size="large"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Crear Empresa
+                        Editar Empresa
                     </Button>
                 </Box>
             </Paper>

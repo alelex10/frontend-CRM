@@ -9,10 +9,7 @@ export async function myFetch<T>(
   url: string,
   options: RequestInit
 ): Promise<ResponseMyFetch<T>> {
-
   const stats: ResponseMyFetch<T> = { data: undefined, error: undefined };
-  console.log(url)
-  // console.log(options.body)
   try {
     const response = await fetch(url, {
       ...options,
@@ -34,6 +31,7 @@ export async function myFetch<T>(
     }
 
     const responseJson = await response.json();
+
 
     stats.data = responseJson as ResponseTemplate<T>;
     return stats;

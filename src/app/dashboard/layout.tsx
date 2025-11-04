@@ -45,7 +45,6 @@ export const LIST_MENU_ITEMS: ListMenuItem[] = [
 ];
 
 const DashboardLayout = ({ children }: Props) => {
-	console.log("asdsadasdasdasd layout")
 	return (<>
 		<ThemeRegistry>
 			<ContainerDesktop component="main" sx={{ minHeight: "100vh" }}>
@@ -53,7 +52,7 @@ const DashboardLayout = ({ children }: Props) => {
 			</ContainerDesktop>
 
 			{/* SE PRIORIZA LA VISTA DE DESKTOP */}
-			
+
 			{/* <ContainerMovil component="main" sx={{ minHeight: "100vh" }}>
 				<AppBar open={false} />
 				<DrawerHeader />

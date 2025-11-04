@@ -3,24 +3,34 @@ import { MySnackbar } from './my-snackbar-style'
 import Alert from '@mui/material/Alert'
 import IconButton from '@mui/material/IconButton'
 import { Iconify } from '../icons/icon'
+import { Compani } from '@/types/compani.types'
+import { ResponseError } from '@/types/response'
 
 interface MySnackbarAlertProps {
-    errorMessage: string | undefined,
-
-    setError: Dispatch<SetStateAction<string | undefined>> | Dispatch<SetStateAction<{
-    message: string;
-    type: "success" | "error";
-} | undefined>>,
+    message: string | undefined,
+    state?: Compani | undefined | ResponseError,
+    setError?: Dispatch<SetStateAction<string | undefined>> | Dispatch<SetStateAction<{
+        message: string;
+        type: "success" | "error";
+    } | undefined>>,
     variant?: 'error' | 'success' | 'warning' | 'info'
 }
 
-export const MySnackbarAlert = ({ errorMessage, setError, variant }: MySnackbarAlertProps) => {
+export const MySnackbarAlert = ({ message, setError, variant, state }: MySnackbarAlertProps) => {
+    const [error, setErrorState] = React.useState<string | undefined>(message)
+
+    React.useEffect(() => {
+        if (message) {
+            setErrorState(message)
+        }
+    }, [state])
+
     return (
         <div>
             <MySnackbar
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                open={!!errorMessage}
-                onClose={() => setError(undefined)}
+                open={!!error}
+                onClose={() => setErrorState(undefined)}
                 sx={{ width: "100%" }}
                 message={
                     <Alert
@@ -29,14 +39,14 @@ export const MySnackbarAlert = ({ errorMessage, setError, variant }: MySnackbarA
                                 size="small"
                                 aria-label="close"
                                 color="inherit"
-                                onClick={() => setError(undefined)}
+                                onClick={() => setErrorState(undefined)}
                             >
                                 <Iconify icon="eva:close-fill" />
                             </IconButton>
                         }
                         severity={variant}
                     >
-                        {errorMessage}
+                        {message}
                     </Alert>
                 }
                 autoHideDuration={6000}
