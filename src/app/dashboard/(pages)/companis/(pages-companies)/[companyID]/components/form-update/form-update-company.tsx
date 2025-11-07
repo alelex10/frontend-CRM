@@ -46,7 +46,6 @@ export const FormUpdateCompani = ({ compani }: Props) => {
         });
 
     });
-    console.log("state", state)
     return (
         <>
             {state?.data && (<MySnackbarAlert
@@ -65,7 +64,7 @@ export const FormUpdateCompani = ({ compani }: Props) => {
             <Paper elevation={3} sx={{ p: 4, maxWidth: 500, mx: "auto" }}>
 
                 <Typography variant="h4" component="h1" gutterBottom>
-                    Crear Empresa
+                    Editar Empresa {compani?.name}
                 </Typography>
 
                 <Box component="form" onSubmit={onSubmit} sx={{ mt: 2 }}>

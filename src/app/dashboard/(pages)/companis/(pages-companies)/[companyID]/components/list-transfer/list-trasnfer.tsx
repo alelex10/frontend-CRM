@@ -1,38 +1,40 @@
 "use client";
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 import { customList } from './custom-list';
+import { Compani } from '@/types/compani.types';
+import { Contact } from '@/types/contact.types';
+import { updateContactsOfCompany } from '../../actions';
 
-function not(a: readonly number[], b: readonly number[]) {
+function not(a: DateTypeListTransfer[], b: DateTypeListTransfer[]) {
   return a.filter((value) => !b.includes(value));
 }
 
-function intersection(a: readonly number[], b: readonly number[]) {
+function intersection(a: DateTypeListTransfer[], b: DateTypeListTransfer[]) {
   return a.filter((value) => b.includes(value));
 }
 
-function union(a: readonly number[], b: readonly number[]) {
+function union(a: DateTypeListTransfer[], b: DateTypeListTransfer[]) {
   return [...a, ...not(b, a)];
 }
+export type DateTypeListTransfer = Compani | Contact;
+interface Props {
+  // title: React.ReactNode;
+  left: DateTypeListTransfer[],
+  right: DateTypeListTransfer[]
+  idCompany: number;
+}
 
-export default function ListTransfer() {
-  const [checked, setChecked] = React.useState<readonly number[]>([]);
-  const [left, setLeft] = React.useState<readonly number[]>([0, 1, 2, 3]);
-  const [right, setRight] = React.useState<readonly number[]>([4, 5, 6, 7]);
+export default function ListTransfer({ left, right, idCompany }: Props) {
+  const [checked, setChecked] = React.useState<DateTypeListTransfer[]>([]);
+  // const [left, setLeft] = React.useState<readonly number[]>([0, 1, 2, 3]);
+  // const [right, setRight] = React.useState<readonly number[]>([4, 5, 6, 7]);
 
   const leftChecked = intersection(checked, left);
   const rightChecked = intersection(checked, right);
 
-  const handleToggle = (value: number) => () => {
+  const handleToggle = (value: Compani | Contact) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -45,27 +47,23 @@ export default function ListTransfer() {
     setChecked(newChecked);
   };
 
-  const numberOfChecked = (items: readonly number[]) =>
+  const numberOfChecked = (items: DateTypeListTransfer[]) =>
     intersection(checked, items).length;
 
-  const handleToggleAll = (items: readonly number[]) => () => {
-    if (numberOfChecked(items) === items.length) {
-      setChecked(not(checked, items));
-    } else {
-      setChecked(union(checked, items));
-    }
-  };
-
   const handleCheckedRight = () => {
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
-    setChecked(not(checked, leftChecked));
+    updateContactsOfCompany({
+      contactIds: leftChecked.map((item) => item.id),
+      newCompanyId: null
+    });
+    setChecked([]);
   };
 
-  const handleCheckedLeft = () => {
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
-    setChecked(not(checked, rightChecked));
+  const handleCheckedLeft =async () => {
+      await updateContactsOfCompany({
+        contactIds: rightChecked.map((item) => item.id),
+        newCompanyId: idCompany
+      });
+
   };
 
 
@@ -80,7 +78,8 @@ export default function ListTransfer() {
         title: 'Asignados',
         items: left,
         numberOfChecked,
-        handleToggle
+        handleToggle,
+        checked
       })}</Grid>
       <Grid>
         <Grid container direction="column" sx={{ alignItems: 'center' }}>
@@ -110,7 +109,8 @@ export default function ListTransfer() {
         title: 'Sin asignar',
         items: right,
         numberOfChecked,
-        handleToggle
+        handleToggle,
+        checked
       })}</Grid>
     </Grid>
   );
