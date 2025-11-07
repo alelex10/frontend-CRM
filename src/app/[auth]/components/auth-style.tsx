@@ -14,6 +14,7 @@ export const SignInContainer = styled(Stack)(({ theme }) => ({
     content: '""',
     display: "block",
     position: "absolute",
+    
     zIndex: -1,
     inset: 0,
     backgroundImage:
